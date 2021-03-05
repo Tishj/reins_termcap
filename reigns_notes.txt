@@ -1,0 +1,50 @@
+input.cur.row | inputrow
+input.max.row | totalrows
+input.cur.col
+input.max.col
+
+max_row
+
+
+col.current
+col.maximum
+
+row.current
+row.maximum
+
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaa| <- inputrow (0)
+bb                           | <- total_rows (1)
+
+
+cursor.row = the row we're on in relation to the entire terminal window
+cursor.col = the column we're on in relation to the entire terminal window
+
+
+cmd			|	the current line of input
+inputrow		|	the current row we're on (in relation to the shell)
+max.row			|	the max row amount of the terminal
+max.col			|	the max column amount of the terminal
+cursor.row		|	the current row we're on (in relation to the terminal-window)
+cursor.col		|	the current column we're on
+total_rows		|	the max rows the input spans
+
+
+// in a terminal, every row is it's own entity, meaning we need to detect if a line flows on to the next
+
+
+terminal.window.dimensions.x
+terminal.window.dimensions.y
+terminal.shell.dimensions.x
+terminal.shell.dimensions.y
+
+
+int	value;
+
+get_value
+set_value
+
+smart<int>	value;
+
+	int ret = value();
+	value(5);
