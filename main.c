@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:54:25 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 12:35:51 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(void)
 			printf("\nexit\n");
 			return (0);
 		}
+		printf("\nLINE: |%s|\n", line);
 		free(line);
 	}
 	reigns_destroy(reigns);

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:29:50 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 11:24:03 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	init_termios(struct termios *term)
 	return (1);
 }
 
-static int	get_cursor_pos(t_vec2sz* cursor)
+static int	get_cursor_pos(t_reigns* reigns)
 {
 	char		buf[10];
 	int			ret;
@@ -54,8 +54,16 @@ static int	get_cursor_pos(t_vec2sz* cursor)
 	ret = read(STDIN_FILENO, buf, 10);
 	if (ret == -1)
 		return (!printf("read for cursor position failed!\n"));
-	cursor->y = util_atoi(buf + 2);
-	cursor->x = util_atoi(buf + 4 + (cursor->y >= 10) + (cursor->y > 100));
+	reigns->nav.cursor.y = util_atoi(buf + 2);
+	reigns->nav.cursor.x = util_atoi(buf + 4 + 
+		(reigns->nav.cursor.y >= 10) +
+		(reigns->nav.cursor.y > 100));
+	reigns->input.nav.dimension.y = 0;
+	reigns->input.nav.dimension.x = 0;
+	reigns->input.nav.cursor.x = reigns->nav.cursor.x;
+	reigns->input.nav.cursor.y = 0;
+	reigns->input.start.y = reigns->nav.cursor.y;
+	reigns->input.start.x = reigns->input.nav.cursor.x;
 	return (1);
 }
 
@@ -68,17 +76,11 @@ t_reigns*	reigns_init()
 		return (NULL);
 	if (!init_table(reigns) ||
 		!init_termios(&reigns->termios) ||
-		!get_cursor_pos(&reigns->nav.cursor))
+		!get_cursor_pos(reigns))
 	{
 		printf("HMMM\n");
 		free(reigns);
 		return (NULL);
 	}
-	reigns->input.nav.dimension.y = 0;
-	reigns->input.nav.dimension.x = 0;
-	reigns->input.nav.cursor.x = reigns->nav.cursor.x;
-	reigns->input.nav.cursor.y = 0;
-	reigns->input.start.y = reigns->nav.cursor.y;
-	reigns->input.start.x = reigns->input.nav.cursor.x;
 	return (reigns);
 }

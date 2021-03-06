@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:04:02 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:41:25 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 11:34:31 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,31 @@
 #include <unistd.h>
 #include <vector.h>
 #include <stdio.h>
+#include <termcap.h>
+
+static int	get_cursor_pos(t_reigns* reigns)
+{
+	char		buf[10];
+	int			ret;
+
+	write(STDOUT_FILENO, "\033[6n", 4);
+	ret = read(STDIN_FILENO, buf, 10);
+	if (ret == -1)
+		return (!printf("read for cursor position failed!\n"));
+	reigns->nav.cursor.y = util_atoi(buf + 2);
+	reigns->nav.cursor.x = util_atoi(buf + 4 + 
+		(reigns->nav.cursor.y >= 10) +
+		(reigns->nav.cursor.y > 100));
+	reigns->input.nav.dimension.y = 0;
+	reigns->input.nav.dimension.x = 0;
+	reigns->input.nav.cursor.x = 0;
+	reigns->input.nav.cursor.y = 0;
+	reigns->input.start.y = reigns->nav.cursor.y;
+	reigns->input.start.x = reigns->nav.cursor.x;
+	reigns->nav.dimension.x = tgetnum("co");
+	reigns->nav.dimension.y = tgetnum("li");
+	return (1);
+}
 
 int		reigns_get_input(t_reigns* reigns, char **line)
 {
@@ -21,6 +46,8 @@ int		reigns_get_input(t_reigns* reigns, char **line)
 	char				buf[6];
 	int	state;
 
+	if (!get_cursor_pos(reigns))
+		return (-1);
 	vec_new(&input, sizeof(char));
 	while (1)
 	{

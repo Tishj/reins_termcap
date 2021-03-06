@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:43:54 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 11:55:27 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 {
 	size_t	index;
 	size_t	row;
-	char	buf;
+	char	*buf;
 
 	row = reigns->input.nav.cursor.y;
 	//for every row of the input
@@ -30,9 +30,9 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 			break ;
 		//insert character
 		termcmd(INSERT_START, 0, 0, 1);
-		if (!vec_getref(input, &buf, index))
+		if ((buf = vec_getref(input, index)) == NULL)
 			return (0);
-		write(1, &buf, 1);
+		write(1, buf, 1);
 		termcmd(INSERT_END, 0, 0, 1);
 		row++;
 	}
@@ -46,6 +46,8 @@ static void			set_pos_of_cursor(t_reigns *reigns)
 		reigns->input.nav.cursor.x = 0;
 		reigns->nav.cursor.x = 0;
 		reigns->input.nav.cursor.y++;
+		if (reigns->input.nav.cursor.y > reigns->input.nav.dimension.y)
+			reigns->input.nav.dimension.y++;
 		reigns->nav.cursor.y++;
 	}
 	else

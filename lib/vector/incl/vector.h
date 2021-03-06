@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/17 14:44:25 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/05 21:48:47 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 11:54:38 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef	struct		s_vec
 int					vec_add(t_vec *vector, void *buffer);
 int					vec_new(t_vec *vector, size_t type_size);
 int					vec_destroy(t_vec *vector, void (*del)(void *));
-int					vec_getref(t_vec *vector, void *buffer, size_t index);
+void				*vec_getref(t_vec *vector, size_t index);
 int					vec_del(t_vec* vector, size_t index);
 
 #endif

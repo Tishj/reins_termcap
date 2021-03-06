@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/06 00:21:51 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/06 13:13:39 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,17 +53,30 @@ INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $^ $(INCL) -ltermcap -o $@
+	@echo "Compiling $(notdir $@)"
+	@$(CC) $(CFLAGS) -c $^ $(INCL) -ltermcap -o $@
 
-$(NAME) : $(OBJ)
-	ar -rcs $@ $^
+$(NAME) : $(LIBRARY) $(OBJ)
+	@echo "Compiling $(notdir $@)"
+	@ar -rcs $@ $^
 
-all : $(NAME)
+./lib/vector/libvector.a:
+	@echo $(TAIL)
+	@$(MAKE) -sC $(dir $@) DEBUG=$(DEBUG)
+
+all : $(NAME) 
+
+test: all
+	$(CC) $(CFLAGS) main.c $(INCL) $(TAIL) -L. -lreigns -L ./lib/vector -lvector -ltermcap
 
 clean:
-	rm -f $(OBJ)
+	@echo "Cleaning reigns.."
+	@$(MAKE) -sC ./lib/vector/ clean
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "Full cleaning reigns.."
+	@$(MAKE) -sC ./lib/vector/ fclean
+	@rm -f $(NAME) test
 
 re: fclean all

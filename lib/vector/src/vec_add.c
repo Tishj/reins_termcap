@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/03 20:49:54 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/03 13:31:08 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 12:02:00 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		vec_add(t_vec *vector, void *buffer)
 	if (vector->index >= vector->capacity)
 	{
 		vector->capacity *= 2;
-		new_store = malloc(sizeof(vector->type_size) * (vector->capacity));
+		new_store = malloc(vector->type_size * vector->capacity);
 		if (!new_store)
 			return (0);
 		ft_memcpy(new_store, vector->store,
