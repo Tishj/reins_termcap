@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:43 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 14:09:19 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 19:18:13 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int	key_del(t_reigns* reigns, t_vec* input, char *buf);
 
 void		termcmd(char *command, int p1, int p2, int lines_affected);
 void		update_cursor(t_reigns* reigns, int col_adjust, int row_adjust);
+void		refresh_cursor(t_navigation* nav);
 
 int			util_atoi(const char *str);
 size_t		util_strlen(char *str);

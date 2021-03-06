@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 13:58:46 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 19:50:20 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 
 int	key_regular(t_reigns* reigns, t_vec* input, char *buf)
 {
-	if (!vec_add(input, buf))
+	size_t index;
+
+	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) +
+		reigns->input.nav.cursor.x;
+	if (!vec_insert(input, buf, index))
 		return (RD_ERROR);
 	termcmd(INSERT_START, 0, 0, 1);
 	write(1, buf, 1);

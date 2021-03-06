@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vec_add.c                                          :+:    :+:            */
+/*   vec_realloc.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
+/*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/03 20:49:54 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/06 19:50:49 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/06 19:26:41 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/06 19:51:13 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-#include "vector_int.h"
+#include <vector_int.h>
 #include <stdlib.h>
 
-int		vec_add(t_vec *vector, void *buffer)
+int		vec_realloc(t_vec* vector)
 {
-	if (!vec_realloc(vector))
+	char	*data;
+
+	if (vector->index < vector->capacity)
+		return (1);
+	data = malloc(vector->type_size * vector->capacity);
+	if (!data)
 		return (0);
-	util_memcpy(&vector->store[vector->index * vector->type_size],
-		buffer, vector->type_size);
-	vector->index++;
+	util_memcpy(data, vector->store, vector->type_size * vector->index);
+	free(vector->store);
+	vector->store = data;
 	return (1);
 }

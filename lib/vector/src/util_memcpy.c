@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_left.c                                         :+:    :+:            */
+/*   util_memcpy.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 18:41:12 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/05 18:15:01 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/06 19:34:03 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
-#include <unistd.h>
+#include <stddef.h>
 
-int	key_left(t_reigns* reigns, t_vec* input, char *buf)
+void	util_memcpy(void *dest, void *src, size_t n)
 {
-	(void)buf;
-	(void)input;
-	if (reigns->input.nav.cursor.x <= 0 && !reigns->input.nav.cursor.y)
-		return (RD_IDLE);
-	update_cursor(reigns, -1, 0);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
-	return (RD_IDLE);
+	size_t i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
 }

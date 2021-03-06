@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_left.c                                         :+:    :+:            */
+/*   util_memmove.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 18:41:12 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/06 19:40:38 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/06 19:41:37 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
-#include <unistd.h>
+#include <stddef.h>
 
-int	key_left(t_reigns* reigns, t_vec* input, char *buf)
+void	util_memmove(void *dst, void *src, size_t n)
 {
-	(void)buf;
-	(void)input;
-	if (reigns->input.nav.cursor.x <= 0 && !reigns->input.nav.cursor.y)
-		return (RD_IDLE);
-	update_cursor(reigns, -1, 0);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
-	return (RD_IDLE);
+	unsigned char	*dest;
+	unsigned char	*source;
+	char			rev;
+	size_t			i;
+
+	if (!dst || !src || !n)
+		return ;
+	rev = (dst > src && src + n > dst);
+	i = 0;
+	dest = dst;
+	source = src;
+	while (i < n)
+	{
+		if (rev)
+			dest[(n - 1) - i] = source[(n - 1) - i];
+		else
+			dest[i] = source[i];
+		i++;
+	}
 }

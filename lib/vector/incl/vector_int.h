@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vec_add.c                                          :+:    :+:            */
+/*   vector_int.h                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
+/*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/03 20:49:54 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/06 19:50:49 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/06 19:32:37 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/06 19:51:34 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
-#include "vector_int.h"
-#include <stdlib.h>
+#ifndef VECTOR_INT_H
+# define VECTOR_INT_H
 
-int		vec_add(t_vec *vector, void *buffer)
-{
-	if (!vec_realloc(vector))
-		return (0);
-	util_memcpy(&vector->store[vector->index * vector->type_size],
-		buffer, vector->type_size);
-	vector->index++;
-	return (1);
-}
+#include "vector.h"
+
+int					vec_realloc(t_vec* vector);
+void				*util_memcpy(void* dst, void* src, size_t n);
+void				util_memmove(void* dst, void* src, size_t n);
+
+#endif

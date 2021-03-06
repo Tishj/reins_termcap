@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/06 13:49:26 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/06 19:17:46 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC 	=	reigns_init.c \
 			util/util_memcpy.c \
 			util/termcmd.c \
 			util/update_cursor.c \
+			util/refresh_cursor.c \
 			perform_action.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)

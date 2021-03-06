@@ -6,13 +6,13 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:25:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:31:01 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 19:23:30 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "reigns.h"
 
-t_actionf	get_action(char c)
+t_actionf	get_action(char *buf, size_t* i)
 {
 	static const t_actionf	functions[128] = {
 		[KEY_CTRL_D] =	&key_eof,
@@ -22,9 +22,14 @@ t_actionf	get_action(char c)
 		[KEY_UP] =		&key_up,
 		[KEY_DOWN] =	&key_down,
 		[KEY_NEWLINE] =	&key_newline,
+		[' '] =			&key_regular,
 	};
 
-	return (functions[(int)c]);
+	if (*i < 3 && buf[*i] == KEY_ESC && buf[*i + 1] == '[')
+		(*i) += 2;
+	else if (buf[*i] >= 32 && buf[*i] <= 126)
+		return (functions[(int)' ']);
+	return (functions[(int)buf[*i]]);
 }
 
 int		perform_action(t_reigns* reigns, t_vec* input, char *buf)
@@ -37,18 +42,13 @@ int		perform_action(t_reigns* reigns, t_vec* input, char *buf)
 	i = 0;
 	while (i < 6)
 	{
-		action = get_action(buf[i]);
+		action = get_action(buf, &i);
 		if (action)
-			state = action(reigns, input, buf + i);
-		else if (!action && !(buf[i] >= 32 && buf[i] <= 126))
 		{
-			i++;
-			continue;
+			state = action(reigns, input, buf + i);
+			if (state != RD_IDLE)
+				break ;
 		}
-		else
-			state = key_regular(reigns, input, buf);
-		if (state != RD_IDLE)
-			break ;
 		i++;
 	}
 	return (state);

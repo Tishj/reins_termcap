@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:04:02 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 11:34:31 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 19:59:06 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		reigns_get_input(t_reigns* reigns, char **line)
 {
 	t_vec				input;
 	char				buf[6];
-	int	state;
+	int					state;
 
 	if (!get_cursor_pos(reigns))
 		return (-1);
@@ -53,6 +53,7 @@ int		reigns_get_input(t_reigns* reigns, char **line)
 	{
 		util_bzero(buf, 6);
 		read(STDIN_FILENO, buf, 6);
+//		printf("BUF[%d][%d][%d][%d][%d][%d]\n", (int)buf[0], (int)buf[1], (int)buf[2], (int)buf[3], (int)buf[4], (int)buf[5]);
 		state = perform_action(reigns, &input, buf);
 		if (state != RD_IDLE)
 			break ;

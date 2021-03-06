@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 13:36:40 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/06 12:40:00 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/06 19:53:07 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,10 @@ SRC 	=	vec_add.c \
 			vec_destroy.c \
 			vec_getref.c \
 			vec_new.c \
+			vec_realloc.c \
+			vec_insert.c \
+			util_memcpy.c \
+			util_memmove.c \
 			vec_del.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
