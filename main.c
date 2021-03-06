@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 12:35:51 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 13:18:59 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int main(void)
 		if (ret == -1)
 			return (!!printf("reigns_get_input failed!\n"));
 		if (!ret)
-		{
-			printf("\nexit\n");
-			return (0);
-		}
+			return (!printf("\nexit\n"));
 		printf("\nLINE: |%s|\n", line);
 		free(line);
 	}

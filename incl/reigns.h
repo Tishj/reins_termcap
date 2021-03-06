@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:43 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:39:50 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 14:09:19 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef int	(*t_actionf)(t_reigns* reigns, t_vec *input, char *buf);
 t_reigns	*reigns_init();
 int			reigns_get_input(t_reigns* reigns, char **line);
 void		reigns_destroy(t_reigns* reigns);
+//reigns_enable //<- raw
+//reigns_disable //<- standard
 
 //-----------------------GET_INPUT-------------------------------
 
@@ -120,6 +122,7 @@ int	key_del(t_reigns* reigns, t_vec* input, char *buf);
 //-----------------------UTIL-------------------------------
 
 void		termcmd(char *command, int p1, int p2, int lines_affected);
+void		update_cursor(t_reigns* reigns, int col_adjust, int row_adjust);
 
 int			util_atoi(const char *str);
 size_t		util_strlen(char *str);
