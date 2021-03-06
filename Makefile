@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/06 19:17:46 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/06 20:23:39 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,6 @@ $(NAME) : $(LIBRARY) $(OBJ)
 	@ar -rcs $@ $^
 
 ./lib/vector/libvector.a:
-	@echo $(TAIL)
 	@$(MAKE) -sC $(dir $@) DEBUG=$(DEBUG)
 
 all : $(NAME) 

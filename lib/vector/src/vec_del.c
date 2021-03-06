@@ -6,31 +6,20 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:12:59 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 12:29:22 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 20:27:40 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include "vector_int.h"
 
 int	vec_del(t_vec* vec, size_t index)
 {
-	size_t i;
-
 	if (index >= vec->index)
 		return (1);
-	index++;
-	while (index < vec->index)
-	{
-		i = 0;
-		while (i < vec->type_size)
-		{
-			vec->store[(index * vec->type_size) + i] = 
-				vec->store[((index + 1) * vec->type_size) + i];
-			i++;
-		}
-		index++;
-	}
-	vec->store[vec->index] = '\0';
+	util_memmove(vec->store + (index * vec->type_size),
+		vec->store + ((index + 1) * vec->type_size),
+		vec->type_size * vec->index);
 	vec->index--;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 19:26:41 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 19:51:13 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/06 20:20:03 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		vec_realloc(t_vec* vector)
 
 	if (vector->index < vector->capacity)
 		return (1);
+	vector->capacity *= 2;
 	data = malloc(vector->type_size * vector->capacity);
 	if (!data)
 		return (0);
