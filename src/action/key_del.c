@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:54:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:57:09 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 00:29:28 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
 	size_t	index;
 
-	(void)hook;
+	if (hook && hook->function)
+		hook->function(hook->param);
 	(void)buf;
 	update_cursor(reigns, -1, 0);
 	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) + \

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:38:29 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:54:55 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 00:29:10 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 int	key_newline(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
-//	buf[0] = '\n';
-//	key_regular(reigns, input, buf);
-	(void)hook;
+	if (hook && hook->function)
+		hook->function(hook->param);
 	(void)reigns;
 	(void)input;
 	(void)buf;

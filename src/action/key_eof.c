@@ -14,7 +14,8 @@
 
 int	key_eof(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
-	(void)hook;
+	if (hook && hook->function)
+		hook->function(hook->param);
 	(void)reigns;
 	(void)buf;
 	if (input->index)

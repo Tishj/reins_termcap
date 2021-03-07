@@ -15,7 +15,8 @@
 
 int	key_right(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
-	(void)hook;
+	if (hook && hook->function)
+		hook->function(hook->param);
 	(void)buf;
 	if ((reigns->input.nav.cursor.y * reigns->nav.dimension.x) + 
 		reigns->input.nav.cursor.x >= input->index)
