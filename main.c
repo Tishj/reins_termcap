@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 23:47:07 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 00:26:37 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	print_up(void *yeet)
 	printf("UP\n");
 }
 
+void	print_a(void *yeet)
+{
+	(void)yeet;
+	printf("\nAAAAAHHH\n");
+}
+
 int main(void)
 {
 	t_reigns *reigns;
@@ -35,6 +41,8 @@ int main(void)
 	if (!reigns)
 		return (1);
 	if (!reigns_hook(reigns, (char [6]){'\x1B', '[', '\x41', '\0', '\0', '\0'}, &print_up, NULL))
+		return (!!printf("Failed to hook!\n"));
+	if (!reigns_hook(reigns, (char [6]){'a', '\0', '\0', '\0', '\0', '\0'}, &print_a, NULL))
 		return (!!printf("Failed to hook!\n"));
 	if (!reigns)
 		return (!!printf("Failed to init reigns!\n"));

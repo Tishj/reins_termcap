@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:24:33 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 00:24:26 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_reigns*	reigns_init()
 	if (!init_table(reigns) ||
 		!init_termios(&reigns->termios) ||
 		!get_cursor_pos(reigns) ||
-		!vec_new(&reigns->hooks, sizeof(t_hook*)))
+		!vec_new(&reigns->hooks, sizeof(t_hook)))
 	{
 		free(reigns);
 		return (NULL);

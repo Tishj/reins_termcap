@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:12:59 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 20:27:40 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 00:01:23 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	vec_del(t_vec* vec, size_t index)
 		return (1);
 	util_memmove(vec->store + (index * vec->type_size),
 		vec->store + ((index + 1) * vec->type_size),
-		vec->type_size * vec->index);
+		vec->type_size * (vec->index - index));
 	vec->index--;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:57:29 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 00:15:18 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
 	size_t index;
 
-	(void)hook;
+	if (hook && hook->function)
+		hook->function(hook->param);
 	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) +
 		reigns->input.nav.cursor.x;
 	if (!vec_insert(input, buf, index))
