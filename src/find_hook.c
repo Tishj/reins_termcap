@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_left.c                                         :+:    :+:            */
+/*   find_hook.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:54:49 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/07 21:22:14 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/07 23:13:44 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
-#include <unistd.h>
 
-int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+ssize_t	find_hook(t_reigns* reigns, char *keycode, size_t size)
 {
-	(void)hook;
-	(void)buf;
-	(void)input;
-	if (reigns->input.nav.cursor.x <= 0 && !reigns->input.nav.cursor.y)
-		return (RD_IDLE);
-	update_cursor(reigns, -1, 0);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
-	return (RD_IDLE);
+	size_t	i;
+	t_hook	*tmp;
+
+	i = 0;
+	while (i < reigns->hooks.index)
+	{
+		tmp = vec_getref(&reigns->hooks, i);
+		if (!util_strncmp(tmp->buf, keycode, size))
+			return (i);
+		i++;
+	}
+	return (-1);
 }

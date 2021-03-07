@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 11:24:03 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:24:33 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include <reigns_int.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -76,9 +76,9 @@ t_reigns*	reigns_init()
 		return (NULL);
 	if (!init_table(reigns) ||
 		!init_termios(&reigns->termios) ||
-		!get_cursor_pos(reigns))
+		!get_cursor_pos(reigns) ||
+		!vec_new(&reigns->hooks, sizeof(t_hook*)))
 	{
-		printf("HMMM\n");
 		free(reigns);
 		return (NULL);
 	}

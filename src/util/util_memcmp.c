@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_left.c                                         :+:    :+:            */
+/*   util_memcmp.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:54:49 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/07 21:01:50 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/07 21:05:11 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
-#include <unistd.h>
+#include <stddef.h>
 
-int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int		util_memcmp(void *dst, void *src, size_t n)
 {
-	(void)hook;
-	(void)buf;
-	(void)input;
-	if (reigns->input.nav.cursor.x <= 0 && !reigns->input.nav.cursor.y)
-		return (RD_IDLE);
-	update_cursor(reigns, -1, 0);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
-	return (RD_IDLE);
+	size_t i;
+
+	if (!dst || !src)
+		return (0);
+	i = 0;
+	while (i < n && ((unsigned char *)dst)[i] == ((unsigned char *)src)[i])
+		i++;
+	if (i == n)
+		return (0);
+	return (((unsigned char*)dst)[i] - ((unsigned char*)src)[i]);
 }

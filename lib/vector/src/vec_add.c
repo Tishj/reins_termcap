@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/03 20:49:54 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/06 19:50:49 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 23:34:23 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		vec_add(t_vec *vector, void *buffer)
 {
 	if (!vec_realloc(vector))
 		return (0);
-	util_memcpy(&vector->store[vector->index * vector->type_size],
+	util_memcpy(vector->store + (vector->index * vector->type_size),
 		buffer, vector->type_size);
 	vector->index++;
 	return (1);

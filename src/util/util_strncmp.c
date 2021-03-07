@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_left.c                                         :+:    :+:            */
+/*   util_strncmp.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:54:49 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/07 22:43:20 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/07 23:48:23 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
-#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
 
-int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int		util_strncmp(char *str1, char *str2, size_t n)
 {
-	(void)hook;
-	(void)buf;
-	(void)input;
-	if (reigns->input.nav.cursor.x <= 0 && !reigns->input.nav.cursor.y)
-		return (RD_IDLE);
-	update_cursor(reigns, -1, 0);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
-	return (RD_IDLE);
+	size_t i;
+
+
+	i = 0;
+	while (i < n && str1[i] && str2[i] && str1[i] == str2[i])
+		i++;
+	if (i == n || str1[i] == str2[i])
+		return (0);
+	return (str1[i] - str2[i]);
 }

@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 16:52:44 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 00:20:10 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:13:34 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include <reigns_int.h>
 #include <termios.h>
 #include <termcap.h>
 #include <unistd.h>

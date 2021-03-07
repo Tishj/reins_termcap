@@ -6,15 +6,15 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:04:02 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 19:59:06 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:56:08 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
 #include <unistd.h>
 #include <vector.h>
 #include <stdio.h>
 #include <termcap.h>
+#include <reigns_int.h>
 
 static int	get_cursor_pos(t_reigns* reigns)
 {

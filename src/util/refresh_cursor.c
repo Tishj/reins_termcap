@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:57:48 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 19:20:59 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:14:27 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include <reigns_int.h>
 
 void	refresh_cursor(t_navigation* nav)
 {

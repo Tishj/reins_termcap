@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 13:36:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 17:13:34 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:13:49 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include <reigns_int.h>
 
 // static void	update_column(t_reigns* reigns, long long *col, long long *row)
 // {

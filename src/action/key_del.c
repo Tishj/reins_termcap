@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:54:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 17:11:56 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:57:09 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include <reigns_int.h>
 #include <unistd.h>
 
 int			delete_from_affected_rows(t_reigns* reigns, t_vec* input)
@@ -42,10 +42,11 @@ int			delete_from_affected_rows(t_reigns* reigns, t_vec* input)
 	return (1);
 }
 
-int	key_del(t_reigns* reigns, t_vec* input, char *buf)
+int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
 	size_t	index;
 
+	(void)hook;
 	(void)buf;
 	update_cursor(reigns, -1, 0);
 	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) + \

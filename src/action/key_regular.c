@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 19:50:20 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 22:57:29 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include <reigns_int.h>
 #include <unistd.h>
 
 int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
@@ -54,10 +54,11 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 // 		reigns->input.nav.cursor.x++;
 // }
 
-int	key_regular(t_reigns* reigns, t_vec* input, char *buf)
+int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 {
 	size_t index;
 
+	(void)hook;
 	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) +
 		reigns->input.nav.cursor.x;
 	if (!vec_insert(input, buf, index))

@@ -6,16 +6,23 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/06 13:18:59 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/07 23:47:07 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "reigns.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 #define PROMPT "yeet >$ "
+
+void	print_up(void *yeet)
+{
+	(void)yeet;
+	printf("UP\n");
+}
 
 int main(void)
 {
@@ -25,6 +32,10 @@ int main(void)
 
 	ret = 1;
 	reigns = reigns_init();
+	if (!reigns)
+		return (1);
+	if (!reigns_hook(reigns, (char [6]){'\x1B', '[', '\x41', '\0', '\0', '\0'}, &print_up, NULL))
+		return (!!printf("Failed to hook!\n"));
 	if (!reigns)
 		return (!!printf("Failed to init reigns!\n"));
 	while (ret >= 0)

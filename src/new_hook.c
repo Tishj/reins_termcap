@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_left.c                                         :+:    :+:            */
+/*   new_hook.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:54:49 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/07 21:39:28 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/07 23:48:45 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+t_hook	*new_hook(char keycode[6], void (*f)(), void *param)
 {
-	(void)hook;
-	(void)buf;
-	(void)input;
-	if (reigns->input.nav.cursor.x <= 0 && !reigns->input.nav.cursor.y)
-		return (RD_IDLE);
-	update_cursor(reigns, -1, 0);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
-	return (RD_IDLE);
+	t_hook	*this;
+
+	this = malloc(sizeof(t_hook));
+	if (!this)
+		return (NULL);
+	util_memcpy(this->buf, keycode, 6);
+	this->function = f;
+	this->param = param;
+	return (this);
 }

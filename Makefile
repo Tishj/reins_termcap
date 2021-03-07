@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/06 20:23:39 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/07 22:45:56 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,16 @@ SRC 	=	reigns_init.c \
 			util/util_bzero.c \
 			util/util_strdup.c \
 			util/util_memcpy.c \
+			util/util_memcmp.c \
+			util/util_strncmp.c \
 			util/termcmd.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \
-			perform_action.c
+			perform_action.c \
+			find_hook.c \
+			new_hook.c \
+			get_hook.c \
+			reigns_hook.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
