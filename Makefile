@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/08 23:30:59 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/08 23:39:32 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADER	=	./incl/reigns.h \
 
 LIBRARY	=	./lib/vector/libvector.a
 
-TAIL	=	$(join $(addprefix -L, $(dir $(LIBRARY))),$(addprefix -l, $(patsubst lib%.a,%,$(notdir $(LIBRARY)))))
+TAIL	=	$(foreach lib,$(LIBRARY),-L $(dir $(lib)) $(patsubst lib%.a,-l%,$(notdir $(lib))))
 
 SRC 	=	reigns_init.c \
 			reigns_destroy.c \
@@ -75,7 +75,7 @@ $(NAME) : $(LIBRARY) $(OBJ)
 all : $(NAME) 
 
 test: all
-	$(CC) $(CFLAGS) main.c $(INCL) $(TAIL) -L. -lreigns -L ./lib/vector -lvector -ltermcap -o $@
+	$(CC) $(CFLAGS) $(INCL) main.c -L. -lreigns $(TAIL)  -ltermcap -o $@
 
 clean:
 	@echo "Cleaning reigns.."
