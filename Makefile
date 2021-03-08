@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/07 22:45:56 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/08 23:30:59 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC 	=	reigns_init.c \
 			util/util_memcpy.c \
 			util/util_memcmp.c \
 			util/util_strncmp.c \
+			util/util_strnlen.c \
 			util/termcmd.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \

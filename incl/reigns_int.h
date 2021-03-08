@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:44:08 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:57:55 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/08 23:32:58 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,15 @@ typedef struct		s_reigns
 	t_vec			hooks;
 }					t_reigns;
 
-//----------------------HOOKS-------------------------------
+//-----------------------GET_INPUT-------------------------------
+
+// typedef struct s_hook t_hook;
+
+// typedef struct	s_key
+// {
+// 	char	buf[6];
+// 	t_hook		hook;
+// }				t_key;
 
 typedef struct	s_hook
 {
@@ -108,13 +116,14 @@ typedef struct	s_hook
 	void	*param;
 }				t_hook;
 
+typedef int	(*t_actionf)(t_reigns* reigns, t_vec *input, char *buf, t_hook* hook);
+
+//----------------------HOOKS-------------------------------
+
+
 t_hook		*new_hook(char keycode[6], void (*f)(), void *param);
 ssize_t		find_hook(t_reigns* reigns, char *keycode, size_t size);
 t_hook		*get_hook(t_reigns* reigns, char *keycode, size_t size);
-
-//-----------------------GET_INPUT-------------------------------
-
-typedef int	(*t_actionf)(t_reigns* reigns, t_vec *input, char *buf, t_hook* hook);
 
 int	perform_action(t_reigns* reigns, t_vec* input, char *buf);
 
@@ -126,6 +135,7 @@ int	key_down(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 int	key_right(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
+
 
 //-----------------------TERMINAL RELATED FUNCTIONS-------------------------------
 
@@ -142,5 +152,6 @@ void		util_memcpy(void *dest, void *src, size_t n);
 int			util_memcmp(void *dest, void *src, size_t n);
 int			util_strncmp(char *str1, char *str2, size_t n);
 char		*util_strdup(char *str);
+size_t		*util_strnlen(char *str, size_t n);
 
 #endif
