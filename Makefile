@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/08 23:39:32 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/09 11:56:45 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ LIBRARY	=	./lib/vector/libvector.a
 TAIL	=	$(foreach lib,$(LIBRARY),-L $(dir $(lib)) $(patsubst lib%.a,-l%,$(notdir $(lib))))
 
 SRC 	=	reigns_init.c \
+			init_keys.c \
 			reigns_destroy.c \
 			reigns_get_input.c \
 			action/key_del.c \
@@ -51,10 +52,11 @@ SRC 	=	reigns_init.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \
 			perform_action.c \
-			find_hook.c \
-			new_hook.c \
-			get_hook.c \
-			reigns_hook.c
+			find_key.c \
+			new_key.c \
+			get_key.c \
+			reigns_hook.c \
+			reigns_key.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -75,7 +77,7 @@ $(NAME) : $(LIBRARY) $(OBJ)
 all : $(NAME) 
 
 test: all
-	$(CC) $(CFLAGS) $(INCL) main.c -L. -lreigns $(TAIL)  -ltermcap -o $@
+	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreigns $(TAIL) -ltermcap -o $@
 
 clean:
 	@echo "Cleaning reigns.."

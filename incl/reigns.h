@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:43 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:19:21 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 11:33:22 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		reigns_destroy(t_reigns* reigns);
 //reigns_enable //<- raw
 //reigns_disable //<- standard
 
-//when the given keycode is found, run f()
+int			reigns_key(t_reigns* reigns, char keycode[6], t_keyf func);
 int			reigns_hook(t_reigns* reigns, char keycode[6], void (*f)(), void *param);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:44:08 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/08 23:32:58 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 12:01:46 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,44 +88,51 @@ typedef struct	s_input
 
 typedef struct		s_reigns
 {
-	t_navigation	nav;
 	t_input			input;
+	t_navigation	nav;
 
 	//termcap/termios related variables
 	char			table[2048];
 	struct termios	termios;
 
-	//hooks
-	t_vec			hooks;
+	//keys
+	t_vec			keys;
 }					t_reigns;
 
 //-----------------------GET_INPUT-------------------------------
 
-// typedef struct s_hook t_hook;
-
-// typedef struct	s_key
-// {
-// 	char	buf[6];
-// 	t_hook		hook;
-// }				t_key;
-
 typedef struct	s_hook
 {
-	char	buf[6];
 	void	(*function)();
 	void	*param;
 }				t_hook;
 
-typedef int	(*t_actionf)(t_reigns* reigns, t_vec *input, char *buf, t_hook* hook);
+//----------------------KEY_FUNCTION_PROTOTYPE--------------------------------
+
+typedef int	(*t_keyf)(t_reigns* reigns, t_vec *input, char *buf, t_hook* hook);
+
+typedef struct	s_key
+{
+	char	buf[6];
+	size_t	size;
+	t_keyf	function;
+	t_hook	hook;
+}				t_key;
+
+//----------------------LIBREIGNS FUNCTIONS---------------------------------
+
+int			reigns_key(t_reigns* reigns, char keycode[6], t_keyf func);
+
 
 //----------------------HOOKS-------------------------------
 
-
-t_hook		*new_hook(char keycode[6], void (*f)(), void *param);
-ssize_t		find_hook(t_reigns* reigns, char *keycode, size_t size);
-t_hook		*get_hook(t_reigns* reigns, char *keycode, size_t size);
-
 int	perform_action(t_reigns* reigns, t_vec* input, char *buf);
+
+t_key		*new_key(char keycode[6], t_keyf f);
+ssize_t		find_key(t_reigns* reigns, char *keycode, size_t size);
+t_key		*get_key(t_reigns* reigns, char *keycode, size_t size);
+
+//----------------------------DEFAULT KEY BEHAVIOR------------------------
 
 int	key_eof(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 int	key_newline(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
@@ -136,7 +143,6 @@ int	key_right(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 
-
 //-----------------------TERMINAL RELATED FUNCTIONS-------------------------------
 
 void		termcmd(char *command, int p1, int p2, int lines_affected);
@@ -145,6 +151,8 @@ void		refresh_cursor(t_navigation* nav);
 
 //-----------------------UTIL-------------------------------
 
+int			init_keys(t_reigns* reigns);
+
 int			util_atoi(const char *str);
 size_t		util_strlen(char *str);
 void		util_bzero(void *dest, size_t n);
@@ -152,6 +160,6 @@ void		util_memcpy(void *dest, void *src, size_t n);
 int			util_memcmp(void *dest, void *src, size_t n);
 int			util_strncmp(char *str1, char *str2, size_t n);
 char		*util_strdup(char *str);
-size_t		*util_strnlen(char *str, size_t n);
+size_t		util_strnlen(char *str, size_t n);
 
 #endif

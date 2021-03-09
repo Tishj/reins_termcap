@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   new_hook.c                                         :+:    :+:            */
+/*   new_key.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:39:28 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 23:48:45 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 11:49:17 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
 #include <stdlib.h>
-#include <stdio.h>
 
-t_hook	*new_hook(char keycode[6], void (*f)(), void *param)
+t_key	*new_key(char keycode[6], t_keyf f)
 {
-	t_hook	*this;
+	t_key	*this;
 
-	this = malloc(sizeof(t_hook));
+	this = malloc(sizeof(t_key));
 	if (!this)
 		return (NULL);
 	util_memcpy(this->buf, keycode, 6);
+	this->size = util_strnlen(this->buf, 6);
 	this->function = f;
-	this->param = param;
+	this->hook.function = NULL;
+	this->hook.param = NULL;
 	return (this);
 }
