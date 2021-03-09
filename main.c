@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 14:20:29 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 15:03:13 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int main(void)
 		return (!!printf("Failed to overwrite/add key!\n"));
 	if (!reigns_hook(reigns, KEY_ESC "[" KEY_UP, &print_up, NULL))
 	 	return (!!printf("Failed to hook!\n"));
-	if (!reigns_hook(reigns, "a", &print_a, NULL))
-		return (!!printf("Failed to hook on \"a\"!\n"));
+	// if (!reigns_hook(reigns, "a", &print_a, NULL))
+	// 	return (!!printf("Failed to hook on \"a\"!\n"));
 	while (ret)
 	{
 		write(1, PROMPT, sizeof(PROMPT));

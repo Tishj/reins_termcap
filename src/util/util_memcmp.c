@@ -6,15 +6,15 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:01:50 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 21:05:11 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 15:29:55 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-int		util_memcmp(void *dst, void *src, size_t n)
+int	util_memcmp(void *dst, void *src, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (!dst || !src)
 		return (0);

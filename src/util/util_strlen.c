@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:32:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/05 17:33:00 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 15:29:38 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	util_strlen(char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])

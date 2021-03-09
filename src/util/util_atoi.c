@@ -6,11 +6,11 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:00:50 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/05 17:00:52 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 15:30:10 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			util_atoi(const char *str)
+int	util_atoi(const char *str)
 {
 	int				i;
 	unsigned long	result;
