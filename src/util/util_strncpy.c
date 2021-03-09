@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   new_key.c                                          :+:    :+:            */
+/*   util_strncpy.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/07 21:39:28 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 14:15:15 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/09 14:08:35 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/09 14:10:59 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
-#include <stdlib.h>
+#include <stddef.h>
 
-t_key	*new_key(char keycode[6], t_keyf f)
+void	util_strncpy(char *dest, char *src, size_t n)
 {
-	t_key	*this;
+	size_t	i;
 
-	this = malloc(sizeof(t_key));
-	if (!this)
-		return (NULL);
-	util_bzero(this->buf, 6);
-	util_memcpy(this->buf, keycode, 6);
-	this->size = util_strnlen(this->buf, 6);
-	this->function = f;
-	this->hook.function = NULL;
-	this->hook.param = NULL;
-	return (this);
+	i = 0;
+	while (i < n && src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
 }

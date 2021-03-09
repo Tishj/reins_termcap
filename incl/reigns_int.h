@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:44:08 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 13:36:37 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 14:43:57 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void		refresh_cursor(t_navigation* nav);
 
 int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reigns* reigns);
+void		print_keycode_formatted(char keycode[6]);
 
 int			util_atoi(const char *str);
 size_t		util_strlen(char *str);
@@ -159,5 +160,6 @@ int			util_memcmp(void *dest, void *src, size_t n);
 int			util_strncmp(char *str1, char *str2, size_t n);
 char		*util_strdup(char *str);
 size_t		util_strnlen(char *str, size_t n);
+void		util_strncpy(char *dest, char *src, size_t n);
 
 #endif
