@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 11:47:41 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 16:54:21 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ static int	get_cursor_pos(t_reigns* reigns)
 	ret = read(STDIN_FILENO, buf, 10);
 	if (ret == -1)
 		return (!printf("read for cursor position failed!\n"));
-	reigns->nav.cursor.y = util_atoi(buf + 2);
-	reigns->nav.cursor.x = util_atoi(buf + 4 + 
-		(reigns->nav.cursor.y >= 10) +
-		(reigns->nav.cursor.y > 100));
-	reigns->input.nav.dimension.y = 0;
-	reigns->input.nav.dimension.x = 0;
-	reigns->input.nav.cursor.x = reigns->nav.cursor.x;
-	reigns->input.nav.cursor.y = 0;
-	reigns->input.start.y = reigns->nav.cursor.y;
-	reigns->input.start.x = reigns->input.nav.cursor.x;
+	reigns->term_cursor.row = util_atoi(buf + 2);
+	reigns->term_cursor.col = util_atoi(buf + 4 + 
+		(reigns->term_cursor.row >= 10) +
+		(reigns->term_cursor.row > 100));
+
+	reigns->prompt_row = reigns->term_cursor.row;
+	reigns->prompt_size = reigns->term_cursor.col;
+	
+	reigns->input_rows = 0;
+	reigns->shell_cursor.col = 0;
+	reigns->shell_cursor.row = 0;
 	return (1);
 }
 

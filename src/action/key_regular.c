@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/08 00:15:18 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 16:48:36 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 	size_t	row;
 	char	*buf;
 
-	row = reigns->input.nav.cursor.y;
+	row = reigns->shell_cursor.row;
 	//for every row of the input
-	while (row + 1 < reigns->input.nav.dimension.y)
+	while (row + 1 < reigns->input_rows)
 	{
 		//move to start of line
-		termcmd(MOVE_COLROW, 0, reigns->input.start.y + row + 1, 1);
-		index = ((row + 1) * reigns->nav.dimension.x) - reigns->input.start.x;
+		termcmd(MOVE_COLROW, 0, reigns->prompt_row + row + 1, 1);
+		index = ((row + 1) * reigns->term_columns) - reigns->prompt_size;
 		if (index > input->index)
 			break ;
 		//insert character
@@ -41,17 +41,17 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 
 // static void			set_pos_of_cursor(t_reigns *reigns)
 // {
-// 	if (reigns->input.nav.cursor.x + 1 > reigns->nav.dimension.x)
+// 	if (reigns->shell_cursor.col + 1 > reigns->term_columns)
 // 	{
-// 		reigns->input.nav.cursor.x = 0;
-// 		reigns->nav.cursor.x = 0;
-// 		reigns->input.nav.cursor.y++;
-// 		if (reigns->input.nav.cursor.y > reigns->input.nav.dimension.y)
-// 			reigns->input.nav.dimension.y++;
-// 		reigns->nav.cursor.y++;
+// 		reigns->shell_cursor.col = 0;
+// 		reigns->term_cursor.col = 0;
+// 		reigns->shell_cursor.row++;
+// 		if (reigns->shell_cursor.row > reigns->input_rows)
+// 			reigns->input_rows++;
+// 		reigns->term_cursor.row++;
 // 	}
 // 	else
-// 		reigns->input.nav.cursor.x++;
+// 		reigns->shell_cursor.col++;
 // }
 
 int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
@@ -60,8 +60,8 @@ int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 
 	if (hook && hook->function)
 		hook->function(hook->param);
-	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) +
-		reigns->input.nav.cursor.x;
+	index = (reigns->shell_cursor.row * reigns->term_columns) +
+		reigns->shell_cursor.col;
 	if (!vec_insert(input, buf, index))
 		return (RD_ERROR);
 	termcmd(INSERT_START, 0, 0, 1);
@@ -70,6 +70,6 @@ int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 	if (!add_overflow_to_start_of_row(reigns, input))
 		return (RD_ERROR);
 	update_cursor(reigns, 1, 0);
-//	termcmd(MOVE_COLROW, reigns->nav.cursor.x, reigns->nav.cursor.y, 1);
+//	termcmd(MOVE_COLROW, reigns->term_cursor.col, reigns->term_cursor.row, 1);
 	return (RD_IDLE);
 }

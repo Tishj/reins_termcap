@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 13:36:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 16:16:12 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 16:48:36 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	update_cursor(t_reigns* reigns, int col_adjust, int row_adjust)
 {
 	long long col;
 	long long row;
-	col = (long long)reigns->input.nav.cursor.x + col_adjust;
-	row = (long long)reigns->input.nav.cursor.y + row_adjust;
+	col = (long long)reigns->shell_cursor.col + col_adjust;
+	row = (long long)reigns->shell_cursor.row + row_adjust;
 	//adjust column
-	if (col >= (long long)reigns->nav.dimension.x)
+	if (col >= (long long)reigns->term_columns)
 	{
 		col = 0;
 		row++;
@@ -27,19 +27,19 @@ void	update_cursor(t_reigns* reigns, int col_adjust, int row_adjust)
 	else if (col < 0)
 	{
 		if (row)
-			col = reigns->nav.dimension.x - 1;
+			col = reigns->term_columns - 1;
 		else
 			col = 0;
 		row--;
 	}
 	//adjust row;
-	if (row > (long long)reigns->input.nav.dimension.y)
-		reigns->input.nav.dimension.y++;
+	if (row > (long long)reigns->input_rows)
+		reigns->input_rows++;
 	else if (row < 0)
 		row = 0;
-	reigns->input.nav.cursor.x = col;
-	reigns->input.nav.cursor.y = row;
-	reigns->nav.cursor.x = reigns->input.nav.cursor.x;
-	if (!reigns->input.nav.cursor.y)
-		reigns->nav.cursor.x += (reigns->input.start.x - 1);
+	reigns->shell_cursor.col = col;
+	reigns->shell_cursor.row = row;
+	reigns->term_cursor.col = reigns->shell_cursor.col;
+	if (!reigns->shell_cursor.row)
+		reigns->term_cursor.col += (reigns->prompt_size - 1);
 }

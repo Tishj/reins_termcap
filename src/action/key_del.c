@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:54:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/08 00:29:28 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 16:48:36 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int			delete_from_affected_rows(t_reigns* reigns, t_vec* input)
 	size_t	index;
 	char	*buf;
 
-	row = reigns->input.nav.cursor.y;
-	while (row < reigns->input.nav.dimension.y)
+	row = reigns->shell_cursor.row;
+	while (row < reigns->input_rows)
 	{
-		termcmd(MOVE_COLROW, 0, reigns->input.start.y + row + 1, 1);
+		termcmd(MOVE_COLROW, 0, reigns->prompt_row + row + 1, 1);
 		termcmd(DELETE_START, 0, 0, 1);
 		termcmd(DELETE_CHAR, 0, 0, 1);
 		termcmd(DELETE_END, 0, 0, 1);
-		termcmd(MOVE_COLROW, reigns->input.nav.dimension.x, 
-			reigns->input.start.y + row, 1);
-		index = ((row + 1) * reigns->input.nav.dimension.x) -
-			reigns->input.start.x - 1;
+		termcmd(MOVE_COLROW, reigns->term_columns, 
+			reigns->prompt_row + row, 1);
+		index = ((row + 1) * reigns->term_columns) -
+			reigns->prompt_size - 1;
 		if (index > input->index)
 			break ;
 		termcmd(INSERT_START, 0, 0, 1);
@@ -50,12 +50,12 @@ int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 		hook->function(hook->param);
 	(void)buf;
 	update_cursor(reigns, -1, 0);
-	index = (reigns->input.nav.cursor.y * reigns->nav.dimension.x) + \
-		reigns->input.nav.cursor.x;
+	index = (reigns->shell_cursor.row * reigns->term_columns) + \
+		reigns->shell_cursor.col;
 	if (!vec_del(input, index))
 		return (RD_ERROR);
-	termcmd(MOVE_COLROW, reigns->nav.cursor.x,
-		reigns->nav.cursor.y, 1);
+	termcmd(MOVE_COLROW, reigns->term_cursor.col,
+		reigns->term_cursor.row, 1);
 	termcmd(DELETE_START, 0, 0, 1);
 	termcmd(DELETE_CHAR, 0, 0, 1);
 	termcmd(DELETE_END, 0, 0, 1);

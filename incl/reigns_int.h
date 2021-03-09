@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:44:08 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 14:43:57 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 16:55:10 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,24 @@ enum	e_readstate
 
 typedef struct	s_vec2sz
 {
-	size_t	x;
-	size_t	y;	
+	size_t	col;
+	size_t	row;	
 }				t_vec2sz;
-
-typedef struct	s_navigation
-{
-	t_vec2sz	dimension;
-	t_vec2sz	cursor;
-}				t_navigation;
-
-typedef struct	s_input
-{
-	t_vec2sz		start;
-	t_navigation	nav;
-	t_vec			line;
-}					t_input;
 
 typedef struct		s_reigns
 {
-	t_input			input;
-	t_navigation	nav;
+	//relative to terminal
+	t_vec2sz		term_cursor;
+	size_t			term_columns;
+	size_t			term_rows;
+
+	//relative to terminal
+	size_t			prompt_size;
+	size_t			prompt_row;
+
+	//relative to shell
+	t_vec2sz		shell_cursor;
+	size_t			input_rows;
 
 	//termcap/termios related variables
 	char			table[2048];
@@ -144,7 +141,7 @@ int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
 
 void		termcmd(char *command, int p1, int p2, int lines_affected);
 void		update_cursor(t_reigns* reigns, int col_adjust, int row_adjust);
-void		refresh_cursor(t_navigation* nav);
+void		refresh_cursor(t_reigns* nav);
 
 //-----------------------UTIL-------------------------------
 

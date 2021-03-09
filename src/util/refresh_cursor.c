@@ -6,15 +6,15 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:57:48 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:14:27 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 16:55:25 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
 
-void	refresh_cursor(t_navigation* nav)
+void	refresh_cursor(t_reigns* reigns)
 {
-	(void)nav;
+	(void)reigns;
 	// if (nav->cursor.y < 0)
 	// {
 	// 	while (nav->cursor.y < 0)
