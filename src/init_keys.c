@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/09 11:38:54 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 12:03:51 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 13:38:21 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int	init_keys(t_reigns* reigns)
 		key_regular,
 		NULL
 	};
-	static const char keycodes[][6] = {
-		{'\x1B', '[', (char)KEY_CTRL_D, '\0', '\0', '\0'},
-		{(char)KEY_DEL, '\0', '\0', '\0', '\0', '\0'},
-		{'\x1B', '[', (char)KEY_RIGHT, '\0', '\0', '\0'},
-		{'\x1B', '[', (char)KEY_LEFT, '\0', '\0', '\0'},
-		{'\x1B', '[', (char)KEY_UP, '\0', '\0', '\0'},
-		{'\x1B', '[', (char)KEY_DOWN, '\0', '\0', '\0'},
-		{'\xA', '\0', '\0', '\0', '\0', '\0'},
-		{' ', '\0', '\0', '\0', '\0', '\0'},
+	static const char *keycodes[] = {
+		KEY_CNTRL_D,
+		KEY_DEL,
+		KEY_ESC "[" KEY_RIGHT,
+		KEY_ESC "[" KEY_LEFT,
+		KEY_ESC "[" KEY_UP,
+		KEY_ESC "[" KEY_DOWN,
+		KEY_NEWLINE,
+		" "
 	};
 
 	if (!vec_new(&reigns->keys, sizeof(t_key)))

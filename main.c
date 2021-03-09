@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 12:08:36 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 13:31:28 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	print_a(void *yeet)
 	printf("\nAAAAAHHH\n");
 }
 
-int	up_function(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int	up_function(t_reigns* reigns, t_vec* line, char *buf, t_hook* hook)
 {
-	(void)input;
+	(void)line;
 	(void)reigns;
 	(void)buf;
 	(void)hook;
@@ -49,15 +49,14 @@ int main(void)
 	ret = 1;
 	reigns = reigns_init();
 	if (!reigns)
-		return (1);
+		return (!!printf("Failed to init reigns!\n"));
 	// if (!reigns_hook(reigns, (char [6]){'\x1B', '[', '\x41', '\0', '\0', '\0'}, &print_up, NULL))
 	// 	return (!!printf("Failed to hook!\n"));
-	if (!reigns_key(reigns, (char [6]){'\x1B', '[', '\x41', '\0', '\0', '\0'}, up_function))
+//	if (!reigns_key(reigns, (char [3]){KEY_ESC, '[', KEY_UP}, up_function))
+	if (!reigns_key(reigns, KEY_ESC "[" KEY_UP, up_function))
 		return (!!printf("Failed to overwrite/add key!\n"));
-	if (!reigns_hook(reigns, (char [6]){'a', '\0', '\0', '\0', '\0', '\0'}, &print_a, NULL))
+	if (!reigns_hook(reigns, "a", &print_a, NULL))
 		return (!!printf("Failed to hook!\n"));
-	if (!reigns)
-		return (!!printf("Failed to init reigns!\n"));
 	while (ret >= 0)
 	{
 		write(1, PROMPT, sizeof(PROMPT));

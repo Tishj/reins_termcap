@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_hook.c                                      :+:    :+:            */
+/*   create_keycode.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/07 20:43:23 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 13:15:28 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/09 13:10:28 by tishj         #+#    #+#                 */
+/*   Updated: 2021/03/09 13:23:34 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-
-int		reigns_hook(t_reigns* reigns, char *raw_key, void (*f)(), void* param)
+int	create_keycode(char *raw, char keycode[6])
 {
-	t_key	*key;
-	ssize_t	index;
-	char	keycode[6];
-
-	if (!reigns || !create_keycode(raw_key, keycode))
+	if (!raw)
 		return (0);
-	index = find_key(reigns, keycode, 6);
-	if (index == -1)
-		return (0);
-	key = vec_getref(&reigns->keys, index);
-	if (!key)
-		return (0);
-	key->hook.function = f;
-	key->hook.param = param;
+	util_bzero(keycode, 6);
+	util_memcpy(keycode, raw, 6);
 	return (1);
 }

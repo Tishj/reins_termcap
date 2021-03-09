@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/09 11:56:45 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/09 13:15:41 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC 	=	reigns_init.c \
 			util/termcmd.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \
+			create_keycode.c \
 			perform_action.c \
 			find_key.c \
 			new_key.c \

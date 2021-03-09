@@ -6,19 +6,20 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 23:41:18 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 11:11:31 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 13:13:34 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
 
 //add or replace a function to handle a certain keycode
-int		reigns_key(t_reigns* reigns, char keycode[6], t_keyf func)
+int		reigns_key(t_reigns* reigns, char *raw_key, t_keyf func)
 {
 	ssize_t	index;
 	t_key	*key;
+	char	keycode[6];
 
-	if (!reigns)
+	if (!reigns || !create_keycode(raw_key, keycode))
 		return (0);
 	index = find_key(reigns, keycode, 6);
 	if (index == -1)

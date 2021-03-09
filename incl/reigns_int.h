@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:44:08 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 12:01:46 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 13:36:37 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 //---------------------READ_STATE-----------------------------
 
+//returned by t_keyf functions to signal the state of the reader
 enum	e_readstate
 {
 	RD_ERROR,
@@ -49,21 +50,18 @@ enum	e_readstate
 
 //-----------------------SPECIAL_CHARACTERS-------------------------------
 
-enum		e_special
-{
-	KEY_CTRL_D		= 4,
-	KEY_NEWLINE		= 10,
-	KEY_CTRL_L		= 12,
-	KEY_CTRL_U		= 21,
-	KEY_ESC			= 27,
-	KEY_UP			= 65,
-	KEY_DOWN		= 66,
-	KEY_RIGHT		= 67,
-	KEY_LEFT		= 68,
-	KEY_END			= 70,
-	KEY_HOME		= 72,
-	KEY_DEL	 		= 127,
-};
+#define KEY_CNTRL_D "\x4"
+#define KEY_NEWLINE "\xA"
+#define KEY_CNTRL_L "\xC"
+#define KEY_ESC "\x1B"
+#define KEY_CNTRL_U "\x15"
+#define KEY_UP "\x41"
+#define KEY_DOWN "\x42"
+#define KEY_RIGHT "\x43"
+#define KEY_LEFT "\x44"
+#define KEY_END "\x46"
+#define KEY_HOME "\x48"
+#define KEY_DEL "\x7F"
 
 //---------------------STRUCTS------------------------------
 
@@ -121,8 +119,7 @@ typedef struct	s_key
 
 //----------------------LIBREIGNS FUNCTIONS---------------------------------
 
-int			reigns_key(t_reigns* reigns, char keycode[6], t_keyf func);
-
+int			reigns_key(t_reigns* reigns, char *raw_key, t_keyf func);
 
 //----------------------HOOKS-------------------------------
 
@@ -151,6 +148,7 @@ void		refresh_cursor(t_navigation* nav);
 
 //-----------------------UTIL-------------------------------
 
+int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reigns* reigns);
 
 int			util_atoi(const char *str);
