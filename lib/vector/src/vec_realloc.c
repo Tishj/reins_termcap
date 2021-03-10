@@ -14,7 +14,7 @@
 #include <vector_int.h>
 #include <stdlib.h>
 
-int		vec_realloc(t_vec* vector)
+int	vec_realloc(t_vec *vector)
 {
 	char	*data;
 

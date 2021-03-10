@@ -19,7 +19,6 @@ int	util_atoi(char *str)
 
 	i = 0;
 	result = 0;
-//	printf("%s\n", str);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = (result * 10) + (str[i] - '0');

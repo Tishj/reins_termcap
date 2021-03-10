@@ -13,8 +13,10 @@
 #include <reins_int.h>
 #include <stdlib.h>
 
-//add or replace a function to handle a certain keycode
-int		reins_key(t_reins* reins, char *raw_key, t_keyf func)
+/*
+**	Add or replace a function to handle a certain keycode
+*/
+int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 {
 	ssize_t	index;
 	t_key	*key;

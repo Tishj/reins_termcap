@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include <reins_int.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 
-int		reins_hook(t_reins* reins, char *raw_key, void (*f)(), void* param)
+int	reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param)
 {
 	t_key	*key;
 	ssize_t	index;

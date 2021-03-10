@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/10 15:20:29 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/10 16:33:40 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,8 @@ SRC 	=	reins_init.c \
 			reins_hook.c \
 			reins_key.c
 
+
+
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
@@ -71,7 +73,7 @@ INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@echo "Compiling $(notdir $@)"
-	@$(CC) $(CFLAGS) -c $^ $(INCL) -ltermcap -o $@
+	@$(CC) $(CFLAGS) -c $^ $(INCL) $(TAIL) -o $@
 
 $(NAME) : $(OBJ) $(LIBRARY)
 	@echo "Compiling $(notdir $@)"
@@ -83,7 +85,7 @@ $(NAME) : $(OBJ) $(LIBRARY)
 all : $(NAME) 
 
 test: all
-	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreins $(TAIL) -ltermcap -o $@
+	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreins $(TAIL) -ltermcap -o $@ 
 
 clean:
 	@echo "Cleaning reins.."
@@ -96,3 +98,5 @@ fclean: clean
 	@rm -f $(NAME) test
 
 re: fclean all
+
+.PHONY: all test clean fclean re

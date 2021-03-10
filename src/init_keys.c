@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/09 11:38:54 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 15:28:17 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 16:36:28 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	regular_ascii_keys(t_reins *reins)
 	return (1);
 }
 
-static int	populate_keys_vector(t_reins* reins,
-		const t_keyf* functions,
+static int	populate_keys_vector(t_reins *reins,
+		const t_keyf *functions,
 		const char **keycodes)
 {
 	size_t	i;
@@ -49,7 +49,7 @@ static int	populate_keys_vector(t_reins* reins,
 	return (1);
 }
 
-int	init_keys(t_reins* reins)
+int	init_keys(t_reins *reins)
 {
 	static const t_keyf	functions[] = {
 		key_eof,
@@ -62,7 +62,7 @@ int	init_keys(t_reins* reins)
 		key_regular,
 		NULL
 	};
-	static const char *keycodes[] = {
+	static const char	*keycodes[] = {
 		KEY_CNTRL_D,
 		KEY_DEL,
 		KEY_ESC "[" KEY_RIGHT,
@@ -72,5 +72,6 @@ int	init_keys(t_reins* reins)
 		KEY_NEWLINE,
 		" "
 	};
+
 	return (populate_keys_vector(reins, functions, keycodes));
 }

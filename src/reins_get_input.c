@@ -16,7 +16,7 @@
 #include <termcap.h>
 #include <reins_int.h>
 
-int		reins_get_input(t_reins* reins, char **line)
+int	reins_get_input(t_reins *reins, char **line)
 {
 	t_vec				input;
 	char				buf[6];
@@ -29,19 +29,18 @@ int		reins_get_input(t_reins* reins, char **line)
 	{
 		util_bzero(buf, 6);
 		read(STDIN_FILENO, buf, 6);
-//		printf("BUF[%d][%d][%d][%d][%d][%d]\n", (int)buf[0], (int)buf[1], (int)buf[2], (int)buf[3], (int)buf[4], (int)buf[5]);
 		state = perform_action(reins, &input, buf);
 		if (state != RD_IDLE)
 			break ;
 		refresh_cursor(reins);
 	}
 	if (state == RD_ERROR)
-		return (-!!dprintf(2, "error state!\n"));
+		return (- !!dprintf(2, "error state!\n"));
 	if (!vec_add(&input, ""))
-		return (-!!dprintf(2, "failed to null-terminate!\n"));
+		return (- !!dprintf(2, "failed to null-terminate!\n"));
 	*line = util_strdup(input.store);
 	if (!*line)
-		return (-!!dprintf(2, "strdup failed!\n"));
+		return (- !!dprintf(2, "strdup failed!\n"));
 	vec_destroy(&input, NULL);
 	return ((state != RD_EOF));
 }

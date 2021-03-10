@@ -15,7 +15,7 @@
 
 # include <sys/types.h>
 
-typedef	struct		s_vec
+typedef struct s_vec
 {
 	char			*store;
 	size_t			type_size;
@@ -28,6 +28,6 @@ int					vec_insert(t_vec *vector, void *buffer, size_t index);
 int					vec_new(t_vec *vector, size_t type_size);
 int					vec_destroy(t_vec *vector, void (*del)(void *));
 void				*vec_getref(t_vec *vector, size_t index);
-int					vec_del(t_vec* vector, size_t index);
+int					vec_del(t_vec *vector, size_t index);
 
 #endif

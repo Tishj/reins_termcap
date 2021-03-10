@@ -13,13 +13,13 @@
 #include <reins_int.h>
 #include <unistd.h>
 
-int	key_right(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
+int	key_right(t_reins *reins, t_vec *input, char *buf, t_hook *hook)
 {
 	if (hook && hook->function)
 		hook->function(hook->param);
 	(void)buf;
-	if ((reins->shell_cursor.row * reins->max_col) + 
-		reins->shell_cursor.col >= input->size)
+	if ((reins->shell_cursor.row * reins->max_col)
+		+ reins->shell_cursor.col >= input->size)
 		return (RD_IDLE);
 	update_cursor(reins, 1, 0);
 	termcmd(MOVE_COLROW, reins->term_cursor.col, reins->term_cursor.row, 1);

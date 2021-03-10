@@ -14,7 +14,7 @@
 #include "vector_int.h"
 #include <stdlib.h>
 
-int		vec_add(t_vec *vector, void *buffer)
+int	vec_add(t_vec *vector, void *buffer)
 {
 	if (!vec_realloc(vector))
 		return (0);

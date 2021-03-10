@@ -13,10 +13,10 @@
 #ifndef VECTOR_INT_H
 # define VECTOR_INT_H
 
-#include "vector.h"
+# include "vector.h"
 
-int					vec_realloc(t_vec* vector);
-void				*util_memcpy(void* dst, void* src, size_t n);
-void				util_memmove(void* dst, void* src, size_t n);
+int					vec_realloc(t_vec *vector);
+void				*util_memcpy(void *dst, void *src, size_t n);
+void				util_memmove(void *dst, void *src, size_t n);
 
 #endif

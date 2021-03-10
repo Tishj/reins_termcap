@@ -13,7 +13,7 @@
 #include "vector.h"
 #include <stdlib.h>
 
-int		vec_new(t_vec *vector, size_t type_size)
+int	vec_new(t_vec *vector, size_t type_size)
 {
 	vector->capacity = 4;
 	vector->size = 0;

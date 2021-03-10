@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <reins_int.h>
 
-void	reins_destroy(t_reins* reins)
+void	reins_destroy(t_reins *reins)
 {
 	vec_destroy(&reins->keys, NULL);
 	free(reins);
