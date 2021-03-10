@@ -12,7 +12,7 @@ Its prototype is:
 ## Functions
 
 * `reins_hook(t_reins *reins, char *keycode, void (*f)(void *param), void *param);`  
-In default `t_keyf` functions, when present, a hook is always called using the provided parameter.
+In default `t_keyf` functions a hook is always called using the provided parameter when present.
 
 * `reins_key(t_reins *reins, char *keycode, t_keyf function));`  
 Add functionality or change existing `t_keyf` function of a given key.  
