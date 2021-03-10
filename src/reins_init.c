@@ -19,9 +19,11 @@
 #include <term.h>
 #include <stdio.h>
 
-static int	init_table(t_reins* reins)
+static int	init_table(t_reins *reins)
 {
-	char	*termtype = getenv("TERM");
+	char	*termtype;
+
+	termtype = getenv("TERM");
 	if (!termtype)
 		return (!printf("No termtype!\n"));
 	if (tgetent(reins->table, termtype) == -1)
@@ -29,33 +31,37 @@ static int	init_table(t_reins* reins)
 	return (1);
 }
 
+/*
+**	IMAXBEL			-	kinda useless
+**	ECHO | ICANON	-	turn off canonical mode and echo
+**	VMIN			-	minimal amount of characters for non-canonical read (syscall)
+**	VTIME			-	minimal time-out for non-canonical read (syscall)
+*/
 static int	init_termios(struct termios *term)
 {
 	if (!isatty(STDIN_FILENO) || tcgetattr(STDIN_FILENO, term) < 0)
 		return (0);
-	term->c_iflag &= ~(IMAXBEL); //kinda useless
-	term->c_lflag &= ~(ECHO | ICANON); //turn off canonical mode and echo
-	term->c_cc[VMIN] = 1; //minimal amount of characters for non-canonical read (syscall)
-	term->c_cc[VTIME] = 0; //minimal time-out for non-canonical read (syscall)
-
-	//set input/output speed to standard, set changed attributes in the terminal
+	term->c_iflag &= ~(IMAXBEL);
+	term->c_lflag &= ~(ECHO | ICANON);
+	term->c_cc[VMIN] = 1;
+	term->c_cc[VTIME] = 0;
 	if (cfsetispeed(term, B9600) < 0 || cfsetospeed(term, B9600) < 0
 		|| tcsetattr(STDIN_FILENO, TCSAFLUSH, term) < 0)
 		return (!printf("failed to set attribute!\n"));
 	return (1);
 }
 
-t_reins*	reins_init()
+t_reins	*reins_init(void)
 {
-	t_reins*	reins;
+	t_reins	*reins;
 
 	reins = malloc(sizeof(t_reins));
 	if (!reins)
 		return (NULL);
 	reins->enabled = false;
-	if (!init_table(reins) ||
-		!init_termios(&reins->termios) ||
-		!init_keys(reins))
+	if (!init_table(reins)
+		|| !init_termios(&reins->termios)
+		|| !init_keys(reins))
 	{
 		free(reins);
 		return (NULL);

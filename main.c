@@ -30,7 +30,7 @@ void	print_a(void *yeet)
 	printf("\nAAAAAHHH\n");
 }
 
-int	up_function(t_reins* reins, t_vec* line, char *buf, t_hook* hook)
+int	up_function(t_reins *reins, t_vec *line, char *buf, t_hook *hook)
 {
 	(void)line;
 	(void)reins;
@@ -42,22 +42,27 @@ int	up_function(t_reins* reins, t_vec* line, char *buf, t_hook* hook)
 	return (RD_IDLE);
 }
 
-int main(void)
+int	reins_start(t_reins **reins)
+{
+	*reins = reins_init();
+	if (!*reins)
+		return (!!printf("Failed to init reins!\n"));
+	if (!reins_key(*reins, KEY_ESC "[" KEY_UP, up_function))
+		return (!!printf("Failed to overwrite/add key!\n"));
+	if (!reins_hook(*reins, KEY_ESC "[" KEY_UP, &print_up, NULL))
+		return (!!printf("Failed to hook!\n"));
+	return (0);
+}
+
+int	main(void)
 {
 	t_reins	*reins;
-	char		*line;
-	int			ret;
+	char	*line;
+	int		ret;
 
 	ret = 1;
-	reins = reins_init();
-	if (!reins)
-		return (!!printf("Failed to init reins!\n"));
-	if (!reins_key(reins, KEY_ESC "[" KEY_UP, up_function))
-		return (!!printf("Failed to overwrite/add key!\n"));
-	if (!reins_hook(reins, KEY_ESC "[" KEY_UP, &print_up, NULL))
-	 	return (!!printf("Failed to hook!\n"));
-	// if (!reins_hook(reins, "a", &print_a, NULL))
-	// 	return (!!printf("Failed to hook on \"a\"!\n"));
+	if (reins_start(&reins))
+		return (-1);
 	while (ret)
 	{
 		write(1, PROMPT, sizeof(PROMPT));

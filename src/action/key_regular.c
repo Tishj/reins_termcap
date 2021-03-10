@@ -14,24 +14,22 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int		add_overflow_to_start_of_row(t_reins* reins, t_vec* input)
+int	add_overflow_to_start_of_row(t_reins *reins, t_vec *input)
 {
 	size_t	index;
 	size_t	row;
 	char	*buf;
 
 	row = reins->shell_cursor.row;
-	//for every row of the input
 	while (row + 1 < reins->input_rows)
 	{
-		//move to start of line
 		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
 		index = ((row + 1) * reins->max_col) - reins->prompt_size;
 		if (index >= input->size)
 			break ;
-		//insert character
 		termcmd(INSERT_START, 0, 0, 1);
-		if ((buf = vec_getref(input, index)) == NULL)
+		buf = vec_getref(input, index);
+		if (buf == NULL)
 			return (0);
 		write(1, buf, 1);
 		termcmd(INSERT_END, 0, 0, 1);
@@ -40,14 +38,14 @@ int		add_overflow_to_start_of_row(t_reins* reins, t_vec* input)
 	return (1);
 }
 
-int	key_regular(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
+int	key_regular(t_reins *reins, t_vec *input, char *buf, t_hook *hook)
 {
-	size_t index;
+	size_t	index;
 
 	if (hook && hook->function)
 		hook->function(hook->param);
-	index = (reins->shell_cursor.row * reins->max_col) +
-		reins->shell_cursor.col;
+	index = (reins->shell_cursor.row * reins->max_col)
+		+ reins->shell_cursor.col;
 	if (!vec_insert(input, buf, index))
 	{
 		printf("vec_insert failed\n");

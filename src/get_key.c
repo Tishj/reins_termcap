@@ -12,7 +12,7 @@
 
 #include <reins_int.h>
 
-t_key	*get_key(t_reins* reins, char *keycode, size_t size)
+t_key	*get_key(t_reins *reins, char *keycode, size_t size)
 {
 	ssize_t	index;
 

@@ -13,13 +13,13 @@
 #include "vector.h"
 #include "vector_int.h"
 
-int	vec_insert(t_vec* vec, void* buffer, size_t index)
+int	vec_insert(t_vec *vec, void *buffer, size_t index)
 {
 	if (index >= vec->size)
 		return (vec_add(vec, buffer));
 	if (!vec_realloc(vec))
 		return (0);
-	util_memmove(vec->store + ((index + 1) * vec->type_size), 
+	util_memmove(vec->store + ((index + 1) * vec->type_size),
 		vec->store + (index * vec->type_size),
 		(vec->size - index) * vec->type_size);
 	util_memcpy(vec->store + (index * vec->type_size), buffer, vec->type_size);

@@ -13,7 +13,7 @@
 #include <reins_int.h>
 
 //really needs a better name
-void	refresh_cursor(t_reins* reins)
+void	refresh_cursor(t_reins *reins)
 {
 	while (reins->term_cursor.row < 0)
 	{

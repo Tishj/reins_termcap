@@ -13,7 +13,7 @@
 #include "vector.h"
 #include "vector_int.h"
 
-int	vec_del(t_vec* vec, size_t index)
+int	vec_del(t_vec *vec, size_t index)
 {
 	if (index >= vec->size)
 		return (1);

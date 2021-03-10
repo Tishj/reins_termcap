@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int			delete_from_affected_rows(t_reins* reins, t_vec* input)
+int	delete_from_affected_rows(t_reins *reins, t_vec *input)
 {
 	size_t	row;
 	size_t	index;
@@ -23,20 +23,17 @@ int			delete_from_affected_rows(t_reins* reins, t_vec* input)
 	row = reins->shell_cursor.row;
 	while (row + 1 < reins->input_rows)
 	{
-		//delete from start of next row
 		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
 		termcmd(DELETE_START, 0, 0, 1);
 		termcmd(DELETE_CHAR, 0, 0, 1);
 		termcmd(DELETE_END, 0, 0, 1);
-		//move to X:max, Y:row
-		termcmd(MOVE_COLROW, reins->max_col, 
-			reins->prompt_row + row, 1);
-		index = ((row + 1) * reins->max_col) -
-			reins->prompt_size - 1;
+		termcmd(MOVE_COLROW, reins->max_col, reins->prompt_row + row, 1);
+		index = ((row + 1) * reins->max_col) - reins->prompt_size - 1;
 		if (index >= input->size)
 			break ;
 		termcmd(INSERT_START, 0, 0, 1);
-		if ((buf = vec_getref(input, index)) == NULL)
+		buf = vec_getref(input, index);
+		if (buf == NULL)
 			return (0);
 		write(1, buf, 1);
 		termcmd(INSERT_END, 0, 0, 1);
@@ -45,7 +42,7 @@ int			delete_from_affected_rows(t_reins* reins, t_vec* input)
 	return (1);
 }
 
-int	key_del(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
+int	key_del(t_reins *reins, t_vec *input, char *buf, t_hook *hook)
 {
 	size_t	index;
 

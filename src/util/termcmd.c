@@ -21,7 +21,7 @@ static int	putchar(int c)
 	return (1);
 }
 
-void		termcmd(char *command, int p1, int p2, int lines_affected)
+void	termcmd(char *command, int p1, int p2, int lines_affected)
 {
 	tputs(tgoto(tgetstr(command, NULL), p1, p2), lines_affected, &putchar);
 }

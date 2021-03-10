@@ -13,12 +13,18 @@
 #include "vector.h"
 #include <stdlib.h>
 
-int		vec_destroy(t_vec *vector, void (*del)(void *))
+int	vec_destroy(t_vec *vector, void (*del)(void *))
 {
+	size_t	i;
+
+	i = 0;
 	if (del)
 	{
-		for (size_t i = 0; i < vector->size; i++)
+		while (i < vector->size)
+		{
 			del(vec_getref(vector, i));
+			i++;
+		}
 	}
 	free(vector->store);
 	vector->capacity = 0;

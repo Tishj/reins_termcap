@@ -12,7 +12,7 @@
 
 #include <reins_int.h>
 
-t_key	*get_action(t_reins* reins, char *buf, size_t* i)
+t_key	*get_action(t_reins *reins, char *buf, size_t *i)
 {
 	ssize_t	index;
 
@@ -22,7 +22,7 @@ t_key	*get_action(t_reins* reins, char *buf, size_t* i)
 	return (get_key(reins, buf + *i, 6 - *i));
 }
 
-int		perform_action(t_reins* reins, t_vec* input, char *buf)
+int	perform_action(t_reins *reins, t_vec *input, char *buf)
 {
 	size_t					i;
 	int						state;

@@ -64,6 +64,8 @@ SRC 	=	reins_init.c \
 			reins_hook.c \
 			reins_key.c
 
+
+
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
@@ -71,9 +73,9 @@ INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@echo "Compiling $(notdir $@)"
-	@$(CC) $(CFLAGS) -c $^ $(INCL) -ltermcap -o $@
+	@$(CC) $(CFLAGS) -c $^ $(INCL) -o $@
 
-$(NAME) : $(LIBRARY) $(OBJ)
+$(NAME) : $(OBJ) $(LIBRARY)
 	@echo "Compiling $(notdir $@)"
 	@ar -rcs $@ $^
 
@@ -83,7 +85,7 @@ $(NAME) : $(LIBRARY) $(OBJ)
 all : $(NAME) 
 
 test: all
-	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreins $(TAIL) -ltermcap -o $@
+	$(CC) $(CFLAGS) main.c $(INCL) $(TAIL) -L. -lreins -ltermcap -o $@ 
 
 clean:
 	@echo "Cleaning reins.."
@@ -96,3 +98,5 @@ fclean: clean
 	@rm -f $(NAME) test
 
 re: fclean all
+
+.PHONY: all test clean fclean re
