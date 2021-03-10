@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define PROMPT "yeet >$ "
+#define PROMPT "\e[1;31mreins \e[0m\e[1;33m❯\e[0m "
 
 void	print_up(void *yeet)
 {
