@@ -15,5 +15,5 @@ Its prototype is:
 In default `t_keyf` functions a hook is always called using the provided parameter when present.
 
 * `reins_key(t_reins *reins, char *keycode, t_keyf function);`  
-Add functionality or change existing `t_keyf` function of a given key.  
+Add or change an existing `t_keyf` function of a given key.  
 This can be combined with `reins_hook()` to provide an extra parameter to use in your `t_keyf` function.
