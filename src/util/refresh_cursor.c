@@ -6,13 +6,12 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:57:48 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 13:02:05 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 16:35:18 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 
-//really needs a better name
 void	refresh_cursor(t_reins *reins)
 {
 	while (reins->term_cursor.row < 0)

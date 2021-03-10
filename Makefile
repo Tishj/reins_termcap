@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/09 21:18:08 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/10 16:33:40 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@echo "Compiling $(notdir $@)"
-	@$(CC) $(CFLAGS) -c $^ $(INCL) -o $@
+	@$(CC) $(CFLAGS) -c $^ $(INCL) $(TAIL) -o $@
 
 $(NAME) : $(OBJ) $(LIBRARY)
 	@echo "Compiling $(notdir $@)"
@@ -85,7 +85,7 @@ $(NAME) : $(OBJ) $(LIBRARY)
 all : $(NAME) 
 
 test: all
-	$(CC) $(CFLAGS) main.c $(INCL) $(TAIL) -L. -lreins -ltermcap -o $@ 
+	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreins $(TAIL) -ltermcap -o $@ 
 
 clean:
 	@echo "Cleaning reins.."

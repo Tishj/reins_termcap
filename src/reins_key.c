@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 /*
-**	add or replace a function to handle a certain keycode
+**	Add or replace a function to handle a certain keycode
 */
 int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 {
