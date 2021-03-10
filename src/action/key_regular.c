@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 14:07:08 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 14:33:09 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		add_overflow_to_start_of_row(t_reins* reins, t_vec* input)
 		//move to start of line
 		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
 		index = ((row + 1) * reins->max_col) - reins->prompt_size;
-		if (index >= input->index)
+		if (index >= input->size)
 			break ;
 		//insert character
 		termcmd(INSERT_START, 0, 0, 1);

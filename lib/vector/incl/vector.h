@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/17 14:44:25 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/06 19:33:03 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 14:32:57 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef	struct		s_vec
 	char			*store;
 	size_t			type_size;
 	size_t			capacity;
-	size_t			index;
+	size_t			size;
 }					t_vec;
 
 int					vec_add(t_vec *vector, void *buffer);

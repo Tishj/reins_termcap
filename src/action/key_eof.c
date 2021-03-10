@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:31:26 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:54:42 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 14:33:04 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	key_eof(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 		hook->function(hook->param);
 	(void)reins;
 	(void)buf;
-	if (input->index)
+	if (input->size)
 		return (RD_IDLE);
 	return (RD_EOF);
 }
