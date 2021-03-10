@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_destroy.c                                   :+:    :+:            */
+/*   reins_destroy.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <reigns_int.h>
+#include <reins_int.h>
 
-void	reigns_destroy(t_reigns* reigns)
+void	reins_destroy(t_reins* reins)
 {
-	vec_destroy(&reigns->keys, NULL);
-	free(reigns);
+	vec_destroy(&reins->keys, NULL);
+	free(reins);
 }

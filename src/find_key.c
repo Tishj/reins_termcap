@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 
-ssize_t	find_key(t_reigns* reigns, char *keycode, size_t size)
+ssize_t	find_key(t_reins* reins, char *keycode, size_t size)
 {
 	size_t	i;
 	t_key	*tmp;
 
 	i = 0;
-	while (i < reigns->keys.index)
+	while (i < reins->keys.index)
 	{
-		tmp = vec_getref(&reigns->keys, i);
+		tmp = vec_getref(&reins->keys, i);
 		if (!util_strncmp(tmp->buf, keycode, size))
 			return (i);
 		i++;

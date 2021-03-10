@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_init.c                                      :+:    :+:            */
+/*   reins_init.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -19,12 +19,12 @@
 #include <term.h>
 #include <ncurses.h>
 
-static int	init_table(t_reigns* reigns)
+static int	init_table(t_reins* reins)
 {
 	char	*termtype = getenv("TERM");
 	if (!termtype)
 		return (!printf("No termtype!\n"));
-	if (tgetent(reigns->table, termtype) == -1)
+	if (tgetent(reins->table, termtype) == -1)
 		return (!printf("tgetent failed!\n"));
 	return (1);
 }
@@ -45,20 +45,20 @@ static int	init_termios(struct termios *term)
 	return (1);
 }
 
-t_reigns*	reigns_init()
+t_reins*	reins_init()
 {
-	t_reigns*	reigns;
+	t_reins*	reins;
 
-	reigns = malloc(sizeof(t_reigns));
-	if (!reigns)
+	reins = malloc(sizeof(t_reins));
+	if (!reins)
 		return (NULL);
-	if (!init_table(reigns) ||
-		!init_termios(&reigns->termios) ||
-		!init_cursor(reigns) ||
-		!init_keys(reigns))
+	if (!init_table(reins) ||
+		!init_termios(&reins->termios) ||
+		!init_cursor(reins) ||
+		!init_keys(reins))
 	{
-		free(reigns);
+		free(reins);
 		return (NULL);
 	}
-	return (reigns);
+	return (reins);
 }

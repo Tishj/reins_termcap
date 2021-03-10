@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_get_input.c                                 :+:    :+:            */
+/*   reins_get_input.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -14,15 +14,15 @@
 #include <vector.h>
 #include <stdio.h>
 #include <termcap.h>
-#include <reigns_int.h>
+#include <reins_int.h>
 
-int		reigns_get_input(t_reigns* reigns, char **line)
+int		reins_get_input(t_reins* reins, char **line)
 {
 	t_vec				input;
 	char				buf[6];
 	int					state;
 
-	if (!init_cursor(reigns))
+	if (!init_cursor(reins))
 		return (-1);
 	vec_new(&input, sizeof(char));
 	while (1)
@@ -30,10 +30,10 @@ int		reigns_get_input(t_reigns* reigns, char **line)
 		util_bzero(buf, 6);
 		read(STDIN_FILENO, buf, 6);
 //		printf("BUF[%d][%d][%d][%d][%d][%d]\n", (int)buf[0], (int)buf[1], (int)buf[2], (int)buf[3], (int)buf[4], (int)buf[5]);
-		state = perform_action(reigns, &input, buf);
+		state = perform_action(reins, &input, buf);
 		if (state != RD_IDLE)
 			break ;
-		refresh_cursor(reigns);
+		refresh_cursor(reins);
 	}
 	if (state == RD_ERROR)
 		return (-!!dprintf(2, "error state!\n"));

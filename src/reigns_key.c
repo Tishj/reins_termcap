@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_key.c                                       :+:    :+:            */
+/*   reins_key.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -10,30 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <stdlib.h>
 
 //add or replace a function to handle a certain keycode
-int		reigns_key(t_reigns* reigns, char *raw_key, t_keyf func)
+int		reins_key(t_reins* reins, char *raw_key, t_keyf func)
 {
 	ssize_t	index;
 	t_key	*key;
 	char	keycode[6];
 	int		ret;
 
-	if (!reigns || !create_keycode(raw_key, keycode))
+	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
-	index = find_key(reigns, keycode, 6);
+	index = find_key(reins, keycode, 6);
 	if (index == -1)
 	{
 		key = new_key(keycode, func);
 		if (!key)
 			return (0);
-		ret = vec_add(&reigns->keys, key);
+		ret = vec_add(&reins->keys, key);
 		free(key);
 		return (ret);
 	}
-	key = get_key(reigns, keycode, index);
+	key = get_key(reins, keycode, index);
 	if (!key)
 		return (0);
 	util_memcpy(key->buf, keycode, 6);

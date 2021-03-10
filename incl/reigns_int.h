@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_int.h                                       :+:    :+:            */
+/*   reins_int.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REIGNS_INT_H
+#ifndef reins_INT_H
 # define REINGS_INT_H
 
 # include <termios.h>
@@ -71,7 +71,7 @@ typedef struct	s_vec2ll
 	long long	row;	
 }				t_vec2ll;
 
-typedef struct		s_reigns
+typedef struct		s_reins
 {
 	//relative to terminal
 	t_vec2ll		term_cursor;
@@ -92,7 +92,7 @@ typedef struct		s_reigns
 
 	//keys
 	t_vec			keys;
-}					t_reigns;
+}					t_reins;
 
 //-----------------------GET_INPUT-------------------------------
 
@@ -104,7 +104,7 @@ typedef struct	s_hook
 
 //----------------------KEY_FUNCTION_PROTOTYPE--------------------------------
 
-typedef int	(*t_keyf)(t_reigns* reigns, t_vec *input, char *buf, t_hook* hook);
+typedef int	(*t_keyf)(t_reins* reins, t_vec *input, char *buf, t_hook* hook);
 
 typedef struct	s_key
 {
@@ -114,40 +114,40 @@ typedef struct	s_key
 	t_hook	hook;
 }				t_key;
 
-//----------------------LIBREIGNS FUNCTIONS---------------------------------
+//----------------------LIBreins FUNCTIONS---------------------------------
 
-int			reigns_key(t_reigns* reigns, char *raw_key, t_keyf func);
+int			reins_key(t_reins* reins, char *raw_key, t_keyf func);
 
 //----------------------HOOKS-------------------------------
 
-int	perform_action(t_reigns* reigns, t_vec* input, char *buf);
+int	perform_action(t_reins* reins, t_vec* input, char *buf);
 
 t_key		*new_key(char keycode[6], t_keyf f);
-ssize_t		find_key(t_reigns* reigns, char *keycode, size_t size);
-t_key		*get_key(t_reigns* reigns, char *keycode, size_t size);
+ssize_t		find_key(t_reins* reins, char *keycode, size_t size);
+t_key		*get_key(t_reins* reins, char *keycode, size_t size);
 
 //----------------------------DEFAULT KEY BEHAVIOR------------------------
 
-int	key_eof(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_newline(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_up(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_down(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_right(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_left(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
-int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook);
+int	key_eof(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_newline(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_regular(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_up(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_down(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_right(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_left(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
+int	key_del(t_reins* reins, t_vec* input, char *buf, t_hook* hook);
 
 //-----------------------TERMINAL RELATED FUNCTIONS-------------------------------
 
 void		termcmd(char *command, int p1, int p2, int lines_affected);
-void		update_cursor(t_reigns* reigns, int col_adjust, int row_adjust);
-void		refresh_cursor(t_reigns* nav);
+void		update_cursor(t_reins* reins, int col_adjust, int row_adjust);
+void		refresh_cursor(t_reins* nav);
 
 //-----------------------UTIL-------------------------------
 
 int			create_keycode(char *raw, char keycode[6]);
-int			init_keys(t_reigns* reigns);
-int			init_cursor(t_reigns* reigns);
+int			init_keys(t_reins* reins);
+int			init_cursor(t_reins* reins);
 void		print_keycode_formatted(char *keycode, size_t n);
 
 int			util_atoi(const char *str);

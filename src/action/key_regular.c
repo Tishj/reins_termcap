@@ -10,23 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <unistd.h>
 #include <stdio.h>
 
-int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
+int		add_overflow_to_start_of_row(t_reins* reins, t_vec* input)
 {
 	size_t	index;
 	size_t	row;
 	char	*buf;
 
-	row = reigns->shell_cursor.row;
+	row = reins->shell_cursor.row;
 	//for every row of the input
-	while (row + 1 < reigns->input_rows)
+	while (row + 1 < reins->input_rows)
 	{
 		//move to start of line
-		termcmd(MOVE_COLROW, 0, reigns->prompt_row + row + 1, 1);
-		index = ((row + 1) * reigns->term_columns) - reigns->prompt_size;
+		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
+		index = ((row + 1) * reins->term_columns) - reins->prompt_size;
 		if (index > input->index)
 			break ;
 		//insert character
@@ -40,14 +40,14 @@ int		add_overflow_to_start_of_row(t_reigns* reigns, t_vec* input)
 	return (1);
 }
 
-int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int	key_regular(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 {
 	size_t index;
 
 	if (hook && hook->function)
 		hook->function(hook->param);
-	index = (reigns->shell_cursor.row * reigns->term_columns) +
-		reigns->shell_cursor.col;
+	index = (reins->shell_cursor.row * reins->term_columns) +
+		reins->shell_cursor.col;
 	if (!vec_insert(input, buf, index))
 	{
 		printf("vec_insert failed\n");
@@ -56,12 +56,12 @@ int	key_regular(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 	termcmd(INSERT_START, 0, 0, 1);
 	write(1, buf, 1);
 	termcmd(INSERT_END, 0, 0, 1);
-	update_cursor(reigns, 1, 0);
-	if (!add_overflow_to_start_of_row(reigns, input))
+	update_cursor(reins, 1, 0);
+	if (!add_overflow_to_start_of_row(reins, input))
 	{
 		printf("add_overflow failed\n");
 		return (RD_ERROR);
 	}
-	termcmd(MOVE_COLROW, reigns->term_cursor.col, reigns->term_cursor.row, 1);
+	termcmd(MOVE_COLROW, reins->term_cursor.col, reins->term_cursor.row, 1);
 	return (RD_IDLE);
 }

@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 
-t_key	*get_key(t_reigns* reigns, char *keycode, size_t size)
+t_key	*get_key(t_reins* reins, char *keycode, size_t size)
 {
 	ssize_t	index;
 
-	index = find_key(reigns, keycode, size);
+	index = find_key(reins, keycode, size);
 	if (index == -1)
 		return (NULL);
-	return (vec_getref(&reigns->keys, (size_t)index));
+	return (vec_getref(&reins->keys, (size_t)index));
 }

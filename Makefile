@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libreigns.a
+NAME = libreins.a
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 
@@ -23,18 +23,18 @@ else ifeq ($(DEBUG),2)
 	CFLAGS += -g
 endif
 
-HEADER	=	./incl/reigns.h \
+HEADER	=	./incl/reins.h \
 			./lib/vector/incl/vector.h
 
 LIBRARY	=	./lib/vector/libvector.a
 
 TAIL	=	$(foreach lib,$(LIBRARY),-L $(dir $(lib)) $(patsubst lib%.a,-l%,$(notdir $(lib))))
 
-SRC 	=	reigns_init.c \
+SRC 	=	reins_init.c \
 			init_keys.c \
 			init_cursor.c \
-			reigns_destroy.c \
-			reigns_get_input.c \
+			reins_destroy.c \
+			reins_get_input.c \
 			action/key_del.c \
 			action/key_regular.c \
 			action/key_eof.c \
@@ -61,8 +61,8 @@ SRC 	=	reigns_init.c \
 			find_key.c \
 			new_key.c \
 			get_key.c \
-			reigns_hook.c \
-			reigns_key.c
+			reins_hook.c \
+			reins_key.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -83,15 +83,15 @@ $(NAME) : $(LIBRARY) $(OBJ)
 all : $(NAME) 
 
 test: all
-	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreigns $(TAIL) -ltermcap -o $@
+	$(CC) $(CFLAGS) main.c $(INCL) -L. -lreins $(TAIL) -ltermcap -o $@
 
 clean:
-	@echo "Cleaning reigns.."
+	@echo "Cleaning reins.."
 	@$(MAKE) -sC ./lib/vector/ clean
 	@rm -f $(OBJ)
 
 fclean: clean
-	@echo "Full cleaning reigns.."
+	@echo "Full cleaning reins.."
 	@$(MAKE) -sC ./lib/vector/ fclean
 	@rm -f $(NAME) test
 

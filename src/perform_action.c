@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 
-t_key	*get_action(t_reigns* reigns, char *buf, size_t* i)
+t_key	*get_action(t_reins* reins, char *buf, size_t* i)
 {
 	ssize_t	index;
 
-	index = find_key(reigns, buf + *i, 6 - *i);
+	index = find_key(reins, buf + *i, 6 - *i);
 	if (index == -1)
 		return (NULL);
-	return (get_key(reigns, buf + *i, 6 - *i));
+	return (get_key(reins, buf + *i, 6 - *i));
 }
 
-int		perform_action(t_reigns* reigns, t_vec* input, char *buf)
+int		perform_action(t_reins* reins, t_vec* input, char *buf)
 {
 	size_t					i;
 	int						state;
@@ -32,10 +32,10 @@ int		perform_action(t_reigns* reigns, t_vec* input, char *buf)
 	i = 0;
 	while (i < 6)
 	{
-		key = get_action(reigns, buf, &i);
+		key = get_action(reins, buf, &i);
 		if (key && key->function)
 		{
-			state = key->function(reigns, input, buf + i, &key->hook);
+			state = key->function(reins, input, buf + i, &key->hook);
 			if (state != RD_IDLE)
 				break ;
 			i += key->size;

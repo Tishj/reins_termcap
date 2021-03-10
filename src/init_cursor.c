@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <stdio.h>
 #include <termcap.h>
 
-int	init_cursor(t_reigns* reigns)
+int	init_cursor(t_reins* reins)
 {
 	char		buf[10];
 	int			ret;
@@ -25,18 +25,18 @@ int	init_cursor(t_reigns* reigns)
 	if (ret == -1)
 		return (!printf("read for cursor position failed!\n"));
 //	print_keycode_formatted(buf, 10);
-	reigns->term_cursor.row = util_atoi(buf + 2) - 1;
-	reigns->term_cursor.col = util_atoi(buf + 4 + 
-		(reigns->term_cursor.row >= 10) +
-		(reigns->term_cursor.row > 100)) - 1;
+	reins->term_cursor.row = util_atoi(buf + 2) - 1;
+	reins->term_cursor.col = util_atoi(buf + 4 + 
+		(reins->term_cursor.row >= 10) +
+		(reins->term_cursor.row > 100)) - 1;
 
-	reigns->prompt_row = reigns->term_cursor.row;
-	reigns->prompt_size = reigns->term_cursor.col;
+	reins->prompt_row = reins->term_cursor.row;
+	reins->prompt_size = reins->term_cursor.col;
 	
-	reigns->input_rows = 0;
-	reigns->shell_cursor.col = 0;
-	reigns->shell_cursor.row = 0;
-	reigns->term_columns = tgetnum("co");
-	reigns->term_rows = tgetnum("li");
+	reins->input_rows = 0;
+	reins->shell_cursor.col = 0;
+	reins->shell_cursor.row = 0;
+	reins->term_columns = tgetnum("co");
+	reins->term_rows = tgetnum("li");
 	return (1);
 }

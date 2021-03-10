@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reigns.h"
+#include "reins.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,10 +30,10 @@ void	print_a(void *yeet)
 	printf("\nAAAAAHHH\n");
 }
 
-int	up_function(t_reigns* reigns, t_vec* line, char *buf, t_hook* hook)
+int	up_function(t_reins* reins, t_vec* line, char *buf, t_hook* hook)
 {
 	(void)line;
-	(void)reigns;
+	(void)reins;
 	(void)buf;
 	(void)hook;
 	if (hook && hook->function)
@@ -44,33 +44,33 @@ int	up_function(t_reigns* reigns, t_vec* line, char *buf, t_hook* hook)
 
 int main(void)
 {
-	t_reigns	*reigns;
+	t_reins	*reins;
 	char		*line;
 	int			ret;
 
 	ret = 1;
-	reigns = reigns_init();
-	if (!reigns)
-		return (!!printf("Failed to init reigns!\n"));
-	if (!reigns_key(reigns, KEY_ESC "[" KEY_UP, up_function))
+	reins = reins_init();
+	if (!reins)
+		return (!!printf("Failed to init reins!\n"));
+	if (!reins_key(reins, KEY_ESC "[" KEY_UP, up_function))
 		return (!!printf("Failed to overwrite/add key!\n"));
-	if (!reigns_hook(reigns, KEY_ESC "[" KEY_UP, &print_up, NULL))
+	if (!reins_hook(reins, KEY_ESC "[" KEY_UP, &print_up, NULL))
 	 	return (!!printf("Failed to hook!\n"));
-	// if (!reigns_hook(reigns, "a", &print_a, NULL))
+	// if (!reins_hook(reins, "a", &print_a, NULL))
 	// 	return (!!printf("Failed to hook on \"a\"!\n"));
 	while (ret)
 	{
 		write(1, PROMPT, sizeof(PROMPT));
-		ret = reigns_get_input(reigns, &line);
+		ret = reins_get_input(reins, &line);
 		if (ret != 1)
 			break ;
 		printf("\nLINE: |%s|\n", line);
 		free(line);
 	}
-	reigns_destroy(reigns);
+	reins_destroy(reins);
 	if (!ret)
 		return (!printf("\nexit\n"));
 	else if (ret == -1)
-		return (!!printf("reigns_get_input failed!\n"));
+		return (!!printf("reins_get_input failed!\n"));
 	return (0);
 }

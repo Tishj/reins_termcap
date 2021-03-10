@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 
-static int	populate_keys_vector(t_reigns* reigns,
+static int	populate_keys_vector(t_reins* reins,
 		const t_keyf* functions,
 		const char **keycodes)
 {
@@ -20,7 +20,7 @@ static int	populate_keys_vector(t_reigns* reigns,
 	size_t	j;
 	char	tmp[6];
 
-	if (!vec_new(&reigns->keys, sizeof(t_key)))
+	if (!vec_new(&reins->keys, sizeof(t_key)))
 		return (0);
 	i = 0;
 	while (functions[i])
@@ -33,19 +33,19 @@ static int	populate_keys_vector(t_reigns* reigns,
 			while (j <= 126)
 			{
 				tmp[0] = (char)j;
-				if (!reigns_key(reigns, tmp, functions[i]))
+				if (!reins_key(reins, tmp, functions[i]))
 					return (0);
 				j++;
 			}
 		}
-		else if (!reigns_key(reigns, (char *)keycodes[i], functions[i]))
+		else if (!reins_key(reins, (char *)keycodes[i], functions[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	init_keys(t_reigns* reigns)
+int	init_keys(t_reins* reins)
 {
 	static const t_keyf	functions[] = {
 		key_eof,
@@ -68,5 +68,5 @@ int	init_keys(t_reigns* reigns)
 		KEY_NEWLINE,
 		" "
 	};
-	return (populate_keys_vector(reigns, functions, keycodes));
+	return (populate_keys_vector(reins, functions, keycodes));
 }

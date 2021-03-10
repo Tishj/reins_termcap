@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns_hook.c                                      :+:    :+:            */
+/*   reins_hook.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -10,23 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int		reigns_hook(t_reigns* reigns, char *raw_key, void (*f)(), void* param)
+int		reins_hook(t_reins* reins, char *raw_key, void (*f)(), void* param)
 {
 	t_key	*key;
 	ssize_t	index;
 	char	keycode[6];
 
-	if (!reigns || !create_keycode(raw_key, keycode))
+	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
-	index = find_key(reigns, keycode, 6);
+	index = find_key(reins, keycode, 6);
 	if (index == -1)
 		return (0);
-	key = vec_getref(&reigns->keys, index);
+	key = vec_getref(&reins->keys, index);
 	if (!key)
 		return (0);
 	key->hook.function = f;

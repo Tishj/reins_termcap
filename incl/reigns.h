@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reigns.h                                           :+:    :+:            */
+/*   reins.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REIGNS_H
-# define REIGNS_H
+#ifndef reins_H
+# define reins_H
 
-# include <reigns_int.h>
+# include <reins_int.h>
 
 //-----------------------PROTOTYPES-------------------------------
 
-t_reigns	*reigns_init();
-int			reigns_get_input(t_reigns* reigns, char **line);
-void		reigns_destroy(t_reigns* reigns);
-//reigns_enable //<- raw
-//reigns_disable //<- standard
+t_reins	*reins_init();
+int			reins_get_input(t_reins* reins, char **line);
+void		reins_destroy(t_reins* reins);
+//reins_enable //<- raw
+//reins_disable //<- standard
 
-int			reigns_key(t_reigns* reigns, char *raw_key, t_keyf func);
-int			reigns_hook(t_reigns* reigns, char *raw_key, void (*f)(), void *param);
+int			reins_key(t_reins* reins, char *raw_key, t_keyf func);
+int			reins_hook(t_reins* reins, char *raw_key, void (*f)(), void *param);
 
 #endif

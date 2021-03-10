@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <reigns_int.h>
+#include <reins_int.h>
 
 char	*util_strdup(char *str)
 {

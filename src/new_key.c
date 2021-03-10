@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <stdlib.h>
 
 t_key	*new_key(char keycode[6], t_keyf f)

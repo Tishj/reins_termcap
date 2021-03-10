@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <unistd.h>
 
-int	key_newline(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int	key_newline(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 {
 	if (hook && hook->function)
 		hook->function(hook->param);
-	(void)reigns;
+	(void)reins;
 	(void)input;
 	(void)buf;
 	return (RD_SEND);

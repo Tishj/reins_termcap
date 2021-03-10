@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 
-int	key_eof(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int	key_eof(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 {
 	if (hook && hook->function)
 		hook->function(hook->param);
-	(void)reigns;
+	(void)reins;
 	(void)buf;
 	if (input->index)
 		return (RD_IDLE);

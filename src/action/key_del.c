@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reigns_int.h>
+#include <reins_int.h>
 #include <unistd.h>
 #include <stdio.h>
 
-int			delete_from_affected_rows(t_reigns* reigns, t_vec* input)
+int			delete_from_affected_rows(t_reins* reins, t_vec* input)
 {
 	size_t	row;
 	size_t	index;
 	char	*buf;
 
-	row = reigns->shell_cursor.row;
-	while (row < reigns->input_rows)
+	row = reins->shell_cursor.row;
+	while (row < reins->input_rows)
 	{
-		termcmd(MOVE_COLROW, 0, reigns->prompt_row + row + 1, 1);
+		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
 		termcmd(DELETE_START, 0, 0, 1);
 		termcmd(DELETE_CHAR, 0, 0, 1);
 		termcmd(DELETE_END, 0, 0, 1);
-		termcmd(MOVE_COLROW, reigns->term_columns, 
-			reigns->prompt_row + row, 1);
-		index = ((row + 1) * reigns->term_columns) -
-			reigns->prompt_size - 1;
+		termcmd(MOVE_COLROW, reins->term_columns, 
+			reins->prompt_row + row, 1);
+		index = ((row + 1) * reins->term_columns) -
+			reins->prompt_size - 1;
 		if (index > input->index)
 			break ;
 		termcmd(INSERT_START, 0, 0, 1);
@@ -43,26 +43,26 @@ int			delete_from_affected_rows(t_reigns* reigns, t_vec* input)
 	return (1);
 }
 
-int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
+int	key_del(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 {
 	size_t	index;
 
 	if (hook && hook->function)
 		hook->function(hook->param);
 	(void)buf;
-	update_cursor(reigns, -1, 0);
-	index = (reigns->shell_cursor.row * reigns->term_columns) + \
-		reigns->shell_cursor.col;
+	update_cursor(reins, -1, 0);
+	index = (reins->shell_cursor.row * reins->term_columns) + \
+		reins->shell_cursor.col;
 	if (!vec_del(input, index))
 	{
 		printf("vec_del failed!\n");
 		return (RD_ERROR);
 	}
-	termcmd(MOVE_COLROW, reigns->term_cursor.col,
-		reigns->term_cursor.row, 1);
+	termcmd(MOVE_COLROW, reins->term_cursor.col,
+		reins->term_cursor.row, 1);
 	termcmd(DELETE_START, 0, 0, 1);
 	termcmd(DELETE_CHAR, 0, 0, 1);
 	termcmd(DELETE_END, 0, 0, 1);
-//	delete_from_affected_rows(reigns, input);
+//	delete_from_affected_rows(reins, input);
 	return (RD_IDLE);
 }
