@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/09 21:18:08 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/10 15:20:29 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@echo "Compiling $(notdir $@)"
 	@$(CC) $(CFLAGS) -c $^ $(INCL) -ltermcap -o $@
 
-$(NAME) : $(LIBRARY) $(OBJ)
+$(NAME) : $(OBJ) $(LIBRARY)
 	@echo "Compiling $(notdir $@)"
 	@ar -rcs $@ $^
 
