@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/10 16:33:40 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/10 23:12:22 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,9 @@ SRC 	=	reins_init.c \
 			new_key.c \
 			get_key.c \
 			reins_hook.c \
-			reins_key.c
+			reins_key.c \
+			reins_enable.c \
+			reins_disable.c
 
 
 

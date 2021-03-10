@@ -37,16 +37,17 @@ static int	init_table(t_reins *reins)
 **	VMIN			-	minimal amount of characters for non-canonical read (syscall)
 **	VTIME			-	minimal time-out for non-canonical read (syscall)
 */
-static int	init_termios(struct termios *term)
+static int	init_termios(t_reins *reins)
 {
-	if (!isatty(STDIN_FILENO) || tcgetattr(STDIN_FILENO, term) < 0)
+	if (!isatty(STDIN_FILENO) || tcgetattr(STDIN_FILENO, &reins->standard) < 0)
 		return (0);
-	term->c_iflag &= ~(IMAXBEL);
-	term->c_lflag &= ~(ECHO | ICANON);
-	term->c_cc[VMIN] = 1;
-	term->c_cc[VTIME] = 0;
-	if (cfsetispeed(term, B9600) < 0 || cfsetospeed(term, B9600) < 0
-		|| tcsetattr(STDIN_FILENO, TCSAFLUSH, term) < 0)
+	reins->termios = reins->standard;
+	reins->termios.c_iflag &= ~(IMAXBEL);
+	reins->termios.c_lflag &= ~(ECHO | ICANON);
+	reins->termios.c_cc[VMIN] = 1;
+	reins->termios.c_cc[VTIME] = 0;
+	if (cfsetispeed(&reins->termios, B9600) < 0
+		|| cfsetospeed(&reins->termios, B9600) < 0)
 		return (!printf("failed to set attribute!\n"));
 	return (1);
 }
@@ -60,7 +61,7 @@ t_reins	*reins_init(void)
 		return (NULL);
 	reins->enabled = false;
 	if (!init_table(reins)
-		|| !init_termios(&reins->termios)
+		|| !init_termios(reins)
 		|| !init_keys(reins))
 	{
 		free(reins);

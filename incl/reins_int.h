@@ -96,6 +96,7 @@ typedef struct s_reins
 
 	char			table[2048];
 	struct termios	termios;
+	struct termios	standard;
 	bool			enabled;
 
 	t_vec			keys;

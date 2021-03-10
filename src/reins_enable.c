@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reins_destroy.c                                   :+:    :+:            */
+/*   reins_enable.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 17:46:23 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 12:03:08 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/10 22:37:04 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/10 22:56:26 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <reins_int.h>
-#include <reins.h>
+#include <unistd.h>
 
-void	reins_destroy(t_reins *reins)
+int		reins_enable(t_reins *reins)
 {
-	reins_disable(reins);
-	vec_destroy(&reins->keys, NULL);
-	free(reins);
+	if (reins->enabled)
+		return (1);
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &reins->termios) == -1)
+		return (0);
+	reins->enabled = true;
+	return (1);
 }

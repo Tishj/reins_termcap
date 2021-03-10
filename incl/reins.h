@@ -20,9 +20,8 @@
 t_reins		*reins_init(void);
 int			reins_get_input(t_reins *reins, char **line);
 void		reins_destroy(t_reins *reins);
-//reins_enable //<- raw
-//reins_disable //<- standard
-
+int			reins_enable(t_reins *reins);
+int			reins_disable(t_reins *reins);
 int			reins_key(t_reins *reins, char *raw_key, t_keyf func);
 int			reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param);
 
