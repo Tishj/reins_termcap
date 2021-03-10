@@ -6,14 +6,14 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/10 22:53:35 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/10 22:56:46 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/10 23:24:33 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 #include <unistd.h>
 
-int		reins_disable(t_reins *reins)
+int	reins_disable(t_reins *reins)
 {
 	if (!reins->enabled)
 		return (1);
