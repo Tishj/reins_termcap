@@ -16,6 +16,7 @@
 # include <termios.h>
 # include <stddef.h>
 # include <vector.h>
+# include <stdbool.h>
 
 //---------------------READ_STATE-----------------------------
 
@@ -75,8 +76,8 @@ typedef struct		s_reins
 {
 	//relative to terminal
 	t_vec2ll		term_cursor;
-	size_t			term_columns;
-	size_t			term_rows;
+	size_t			max_col;
+	size_t			max_row;
 
 	//relative to terminal
 	size_t			prompt_size;
@@ -89,6 +90,7 @@ typedef struct		s_reins
 	//termcap/termios related variables
 	char			table[2048];
 	struct termios	termios;
+	bool			enabled;
 
 	//keys
 	t_vec			keys;
@@ -150,7 +152,7 @@ int			init_keys(t_reins* reins);
 int			init_cursor(t_reins* reins);
 void		print_keycode_formatted(char *keycode, size_t n);
 
-int			util_atoi(const char *str);
+int			util_atoi(char *str);
 size_t		util_strlen(char *str);
 void		util_bzero(void *dest, size_t n);
 void		util_memcpy(void *dest, void *src, size_t n);

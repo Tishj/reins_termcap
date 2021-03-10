@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:25:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 11:54:43 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 13:23:43 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		perform_action(t_reins* reins, t_vec* input, char *buf)
 
 	state = RD_IDLE;
 	i = 0;
-	while (i < 6)
+	while (i < 6 && buf[i])
 	{
 		key = get_action(reins, buf, &i);
 		if (key && key->function)

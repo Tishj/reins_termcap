@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:54:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 12:02:32 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 14:30:10 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@ int			delete_from_affected_rows(t_reins* reins, t_vec* input)
 	char	*buf;
 
 	row = reins->shell_cursor.row;
-	while (row < reins->input_rows)
+	while (row + 1 < reins->input_rows)
 	{
+		//delete from start of next row
 		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
 		termcmd(DELETE_START, 0, 0, 1);
 		termcmd(DELETE_CHAR, 0, 0, 1);
 		termcmd(DELETE_END, 0, 0, 1);
-		termcmd(MOVE_COLROW, reins->term_columns, 
+		//move to X:max, Y:row
+		termcmd(MOVE_COLROW, reins->max_col, 
 			reins->prompt_row + row, 1);
-		index = ((row + 1) * reins->term_columns) -
+		index = ((row + 1) * reins->max_col) -
 			reins->prompt_size - 1;
-		if (index > input->index)
+		if (index >= input->index)
 			break ;
 		termcmd(INSERT_START, 0, 0, 1);
 		if ((buf = vec_getref(input, index)) == NULL)
@@ -51,8 +53,10 @@ int	key_del(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 		hook->function(hook->param);
 	(void)buf;
 	update_cursor(reins, -1, 0);
-	index = (reins->shell_cursor.row * reins->term_columns) + \
+	index = (reins->shell_cursor.row * reins->max_col) + \
 		reins->shell_cursor.col;
+	if (reins->shell_cursor.row)
+		index -= reins->prompt_size;
 	if (!vec_del(input, index))
 	{
 		printf("vec_del failed!\n");
@@ -63,6 +67,6 @@ int	key_del(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 	termcmd(DELETE_START, 0, 0, 1);
 	termcmd(DELETE_CHAR, 0, 0, 1);
 	termcmd(DELETE_END, 0, 0, 1);
-//	delete_from_affected_rows(reins, input);
+	delete_from_affected_rows(reins, input);
 	return (RD_IDLE);
 }

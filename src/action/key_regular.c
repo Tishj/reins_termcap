@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 12:03:35 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 14:07:08 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		add_overflow_to_start_of_row(t_reins* reins, t_vec* input)
 	{
 		//move to start of line
 		termcmd(MOVE_COLROW, 0, reins->prompt_row + row + 1, 1);
-		index = ((row + 1) * reins->term_columns) - reins->prompt_size;
-		if (index > input->index)
+		index = ((row + 1) * reins->max_col) - reins->prompt_size;
+		if (index >= input->index)
 			break ;
 		//insert character
 		termcmd(INSERT_START, 0, 0, 1);
@@ -46,7 +46,7 @@ int	key_regular(t_reins* reins, t_vec* input, char *buf, t_hook* hook)
 
 	if (hook && hook->function)
 		hook->function(hook->param);
-	index = (reins->shell_cursor.row * reins->term_columns) +
+	index = (reins->shell_cursor.row * reins->max_col) +
 		reins->shell_cursor.col;
 	if (!vec_insert(input, buf, index))
 	{

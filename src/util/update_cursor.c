@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 13:36:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 11:48:53 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 13:17:26 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	update_cursor(t_reins* reins, int col_adjust, int row_adjust)
 		return ;
 
 	//total columns, including prompt_size
-	total = ((reins->shell_cursor.row + row_adjust) * reins->term_columns)
+	total = ((reins->shell_cursor.row + row_adjust) * reins->max_col)
 		+ column_offset + reins->shell_cursor.col + col_adjust;
-	reins->shell_cursor.row = total / reins->term_columns;
+	reins->shell_cursor.row = total / reins->max_col;
 	reins->term_cursor.row = reins->prompt_row + reins->shell_cursor.row;
 	
-	reins->term_cursor.col = total % reins->term_columns;
+	reins->term_cursor.col = total % reins->max_col;
 	if (!reins->shell_cursor.row)
 		total -= reins->prompt_size;
-	reins->shell_cursor.col = total % reins->term_columns;
+	reins->shell_cursor.col = total % reins->max_col;
 
 	//increase size of input height
 	if (reins->shell_cursor.row >= (long long)reins->input_rows)

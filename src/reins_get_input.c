@@ -37,11 +37,11 @@ int		reins_get_input(t_reins* reins, char **line)
 	}
 	if (state == RD_ERROR)
 		return (-!!dprintf(2, "error state!\n"));
-	buf[0] = '\0';
-	if (!vec_add(&input, buf))
+	if (!vec_add(&input, ""))
 		return (-!!dprintf(2, "failed to null-terminate!\n"));
 	*line = util_strdup(input.store);
 	if (!*line)
 		return (-!!dprintf(2, "strdup failed!\n"));
-	return ((state == RD_EOF) ? 0 : 1);
+	vec_destroy(&input, NULL);
+	return ((state != RD_EOF));
 }

@@ -17,7 +17,7 @@
 #include <termios.h>
 #include <termcap.h>
 #include <term.h>
-#include <ncurses.h>
+#include <stdio.h>
 
 static int	init_table(t_reins* reins)
 {
@@ -52,9 +52,9 @@ t_reins*	reins_init()
 	reins = malloc(sizeof(t_reins));
 	if (!reins)
 		return (NULL);
+	reins->enabled = false;
 	if (!init_table(reins) ||
 		!init_termios(&reins->termios) ||
-		!init_cursor(reins) ||
 		!init_keys(reins))
 	{
 		free(reins);
