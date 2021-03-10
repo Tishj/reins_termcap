@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:00:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 16:54:21 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/09 21:14:54 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,6 @@ static int	init_termios(struct termios *term)
 	return (1);
 }
 
-static int	get_cursor_pos(t_reigns* reigns)
-{
-	char		buf[10];
-	int			ret;
-
-	write(STDOUT_FILENO, "\033[6n", 4);
-	ret = read(STDIN_FILENO, buf, 10);
-	if (ret == -1)
-		return (!printf("read for cursor position failed!\n"));
-	reigns->term_cursor.row = util_atoi(buf + 2);
-	reigns->term_cursor.col = util_atoi(buf + 4 + 
-		(reigns->term_cursor.row >= 10) +
-		(reigns->term_cursor.row > 100));
-
-	reigns->prompt_row = reigns->term_cursor.row;
-	reigns->prompt_size = reigns->term_cursor.col;
-	
-	reigns->input_rows = 0;
-	reigns->shell_cursor.col = 0;
-	reigns->shell_cursor.row = 0;
-	return (1);
-}
-
 t_reigns*	reigns_init()
 {
 	t_reigns*	reigns;
@@ -77,7 +54,7 @@ t_reigns*	reigns_init()
 		return (NULL);
 	if (!init_table(reigns) ||
 		!init_termios(&reigns->termios) ||
-		!get_cursor_pos(reigns) ||
+		!init_cursor(reigns) ||
 		!init_keys(reigns))
 	{
 		free(reigns);

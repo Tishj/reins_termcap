@@ -6,12 +6,13 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:54:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 16:48:36 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 12:02:32 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reigns_int.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int			delete_from_affected_rows(t_reigns* reigns, t_vec* input)
 {
@@ -53,7 +54,10 @@ int	key_del(t_reigns* reigns, t_vec* input, char *buf, t_hook* hook)
 	index = (reigns->shell_cursor.row * reigns->term_columns) + \
 		reigns->shell_cursor.col;
 	if (!vec_del(input, index))
+	{
+		printf("vec_del failed!\n");
 		return (RD_ERROR);
+	}
 	termcmd(MOVE_COLROW, reigns->term_cursor.col,
 		reigns->term_cursor.row, 1);
 	termcmd(DELETE_START, 0, 0, 1);

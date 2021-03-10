@@ -1,8 +1,5 @@
 {
 	"files.associations": {
-		"ncurses.h": "c",
-		"reigns.h": "c",
-		"unistd.h": "c",
 		"reigns_int.h": "c"
 	}
 }

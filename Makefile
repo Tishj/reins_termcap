@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/09 14:44:52 by tishj         ########   odam.nl          #
+#    Updated: 2021/03/09 21:18:08 by tishj         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 ifeq ($(DEBUG),1)
 	CFLAGS += -g -fsanitize=address
+else ifeq ($(DEBUG),2)
+	CFLAGS += -g
 endif
 
 HEADER	=	./incl/reigns.h \
@@ -30,6 +32,7 @@ TAIL	=	$(foreach lib,$(LIBRARY),-L $(dir $(lib)) $(patsubst lib%.a,-l%,$(notdir 
 
 SRC 	=	reigns_init.c \
 			init_keys.c \
+			init_cursor.c \
 			reigns_destroy.c \
 			reigns_get_input.c \
 			action/key_del.c \

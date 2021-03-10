@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:44:08 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 16:55:10 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/10 11:47:50 by tishj         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ enum	e_readstate
 
 //---------------------STRUCTS------------------------------
 
-typedef struct	s_vec2sz
+typedef struct	s_vec2ll
 {
-	size_t	col;
-	size_t	row;	
-}				t_vec2sz;
+	long long	col;
+	long long	row;	
+}				t_vec2ll;
 
 typedef struct		s_reigns
 {
 	//relative to terminal
-	t_vec2sz		term_cursor;
+	t_vec2ll		term_cursor;
 	size_t			term_columns;
 	size_t			term_rows;
 
@@ -83,7 +83,7 @@ typedef struct		s_reigns
 	size_t			prompt_row;
 
 	//relative to shell
-	t_vec2sz		shell_cursor;
+	t_vec2ll		shell_cursor;
 	size_t			input_rows;
 
 	//termcap/termios related variables
@@ -147,7 +147,8 @@ void		refresh_cursor(t_reigns* nav);
 
 int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reigns* reigns);
-void		print_keycode_formatted(char keycode[6]);
+int			init_cursor(t_reigns* reigns);
+void		print_keycode_formatted(char *keycode, size_t n);
 
 int			util_atoi(const char *str);
 size_t		util_strlen(char *str);

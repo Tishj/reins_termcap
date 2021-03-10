@@ -1,0 +1,57 @@
+
+|----10----|
+|          |
+|123456:---|
+|----------|
+
+prompt_size = 7
+
+shell	|	terminal
+0,0	|	7,2
+1,0	|	8,2
+2,0	|	9,2
+0,1	|	0,3
+1,1	|	1,3
+2,1	|	2,3
+
+shell_cursor.row = 0
+shell_cursor.col = 1
+
+actual place =
+
+terminal_cursor.row = 2
+terminal_cursor.col = 7
+
+row <- both shell and terminal need prompt_size to calculate
+
+10 + 1 = 1,1 (11 % 10 = 1, 11 / 10 = 1)
+
+every row has 10 columns, except the first, it has 10 - prompt_size
+
+so if we calculate shell cursor: 2,1
+
+we'd need a total of 12
+which would be 12 - prompt_size columns of actual text
+
+if we calculate shell cursor: 2,0
+
+we'd need a total of 9 (2 + prompt_size)
+
+
+x:0,y:1 | x: +1
+total = (1 * 10) + (0 + 1); (11)
+shell
+- cursor = total % 10 (1)
+- row = total / 10 (1)
+terminal
+- cursor = total % 10 (1)
+- row = total / 10 (1)
+
+x:2,y:0 | x: +1
+total = (0 * 10) + (2 + 1); (3)
+shell:
+- cursor = total % 10 (3)
+- row = total / 10 (0)
+terminal
+- cursor = total % 10 (3)
+- row = total / 10 (0)
