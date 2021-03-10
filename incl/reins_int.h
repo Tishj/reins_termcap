@@ -59,18 +59,18 @@ enum	e_readstate
 **	----------------SPECIAL_CHARACTERS----------------
 */
 
-# define KEY_CNTRL_D "\x4"
-# define KEY_NEWLINE "\xA"
-# define KEY_CNTRL_L "\xC"
-# define KEY_ESC "\x1B"
-# define KEY_CNTRL_U "\x15"
-# define KEY_UP "\x41"
-# define KEY_DOWN "\x42"
-# define KEY_RIGHT "\x43"
-# define KEY_LEFT "\x44"
-# define KEY_END "\x46"
-# define KEY_HOME "\x48"
-# define KEY_DEL "\x7F"
+# define KEY_CNTRL_D		"\x4"
+# define KEY_NEWLINE		"\xA"
+# define KEY_CNTRL_L		"\xC"
+# define KEY_ESC			"\x1B"
+# define KEY_CNTRL_U		"\x15"
+# define KEY_UP				"\x41"
+# define KEY_DOWN			"\x42"
+# define KEY_RIGHT			"\x43"
+# define KEY_LEFT			"\x44"
+# define KEY_END			"\x46"
+# define KEY_HOME			"\x48"
+# define KEY_DEL			"\x7F"
 
 /*
 **	---------------------STRUCTS----------------------
@@ -163,6 +163,7 @@ void		refresh_cursor(t_reins *nav);
 /*
 **	-----------------------UTIL-----------------------
 */
+
 int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reins *reins);
 int			init_cursor(t_reins *reins);
