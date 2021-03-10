@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef reins_H
-# define reins_H
+#ifndef REINS_H
+# define REINS_H
 
 # include <reins_int.h>
 

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef reins_INT_H
-# define REINGS_INT_H
+#ifndef REINS_INT_H
+# define REINS_INT_H
 
 # include <termios.h>
 # include <stddef.h>
