@@ -6,33 +6,33 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 13:36:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 13:17:26 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/11 22:11:11 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 #include <stdbool.h>
 
-void	update_cursor(t_reins *reins, int col_adjust, int row_adjust)
+void	update_cursor(t_input *input, int col_adjust, int row_adjust)
 {
 	size_t	total;
 	size_t	column_offset;
 
-	column_offset = !reins->shell_cursor.row * reins->prompt_size;
-	if (!reins->shell_cursor.col && !reins->shell_cursor.row
+	column_offset = !input->shell_cursor.row * input->prompt_size;
+	if (!input->shell_cursor.col && !input->shell_cursor.row
 		&& col_adjust <= 0 && row_adjust <= 0)
 		return ;
 	if (row_adjust > 0 && row_adjust
-		+ reins->shell_cursor.row > (long long)reins->input_rows)
+		+ input->shell_cursor.row > (long long)input->input_rows)
 		return ;
-	total = ((reins->shell_cursor.row + row_adjust) * reins->max_col)
-		+ column_offset + reins->shell_cursor.col + col_adjust;
-	reins->shell_cursor.row = total / reins->max_col;
-	reins->term_cursor.row = reins->prompt_row + reins->shell_cursor.row;
-	reins->term_cursor.col = total % reins->max_col;
-	if (!reins->shell_cursor.row)
-		total -= reins->prompt_size;
-	reins->shell_cursor.col = total % reins->max_col;
-	if (reins->shell_cursor.row >= (long long)reins->input_rows)
-		reins->input_rows = reins->shell_cursor.row + 1;
+	total = ((input->shell_cursor.row + row_adjust) * input->max_col)
+		+ column_offset + input->shell_cursor.col + col_adjust;
+	input->shell_cursor.row = total / input->max_col;
+	input->term_cursor.row = input->prompt_row + input->shell_cursor.row;
+	input->term_cursor.col = total % input->max_col;
+	if (!input->shell_cursor.row)
+		total -= input->prompt_size;
+	input->shell_cursor.col = total % input->max_col;
+	if (input->shell_cursor.row >= (long long)input->input_rows)
+		input->input_rows = input->shell_cursor.row + 1;
 }

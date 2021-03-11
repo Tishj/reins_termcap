@@ -15,16 +15,17 @@
 #include <stdio.h>
 #include <termcap.h>
 #include <reins_int.h>
+#include <reins.h>
 
 int	reins_get_input(t_reins *reins, char **line)
 {
-	t_vec				input;
+	t_input				input;
 	char				buf[6];
 	int					state;
 
-	if (!init_cursor(reins))
+	if (!reins_enable(reins) || !init_cursor(&input))
 		return (-1);
-	vec_new(&input, sizeof(char));
+	vec_new(&input.line, sizeof(char));
 	while (1)
 	{
 		util_bzero(buf, 6);
@@ -32,15 +33,15 @@ int	reins_get_input(t_reins *reins, char **line)
 		state = perform_action(reins, &input, buf);
 		if (state != RD_IDLE)
 			break ;
-		refresh_cursor(reins);
+		refresh_cursor(&input);
 	}
 	if (state == RD_ERROR)
 		return (- !!dprintf(2, "error state!\n"));
-	if (!vec_add(&input, ""))
+	if (!vec_add(&input.line, "", 1))
 		return (- !!dprintf(2, "failed to null-terminate!\n"));
-	*line = util_strdup(input.store);
+	*line = util_strdup(input.line.store);
 	if (!*line)
 		return (- !!dprintf(2, "strdup failed!\n"));
-	vec_destroy(&input, NULL);
+	vec_destroy(&input.line, NULL);
 	return ((state != RD_EOF));
 }

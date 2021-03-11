@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 15:03:13 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/11 22:24:37 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ void	print_a(void *yeet)
 	printf("\nAAAAAHHH\n");
 }
 
-int	up_function(t_reins *reins, t_vec *line, char *buf, t_hook *hook)
+int	up_function(t_input *line, char *buf, t_hook *hook)
 {
 	(void)line;
-	(void)reins;
 	(void)buf;
 	(void)hook;
 	if (hook && hook->function)

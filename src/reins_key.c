@@ -31,7 +31,7 @@ int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 		key = new_key(keycode, func);
 		if (!key)
 			return (0);
-		ret = vec_add(&reins->keys, key);
+		ret = vec_add(&reins->keys, key, 1);
 		free(key);
 		return (ret);
 	}
