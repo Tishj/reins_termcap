@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/12 11:44:22 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/12 17:29:59 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ int	insert_numbers(t_input *line, char *buf, t_hook *hook)
 	(void)buf;
 	(void)hook;
 	reins_input_add(line, "123456789", 9);
+	return (RD_IDLE);
+}
+
+int	insert_X(t_input *line, char *buf, t_hook *hook)
+{
+	(void)buf;
+	(void)hook;
+	reins_input_add(line, "XXXXXXXXX", 9);
 	return (RD_IDLE);
 }
 

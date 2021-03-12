@@ -171,6 +171,8 @@ void		refresh_cursor(t_input *input);
 **	-----------------------UTIL-----------------------
 */
 
+enum e_readstate	error(char *msg, enum e_readstate error_value);
+
 int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reins *reins);
 int			init_cursor(t_input *input);

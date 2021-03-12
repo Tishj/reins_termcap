@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 13:36:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/12 13:49:44 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/12 17:19:34 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ static size_t	get_total_amount_of_columns(t_input *input, int col_adjust
 	columns = ((input->shell_cursor.row + row_adjust) * input->max_col)
 		+ offset + input->shell_cursor.col + col_adjust;
 	return (columns);
+}
+
+//needs to check if the index doesn't overflow to the next row, not just the cursor itself
+
+//adding 9 characters to a line that would make the rest of the line overflow to the next row,
+//but not the cursor itself is an example of the current issue
+
+static size_t	rows_of_input(t_input *input)
+{
+	size_t	rows;
+
+	rows = (input->line.size + input->prompt_size) / input->max_col;
+	return (rows);
 }
 
 void	update_cursor(t_input *input, int col_adjust, int row_adjust)
@@ -43,6 +56,6 @@ void	update_cursor(t_input *input, int col_adjust, int row_adjust)
 	if (!input->shell_cursor.row)
 		total -= input->prompt_size;
 	input->shell_cursor.col = total % input->max_col;
-	if (input->shell_cursor.row >= (long long)input->input_rows)
-		input->input_rows++;
+	if (rows_of_input(input) >= input->input_rows)
+		input->input_rows = rows_of_input(input) + 1;
 }
