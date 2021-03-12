@@ -24,5 +24,6 @@ int			reins_enable(t_reins *reins);
 int			reins_disable(t_reins *reins);
 int			reins_key(t_reins *reins, char *raw_key, t_keyf func);
 int			reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param);
+int			reins_input_add(t_input *input, char *str, size_t len);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/10 23:12:22 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/12 11:47:31 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,9 +64,8 @@ SRC 	=	reins_init.c \
 			reins_hook.c \
 			reins_key.c \
 			reins_enable.c \
-			reins_disable.c
-
-
+			reins_disable.c \
+			input/reins_input_add.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

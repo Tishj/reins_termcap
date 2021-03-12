@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:57:48 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 22:17:04 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/12 13:47:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	refresh_cursor(t_input *input)
 {
-	while (input->term_cursor.row < 0)
-	{
-		termcmd(MOVE_COLROW, 0, 0, 1);
-		termcmd(SCROLL_UP, 0, 0, 1);
-		input->term_cursor.row++;
-	}
+	// while (input->term_cursor.row < 0)
+	// {
+	// 	termcmd(MOVE_COLROW, 0, 0, 1);
+	// 	termcmd(SCROLL_UP, 0, 0, 1);
+	// 	input->term_cursor.row++;
+	// }
 	if (input->term_cursor.row >= (long long)input->max_row)
 	{
 		input->term_cursor.row -= 1;
