@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/12 17:29:59 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/12 20:57:21 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ int	insert_X(t_input *line, char *buf, t_hook *hook)
 	return (RD_IDLE);
 }
 
+int	insert_a_truckload(t_input *input, char *buf, t_hook *hook)
+{
+	(void)buf;
+	(void)hook;
+	reins_input_add(input, "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 188);
+	return (RD_IDLE);
+}
+
 int	reins_start(t_reins **reins)
 {
 	*reins = reins_init();
@@ -66,7 +74,9 @@ int	reins_start(t_reins **reins)
 		return (!!printf("Failed to overwrite/add key!\n"));
 	if (!reins_hook(*reins, KEY_ESC "[" KEY_UP, &print_up, NULL))
 		return (!!printf("Failed to hook!\n"));
-	if (!reins_key(*reins, "A", insert_numbers))
+	if (!reins_key(*reins, "A", insert_a_truckload))
+		return (1);
+	if (!reins_key(*reins, "a", insert_numbers))
 		return (1);
 	return (0);
 }
