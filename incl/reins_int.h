@@ -176,7 +176,7 @@ void		visual_del(t_input *input, size_t size);
 **	-----------------------UTIL-----------------------
 */
 
-enum e_readstate	error(char *msg, enum e_readstate error_value);
+int			error(char *msg, int error_value);
 
 int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reins *reins);

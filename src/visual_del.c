@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 15:51:02 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 20:28:07 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 20:36:20 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t	max_columns(t_input *input)
 {
 	size_t	columns;
 	size_t	row;
-	
+
 	row = input->shell_cursor.row - (!input->shell_cursor.col);
 	columns = input->max_col - (!row * input->prompt_size);
 	if (!input->shell_cursor.col)

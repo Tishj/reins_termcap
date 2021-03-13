@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 19:24:41 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 20:34:07 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 20:36:57 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	vec_insert(t_vec *vec, void *buffer, size_t index, size_t n)
 	util_memmove(vec->store + ((index + n) * vec->type_size),
 		vec->store + (index * vec->type_size),
 		(vec->size - index) * vec->type_size);
-	util_memcpy(vec->store + (index * vec->type_size), buffer, vec->type_size * n);
+	util_memcpy(vec->store + (index * vec->type_size),
+		buffer, vec->type_size * n);
 	vec->size += n;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 17:48:57 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 20:35:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ static size_t	index_of_cursor(t_input *input)
 
 int	key_right(t_input *input, char *buf, t_hook *hook)
 {
-//	size_t	max_row;
-//	size_t	max_col;
-
 	if (hook && hook->function)
 		hook->function(hook->param);
 	(void)buf;
