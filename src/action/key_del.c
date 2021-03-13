@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:54:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 22:23:14 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 17:42:16 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	key_del(t_input *input, char *buf, t_hook *hook)
 	if (hook && hook->function)
 		hook->function(hook->param);
 	(void)buf;
-	if (!input->shell_cursor.col)
+	if (!input->shell_cursor.row && !input->shell_cursor.col)
 		return (RD_IDLE);
 	update_cursor(input, -1, 0);
 	index = (input->shell_cursor.row * input->max_col)

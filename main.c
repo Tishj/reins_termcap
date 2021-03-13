@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 12:56:39 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 17:17:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,25 @@ int	insert_a_truckload(t_input *input, char *buf, t_hook *hook)
 	return (RD_IDLE);
 }
 
+int	delete_characters(t_input *input, char *buf, t_hook *hook)
+{
+	(void)buf;
+	(void)hook;
+
+	return (reins_input_del(input, 5));
+}
+
+int	delete_row(t_input *input, char *buf, t_hook *hook)
+{
+	(void)buf;
+	(void)hook;
+	size_t	columns;
+
+	columns = input->max_col - (!input->shell_cursor.row * input->prompt_size);
+
+	return (reins_input_del(input, columns));
+}
+
 int	reins_start(t_reins **reins)
 {
 	*reins = reins_init();
@@ -78,6 +97,8 @@ int	reins_start(t_reins **reins)
 		return (1);
 	if (!reins_key(*reins, "x", insert_X))
 		return (1);
+	if (!reins_key(*reins, KEY_ESC "[3~", delete_row))
+		return (1);
 	return (0);
 }
 
@@ -87,6 +108,7 @@ int	main(void)
 	char	*line;
 	int		ret;
 
+	line = NULL;
 	ret = 1;
 	if (reins_start(&reins))
 		return (-1);
@@ -94,11 +116,12 @@ int	main(void)
 	{
 		write(1, PROMPT, sizeof(PROMPT));
 		ret = reins_get_input(reins, &line);
-		if (ret != 1)
-			break ;
+//		ret = reins_print_keycodes(reins);
 		reins_disable(reins);
 		printf("\nLINE: |%s|\n", line);
 		free(line);
+		if (ret != 1)
+			break ;
 	}
 	reins_destroy(reins);
 	if (!ret)

@@ -25,6 +25,7 @@ int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 
 	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
+//	print_keycode_formatted(keycode, 6);
 	index = find_key(reins, keycode, 6);
 	if (index == -1)
 	{

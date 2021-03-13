@@ -31,9 +31,9 @@ int	reins_get_input(t_reins *reins, char **line)
 		util_bzero(buf, 6);
 		read(STDIN_FILENO, buf, 6);
 		state = perform_action(reins, &input, buf);
+		refresh_cursor(&input);
 		if (state != RD_IDLE)
 			break ;
-		refresh_cursor(&input);
 	}
 	if (state == RD_ERROR)
 		return (- !!dprintf(2, "error state!\n"));

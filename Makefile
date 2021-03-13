@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/13 14:53:09 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/13 16:02:13 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,11 @@ SRC 	=	reins_init.c \
 			reins_enable.c \
 			reins_disable.c \
 			input/reins_input_add.c \
+			input/reins_input_del.c \
 			input/reins_cursor_move.c \
+			reins_print_keycodes.c \
 			visual_add.c \
+			visual_del.c \
 			action/key_end.c \
 			action/key_home.c
 
