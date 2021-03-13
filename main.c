@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/12 20:57:21 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 12:34:57 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	insert_X(t_input *line, char *buf, t_hook *hook)
 {
 	(void)buf;
 	(void)hook;
-	reins_input_add(line, "XXXXXXXXX", 9);
+	reins_input_add(line, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 188);
 	return (RD_IDLE);
 }
 
@@ -76,7 +76,7 @@ int	reins_start(t_reins **reins)
 		return (!!printf("Failed to hook!\n"));
 	if (!reins_key(*reins, "A", insert_a_truckload))
 		return (1);
-	if (!reins_key(*reins, "a", insert_numbers))
+	if (!reins_key(*reins, "x", insert_X))
 		return (1);
 	return (0);
 }

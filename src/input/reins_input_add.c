@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 11:59:11 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/12 21:48:32 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 12:44:28 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,53 +39,57 @@ static size_t	add_single_row(t_input *input, char *str, size_t amount)
 	return (amount);
 }
 
-static int	wrap_around_characters(t_input *input, size_t row, size_t len, size_t offset)
+static int	wrap_around_characters(t_input *input, size_t row, size_t len, size_t index)
 {
-	size_t	index;
 	char	*buf;
 
 	while (row + 1 < input->input_rows)
 	{
 		termcmd(MOVE_COLROW, 0, input->prompt_row + row + 1, 1);
-		index = ((row + 1) * input->max_col) - input->prompt_size + offset - len;
 		if (index >= input->line.size)
 			break ;
+		if (index + len >= input->line.size)
+			len = input->line.size - index;
 		termcmd(INSERT_START, 0, 0, 1);
 		buf = vec_getref(&input->line, index);
 		if (buf == NULL)
 			return (0);
 		write(1, buf, len);
 		termcmd(INSERT_END, 0, 0, 1);
+		index += input->max_col;
 		row++;
 	}
 	return (1);
 }
-
-//fix offset
 
 int	reins_input_add(t_input *input, char *str, size_t len)
 {
 	size_t	index;
 	size_t	amount;
 	size_t	row;
-	size_t	iteration;
+	size_t	i;
+	size_t	col;
+//	size_t	start_row;
 
 	index = (input->shell_cursor.row * input->max_col)
 		- ((!!input->shell_cursor.row) * input->prompt_size)
 		+ input->shell_cursor.col;
 	if (!vec_insert(&input->line, str, index, len))
 		return (error("vec_insert failed", RD_ERROR));
-	index = 0;
-	iteration = 0;
-	while (index < len)
+	i = 0;
+	while (i < len)
 	{
 		termcmd(MOVE_COLROW, input->term_cursor.col, input->term_cursor.row, 1);
 		row = input->shell_cursor.row;
-		amount = add_single_row(input, str + index, (len - index));
-		if (!wrap_around_characters(input, row, amount, (len - index)))
+		col = input->shell_cursor.col;
+//		if (!i)
+//			start_row = row;
+		amount = add_single_row(input, str + i, (len - i));
+//		if (!wrap_around_characters(input, row, amount, index + len + i + ((row - start_row) * input->max_col)))
+		index += (input->max_col - (!row * input->prompt_size)) - amount - col;
+		if (!wrap_around_characters(input, row, amount, index + len))
 			return (RD_ERROR);
-		index += amount;
-		iteration++;
+		i += amount;
 	}
 	refresh_cursor(input);
 	termcmd(MOVE_COLROW, input->term_cursor.col, input->term_cursor.row, 1);
