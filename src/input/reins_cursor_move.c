@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 12:59:00 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 13:29:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 15:31:41 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	reins_cursor_move(t_input *input, size_t x, size_t y, bool cap)
 	if (y >= max_row)
 	{
 		y = max_row;
-		x = max_col;
+		if (x > max_col)
+			x = max_col;
 	}
 	input->term_cursor.row = input->prompt_row + y;
 	input->term_cursor.col = x;
