@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 15:41:34 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 19:51:17 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 21:00:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ static void	clear_later_lines(t_input *input)
 	size_t	i;
 	size_t	col;
 	size_t	row;
+	size_t	offset;
 
 	col = input->shell_cursor.col;
 	row = input->shell_cursor.row;
 	i = row;
 	while (i < input->input_rows)
 	{
-		reins_cursor_move(input, 0 + ((i == row) * col), i, false);
+		offset = !(input->shell_cursor.row + i) * input->prompt_size;
+		termcmd(MOVE_COLROW, offset + ((i == row) * col),
+			i + input->prompt_row, 1);
 		termcmd("ce", 0, 0, 1);
 		i++;
 	}
