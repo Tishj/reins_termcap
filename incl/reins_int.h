@@ -168,6 +168,7 @@ int			key_end(t_input *input, char *buf, t_hook *hook);
 void		termcmd(char *command, int p1, int p2, int lines_affected);
 void		update_cursor(t_input *reins, int col_adjust, int row_adjust);
 void		refresh_cursor(t_input *input);
+void		visual_add(t_input *input, char *buffer, size_t size);
 
 /*
 **	-----------------------UTIL-----------------------
