@@ -30,6 +30,8 @@ int	reins_get_input(t_reins *reins, char **line)
 	{
 		util_bzero(buf, 6);
 		read(STDIN_FILENO, buf, 6);
+//		print_keycode_formatted(buf, 6);
+//		state = RD_IDLE;
 		state = perform_action(reins, &input, buf);
 		if (state != RD_IDLE)
 			break ;

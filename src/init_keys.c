@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/09 11:38:54 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 16:36:28 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/13 13:24:29 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	populate_keys_vector(t_reins *reins,
 int	init_keys(t_reins *reins)
 {
 	static const t_keyf	functions[] = {
+		key_home,
+		key_end,
 		key_eof,
 		key_del,
 		key_right,
@@ -63,6 +65,8 @@ int	init_keys(t_reins *reins)
 		NULL
 	};
 	static const char	*keycodes[] = {
+		KEY_ESC "[" KEY_HOME,
+		KEY_ESC "[" KEY_END,
 		KEY_CNTRL_D,
 		KEY_DEL,
 		KEY_ESC "[" KEY_RIGHT,

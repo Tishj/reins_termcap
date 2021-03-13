@@ -158,6 +158,8 @@ int			key_down(t_input *input, char *buf, t_hook *hook);
 int			key_right(t_input *input, char *buf, t_hook *hook);
 int			key_left(t_input *input, char *buf, t_hook *hook);
 int			key_del(t_input *input, char *buf, t_hook *hook);
+int			key_home(t_input *input, char *buf, t_hook *hook);
+int			key_end(t_input *input, char *buf, t_hook *hook);
 
 /*
 **	------------TERMINAL_RELATED_FUNCTIONS------------

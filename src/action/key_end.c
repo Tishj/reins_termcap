@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_newline.c                                      :+:    :+:            */
+/*   key_end.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:38:29 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 13:08:25 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/13 13:18:17 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/13 13:23:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
-#include <unistd.h>
 #include <reins.h>
 
-int	key_newline(t_input *input, char *buf, t_hook *hook)
+int	key_end(t_input *input, char *buf, t_hook *hook)
 {
+	(void)hook;
 	(void)buf;
-	if (hook && hook->function)
-		hook->function(hook->param);
 	reins_cursor_move(input, input->max_col, input->input_rows, true);
-//	reins_input_add(input, "\n", 1);
-	return (RD_SEND);
+	return (RD_IDLE);
 }

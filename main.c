@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 12:34:57 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 12:56:39 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main(void)
 		ret = reins_get_input(reins, &line);
 		if (ret != 1)
 			break ;
+		reins_disable(reins);
 		printf("\nLINE: |%s|\n", line);
 		free(line);
 	}
