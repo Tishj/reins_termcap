@@ -6,30 +6,47 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 15:41:34 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 17:08:20 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 19:17:16 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 #include <reins.h>
 
+static void	clear_later_lines(t_input *input)
+{
+	size_t	i;
+	size_t	col;
+	size_t	row;
+
+	col = input->shell_cursor.col;
+	row = input->shell_cursor.row;
+	i = row;
+	while (i < input->input_rows)
+	{
+		reins_cursor_move(input, 0 + ((i == row) * col), i, true);
+		termcmd("ce", 0, 0, 1);
+		i++;
+	}
+	reins_cursor_move(input, col, row, true);
+}
+
 int	reins_input_del(t_input *input, size_t n)
 {
 	size_t	index;
-//	size_t	col;
-//	size_t	row;
 	char	*str;
 
+	clear_later_lines(input);
 	index = (input->shell_cursor.row * input->max_col)
 		- ((!!input->shell_cursor.row) * input->prompt_size)
 		+ input->shell_cursor.col;
-	if (n > index || !vec_del(&input->line, index - n, n))
+	if (n > index)
+		n = index;
+	if (!vec_del(&input->line, index - n, n))
 		return (RD_ERROR);
 	str = vec_getref(&input->line, index - n);
-//	col = input->shell_cursor.col;
-//	row = input->shell_cursor.row;
 	visual_del(input, n);
-//	reins_cursor_move(input, col, row, true);
-	visual_add(input, str, input->line.size - (index - n));
+	if (index - n < input->line.size)
+		visual_add(input, str, input->line.size - (index - n));
 	return (RD_IDLE);
 }
