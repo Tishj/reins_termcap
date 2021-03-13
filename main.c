@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 19:20:01 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 19:39:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ int	delete_row(t_input *input, char *buf, t_hook *hook)
 	return (reins_input_del(input, columns));
 }
 
+int	clear_input(t_input *input, char *buf, t_hook *hook)
+{
+	(void)buf;
+	(void)hook;
+	return (reins_input_clear(input));
+}
+
 int	reins_start(t_reins **reins)
 {
 	*reins = reins_init();
@@ -98,6 +105,8 @@ int	reins_start(t_reins **reins)
 	if (!reins_key(*reins, "x", insert_X))
 		return (1);
 	if (!reins_key(*reins, KEY_ESC "[3~", delete_characters))
+		return (1);
+	if (!reins_key(*reins, KEY_CNTRL_U, clear_input))
 		return (1);
 	return (0);
 }

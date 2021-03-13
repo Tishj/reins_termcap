@@ -6,33 +6,51 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 15:51:02 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 19:23:50 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 20:28:07 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 #include <reins.h>
 
+static size_t	max_columns(t_input *input)
+{
+	size_t	columns;
+	size_t	row;
+	
+	row = input->shell_cursor.row - (!input->shell_cursor.col);
+	columns = input->max_col - (!row * input->prompt_size);
+	if (!input->shell_cursor.col)
+		return (columns);
+	return (input->shell_cursor.col);
+}
+
 size_t	visual_del_row(t_input *input, size_t n, bool first)
 {
-	if ((long long)n > input->shell_cursor.col)
-		n = input->shell_cursor.col;
-	update_cursor(input, -(n - !first), 0);
-	termcmd(MOVE_COLROW, input->term_cursor.col, input->term_cursor.row, 1);
+	size_t	columns;
+
+	(void)first;
+	columns = max_columns(input);
+	if (n > columns)
+		n = columns;
+	update_cursor(input, -n, 0);
+	refresh_cursor(input);
 	termcmd(DELETE_CHARS, n, n, n);
 	return (n);
 }
 
-//count amount of rows deleted, those need to be cleared afterwards
 void	visual_del(t_input *input, size_t n)
 {
 	size_t	i;
+	size_t	deleted;
 
 	i = 0;
 	while (i < n)
 	{
-		i += visual_del_row(input, (n - i), !i);
-		if (i < n)
-			update_cursor(input, -1, 0);
+		deleted = visual_del_row(input, (n - i), !!i);
+		if (!deleted)
+			break ;
+		i += deleted;
 	}
+	refresh_cursor(input);
 }

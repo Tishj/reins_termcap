@@ -59,6 +59,7 @@ enum	e_readstate
 **	----------------SPECIAL_CHARACTERS----------------
 */
 
+# define KEY_CNTRL_U		"\x15"
 # define KEY_CNTRL_D		"\x4"
 # define KEY_NEWLINE		"\xA"
 # define KEY_CNTRL_L		"\xC"
