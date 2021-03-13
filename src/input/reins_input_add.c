@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 11:59:11 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 13:35:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 13:45:54 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ static int	wrap_around_characters(t_input *input, size_t row, size_t len,
 	}
 	return (1);
 }
+
+/*
+** isn't it possible and easier to run add_single_row for everything added
+** and then run add_single_row again for all the characters that come after it
+*/
 
 int	reins_input_add(t_input *input, char *str, size_t len)
 {
