@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:38:29 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 13:08:25 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 13:36:53 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ int	key_newline(t_input *input, char *buf, t_hook *hook)
 	if (hook && hook->function)
 		hook->function(hook->param);
 	reins_cursor_move(input, input->max_col, input->input_rows, true);
-//	reins_input_add(input, "\n", 1);
 	return (RD_SEND);
 }

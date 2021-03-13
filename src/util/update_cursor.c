@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 13:36:17 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/12 17:19:34 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 13:34:04 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static size_t	get_total_amount_of_columns(t_input *input, int col_adjust
 		+ offset + input->shell_cursor.col + col_adjust;
 	return (columns);
 }
-
-//needs to check if the index doesn't overflow to the next row, not just the cursor itself
-
-//adding 9 characters to a line that would make the rest of the line overflow to the next row,
-//but not the cursor itself is an example of the current issue
 
 static size_t	rows_of_input(t_input *input)
 {
@@ -49,7 +44,7 @@ void	update_cursor(t_input *input, int col_adjust, int row_adjust)
 		+ input->shell_cursor.row > (long long)input->input_rows)
 		return ;
 	total = get_total_amount_of_columns(input, col_adjust,
-		row_adjust, column_offset);
+			row_adjust, column_offset);
 	input->shell_cursor.row = total / input->max_col;
 	input->term_cursor.row = input->prompt_row + input->shell_cursor.row;
 	input->term_cursor.col = total % input->max_col;

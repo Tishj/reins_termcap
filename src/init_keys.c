@@ -6,11 +6,48 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/09 11:38:54 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 13:24:29 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 13:42:01 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
+
+static const t_keyf	*functions_singleton(void)
+{
+	static const t_keyf	functions[] = {
+		key_home,
+		key_end,
+		key_eof,
+		key_del,
+		key_right,
+		key_left,
+		key_up,
+		key_down,
+		key_newline,
+		key_regular,
+		NULL
+	};
+
+	return (functions);
+}
+
+static const char	**keycodes_singleton(void)
+{
+	static const char	*keycodes[] = {
+		KEY_ESC "[" KEY_HOME,
+		KEY_ESC "[" KEY_END,
+		KEY_CNTRL_D,
+		KEY_DEL,
+		KEY_ESC "[" KEY_RIGHT,
+		KEY_ESC "[" KEY_LEFT,
+		KEY_ESC "[" KEY_UP,
+		KEY_ESC "[" KEY_DOWN,
+		KEY_NEWLINE,
+		" "
+	};
+
+	return (keycodes);
+}
 
 static int	regular_ascii_keys(t_reins *reins)
 {
@@ -27,13 +64,15 @@ static int	regular_ascii_keys(t_reins *reins)
 	return (1);
 }
 
-static int	populate_keys_vector(t_reins *reins,
-		const t_keyf *functions,
-		const char **keycodes)
+int	init_keys(t_reins *reins)
 {
-	size_t	i;
-	char	tmp[6];
+	const t_keyf	*functions;
+	const char		**keycodes;
+	size_t			i;
+	char			tmp[6];
 
+	functions = functions_singleton();
+	keycodes = keycodes_singleton();
 	if (!vec_new(&reins->keys, sizeof(t_key)))
 		return (0);
 	i = 0;
@@ -47,35 +86,4 @@ static int	populate_keys_vector(t_reins *reins,
 		i++;
 	}
 	return (1);
-}
-
-int	init_keys(t_reins *reins)
-{
-	static const t_keyf	functions[] = {
-		key_home,
-		key_end,
-		key_eof,
-		key_del,
-		key_right,
-		key_left,
-		key_up,
-		key_down,
-		key_newline,
-		key_regular,
-		NULL
-	};
-	static const char	*keycodes[] = {
-		KEY_ESC "[" KEY_HOME,
-		KEY_ESC "[" KEY_END,
-		KEY_CNTRL_D,
-		KEY_DEL,
-		KEY_ESC "[" KEY_RIGHT,
-		KEY_ESC "[" KEY_LEFT,
-		KEY_ESC "[" KEY_UP,
-		KEY_ESC "[" KEY_DOWN,
-		KEY_NEWLINE,
-		" "
-	};
-
-	return (populate_keys_vector(reins, functions, keycodes));
 }

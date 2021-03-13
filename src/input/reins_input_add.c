@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 11:59:11 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/13 12:44:28 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/13 13:35:34 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static size_t	maximum_columns_left_on_row(t_input *input)
 {
-	size_t max_cols;
+	size_t	max_cols;
 
 	max_cols = input->max_col
 		- (!input->shell_cursor.row * input->prompt_size)
@@ -39,7 +39,8 @@ static size_t	add_single_row(t_input *input, char *str, size_t amount)
 	return (amount);
 }
 
-static int	wrap_around_characters(t_input *input, size_t row, size_t len, size_t index)
+static int	wrap_around_characters(t_input *input, size_t row, size_t len,
+	size_t index)
 {
 	char	*buf;
 
@@ -69,7 +70,6 @@ int	reins_input_add(t_input *input, char *str, size_t len)
 	size_t	row;
 	size_t	i;
 	size_t	col;
-//	size_t	start_row;
 
 	index = (input->shell_cursor.row * input->max_col)
 		- ((!!input->shell_cursor.row) * input->prompt_size)
@@ -82,10 +82,7 @@ int	reins_input_add(t_input *input, char *str, size_t len)
 		termcmd(MOVE_COLROW, input->term_cursor.col, input->term_cursor.row, 1);
 		row = input->shell_cursor.row;
 		col = input->shell_cursor.col;
-//		if (!i)
-//			start_row = row;
 		amount = add_single_row(input, str + i, (len - i));
-//		if (!wrap_around_characters(input, row, amount, index + len + i + ((row - start_row) * input->max_col)))
 		index += (input->max_col - (!row * input->prompt_size)) - amount - col;
 		if (!wrap_around_characters(input, row, amount, index + len))
 			return (RD_ERROR);
