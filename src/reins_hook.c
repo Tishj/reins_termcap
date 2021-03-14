@@ -18,11 +18,11 @@ int	reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param)
 {
 	t_key	*key;
 	ssize_t	index;
-	char	keycode[6];
+	char	keycode[MAX_KEY_SIZE];
 
 	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
-	index = find_key(reins, keycode, 6);
+	index = find_key(reins, keycode, MAX_KEY_SIZE);
 	if (index == -1)
 		return (0);
 	key = vec_getref(&reins->keys, index);

@@ -20,13 +20,13 @@ int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 {
 	ssize_t	index;
 	t_key	*key;
-	char	keycode[6];
+	char	keycode[MAX_KEY_SIZE];
 	int		ret;
 
 	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
-//	print_keycode_formatted(keycode, 6);
-	index = find_key(reins, keycode, 6);
+//	print_keycode_formatted(keycode, MAX_KEY_SIZE);
+	index = find_key(reins, keycode, MAX_KEY_SIZE);
 	if (index == -1)
 	{
 		key = new_key(keycode, func);
@@ -39,8 +39,8 @@ int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 	key = get_key(reins, keycode, index);
 	if (!key)
 		return (0);
-	util_memcpy(key->buf, keycode, 6);
-	key->size = util_strnlen(key->buf, 6);
+	util_memcpy(key->buf, keycode, MAX_KEY_SIZE);
+	key->size = util_strnlen(key->buf, MAX_KEY_SIZE);
 	key->function = func;
 	return (1);
 }

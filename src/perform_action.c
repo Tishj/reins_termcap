@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:25:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 22:20:40 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/14 16:23:27 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_key	*get_action(t_reins *reins, char *buf, size_t *i)
 {
 	ssize_t	index;
 
-	index = find_key(reins, buf + *i, 6 - *i);
+	index = find_key(reins, buf + *i, MAX_KEY_SIZE - *i);
 	if (index == -1)
 		return (NULL);
-	return (get_key(reins, buf + *i, 6 - *i));
+	return (get_key(reins, buf + *i, MAX_KEY_SIZE - *i));
 }
 
 int	perform_action(t_reins *reins, t_input *input, char *buf)
@@ -30,7 +30,7 @@ int	perform_action(t_reins *reins, t_input *input, char *buf)
 
 	state = RD_IDLE;
 	i = 0;
-	while (i < 6 && buf[i])
+	while (i < MAX_KEY_SIZE && buf[i])
 	{
 		key = get_action(reins, buf, &i);
 		if (key && key->function)

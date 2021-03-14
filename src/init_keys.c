@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/09 11:38:54 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 13:42:01 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/14 16:20:46 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_keys(t_reins *reins)
 	const t_keyf	*functions;
 	const char		**keycodes;
 	size_t			i;
-	char			tmp[6];
+	char			tmp[MAX_KEY_SIZE];
 
 	functions = functions_singleton();
 	keycodes = keycodes_singleton();
@@ -78,7 +78,7 @@ int	init_keys(t_reins *reins)
 	i = 0;
 	while (functions[i])
 	{
-		util_bzero(tmp, 6);
+		util_bzero(tmp, MAX_KEY_SIZE);
 		if (functions[i] == key_regular && !regular_ascii_keys(reins))
 			return (0);
 		else if (!reins_key(reins, (char *)keycodes[i], functions[i]))
