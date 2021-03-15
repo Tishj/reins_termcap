@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/10 23:12:22 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/15 16:45:00 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ INCL	:=	$(addprefix -I ,$(dir $(HEADER)))
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@echo "Compiling $(notdir $@)"
-	@$(CC) $(CFLAGS) -c $^ $(INCL) $(TAIL) -o $@
+	@$(CC) $(CFLAGS) -c $^ $(INCL) -o $@
 
 $(NAME) : $(OBJ) $(LIBRARY)
 	@echo "Compiling $(notdir $@)"
