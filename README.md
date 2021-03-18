@@ -46,7 +46,7 @@ This can be combined with `reins_hook()` to provide an extra parameter to use in
 
 > t_input is a struct that contains information about the input field, as well as the line vector itself.
 
-* `int reins_input_add(t_reins *input, char *str, size_t len);`  
+* `int reins_input_add(t_input *input, char *str, size_t len);`  
 Add the given string to the input, inserted at the current position of the cursor.
 
 * `int reins_input_del(t_input *input, size_t len);`  
