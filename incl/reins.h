@@ -24,10 +24,13 @@ int			reins_enable(t_reins *reins);
 int			reins_disable(t_reins *reins);
 int			reins_key(t_reins *reins, char *raw_key, t_keyf func);
 int			reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param);
+int			reins_print_keycodes(t_reins *reins);
+
+int			reins_cursor_move(t_input *input, size_t x, size_t y, bool cap);
 int			reins_input_add(t_input *input, char *str, size_t len);
 int			reins_input_del(t_input *input, size_t len);
 int			reins_input_clear(t_input *input);
-int			reins_cursor_move(t_input *input, size_t x, size_t y, bool cap);
-int			reins_print_keycodes(t_reins *reins);
+bool		reins_input_empty(t_input *input);
+size_t		reins_input_size(t_input *input);
 
 #endif
