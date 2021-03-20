@@ -26,7 +26,7 @@ static int	init_table(t_reins *reins)
 	termtype = getenv("TERM");
 	if (!termtype)
 		return (!printf("No termtype!\n"));
-	if (tgetent(reins->table, termtype) == -1)
+	if (tgetent(reins->table, termtype) <= 0)
 		return (!printf("tgetent failed!\n"));
 	return (1);
 }
@@ -36,6 +36,8 @@ static int	init_table(t_reins *reins)
 **	ECHO | ICANON	-	turn off canonical mode and echo
 **	VMIN			-	minimal amount of characters for non-canonical read (syscall)
 **	VTIME			-	minimal time-out for non-canonical read (syscall)
+**	cfset(i/o)speed -	input and output speed of the terminal,
+**						affects the padding required by tputs
 */
 static int	init_termios(t_reins *reins)
 {
@@ -48,7 +50,7 @@ static int	init_termios(t_reins *reins)
 	reins->termios.c_cc[VTIME] = 0;
 	if (cfsetispeed(&reins->termios, B9600) < 0
 		|| cfsetospeed(&reins->termios, B9600) < 0)
-		return (!printf("failed to set attribute!\n"));
+		return (!printf("failed to set baud rate!\n"));
 	return (1);
 }
 
