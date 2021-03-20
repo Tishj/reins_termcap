@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 12:59:00 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/20 16:03:42 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/20 16:20:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static size_t	column(t_input *input, size_t x, size_t y, size_t total)
 {
 	size_t	max;
 
+	max = input->max_col;
 	if (y + 1 == input->input_rows)
 		max = total % input->max_col;
 	if (!y)
