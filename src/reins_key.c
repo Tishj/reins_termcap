@@ -18,28 +18,16 @@
 */
 int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 {
-	ssize_t	index;
-	t_key	*key;
 	char	keycode[MAX_KEY_SIZE];
-	int		ret;
+	t_key	*key;
+	size_t	len;
 
 	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
-	index = find_key(reins, keycode, MAX_KEY_SIZE);
-	if (index == -1)
-	{
-		key = new_key(keycode, func);
-		if (!key)
-			return (0);
-		ret = vec_add(&reins->keys, key, 1);
-		free(key);
-		return (ret);
-	}
-	key = get_key(reins, keycode, index);
-	if (!key)
+//	print_keycode_formatted(keycode, 6);
+	len = util_strnlen(keycode, 6);
+	key = new_key(keycode, func);
+	if (!key || !bstree_insert(&reins->keys, keycode, len, key, true))
 		return (0);
-	util_memcpy(key->buf, keycode, MAX_KEY_SIZE);
-	key->size = util_strnlen(key->buf, MAX_KEY_SIZE);
-	key->function = func;
 	return (1);
 }

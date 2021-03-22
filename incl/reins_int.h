@@ -16,6 +16,7 @@
 # include <termios.h>
 # include <stddef.h>
 # include <vector.h>
+# include <bstree.h>
 # include <stdbool.h>
 
 /*
@@ -108,7 +109,7 @@ typedef struct s_reins
 	struct termios	standard;
 	bool			enabled;
 
-	t_vec			keys;
+	t_bstree		keys;
 }					t_reins;
 
 /*

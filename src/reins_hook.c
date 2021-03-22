@@ -17,17 +17,16 @@
 int	reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param)
 {
 	t_key	*key;
-	ssize_t	index;
 	char	keycode[MAX_KEY_SIZE];
+	t_node	**node;
 
 	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
-	index = find_key(reins, keycode, MAX_KEY_SIZE);
-	if (index == -1)
+//	print_keycode_formatted(keycode, 6);
+	node = bstree_find(&reins->keys, keycode, util_strnlen(keycode, 6), NULL);
+	if (!*node)
 		return (0);
-	key = vec_getref(&reins->keys, index);
-	if (!key)
-		return (0);
+	key = (*node)->val;
 	key->hook.function = f;
 	key->hook.param = param;
 	return (1);

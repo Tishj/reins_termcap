@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/18 15:18:52 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/23 00:36:56 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,10 @@ else ifeq ($(DEBUG),2)
 endif
 
 HEADER	=	./incl/reins.h \
-			./lib/vector/incl/vector.h
+			./lib/vector/incl/vector.h \
+			./lib/bstree/incl/bstree.h
 
-LIBRARY	=	./lib/vector/libvector.a
+LIBRARY	=	./lib/vector/libvector.a ./lib/bstree/libbst.a
 
 TAIL	=	$(foreach lib,$(LIBRARY),-L $(dir $(lib)) $(patsubst lib%.a,-l%,$(notdir $(lib))))
 
@@ -58,9 +59,7 @@ SRC 	=	reins_init.c \
 			util/refresh_cursor.c \
 			create_keycode.c \
 			perform_action.c \
-			find_key.c \
 			new_key.c \
-			get_key.c \
 			reins_hook.c \
 			reins_key.c \
 			reins_enable.c \
@@ -93,6 +92,9 @@ $(NAME) : $(OBJ) $(LIBRARY)
 ./lib/vector/libvector.a:
 	@$(MAKE) -sC $(dir $@) DEBUG=$(DEBUG)
 
+./lib/bstree/libbst.a:
+	@$(MAKE) -sC $(dir $@) DEBUG=$(DEBUG)
+
 all : $(NAME) 
 
 test: all
@@ -101,11 +103,13 @@ test: all
 clean:
 	@echo "Cleaning reins.."
 	@$(MAKE) -sC ./lib/vector/ clean
+	@$(MAKE) -sC ./lib/bstree/ clean
 	@rm -f $(OBJ)
 
 fclean: clean
 	@echo "Full cleaning reins.."
 	@$(MAKE) -sC ./lib/vector/ fclean
+	@$(MAKE) -sC ./lib/bstree/ fclean
 	@rm -f $(NAME) test
 
 re: fclean all

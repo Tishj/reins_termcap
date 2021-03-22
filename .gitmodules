@@ -1,0 +1,3 @@
+[submodule "lib/bstree"]
+	path = lib/bstree
+	url = https://github.com/Tishj/binary-search-tree-c.git

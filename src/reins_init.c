@@ -48,9 +48,6 @@ static int	init_termios(t_reins *reins)
 	reins->termios.c_lflag &= ~(ECHO | ICANON);
 	reins->termios.c_cc[VMIN] = 1;
 	reins->termios.c_cc[VTIME] = 0;
-	if (cfsetispeed(&reins->termios, B9600) < 0
-		|| cfsetospeed(&reins->termios, B9600) < 0)
-		return (!printf("failed to set baud rate!\n"));
 	return (1);
 }
 
