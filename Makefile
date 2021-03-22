@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/23 00:36:56 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/23 00:45:36 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC 	=	reins_init.c \
 			util/termcmd.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \
+			util/error.c \
 			create_keycode.c \
 			perform_action.c \
 			new_key.c \
