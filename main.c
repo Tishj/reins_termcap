@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/23 00:39:47 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/04/06 19:29:52 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	up_function(t_input *line, char *buf, t_hook *hook)
 	(void)line;
 	(void)buf;
 	(void)hook;
-	if (hook && hook->function)
-		hook->function(hook->param);
+	reins_hook_run(hook);
 	printf("\nOVERWRITTEN UP FUNCTION!\n");
 	return (RD_IDLE);
 }
@@ -77,11 +76,10 @@ int	delete_row(t_input *input, char *buf, t_hook *hook)
 {
 	(void)buf;
 	(void)hook;
-	size_t	columns;
 
-	columns = input->max_col - (!input->shell_cursor.row * input->prompt_size);
+//	columns = input->max_col - (!input->shell_cursor.row * input->prompt_size);
 
-	return (reins_input_del(input, columns));
+	return (reins_input_del(input, 5));
 }
 
 int	clear_input(t_input *input, char *buf, t_hook *hook)

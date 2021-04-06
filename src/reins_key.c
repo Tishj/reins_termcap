@@ -27,7 +27,13 @@ int	reins_key(t_reins *reins, char *raw_key, t_keyf func)
 //	print_keycode_formatted(keycode, 6);
 	len = util_strnlen(keycode, 6);
 	key = new_key(keycode, func);
-	if (!key || !bstree_insert(&reins->keys, keycode, len, key, true))
+	if (!key || !bstree_assign(&reins->keys, keycode, len, key))
 		return (0);
 	return (1);
 }
+
+// int	reins_key(t_reins *reins, int key, bool csi, char modifier)
+// {
+// 	char	*keycode;
+
+// }

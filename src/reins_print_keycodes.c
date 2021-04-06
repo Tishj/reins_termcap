@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 15:34:46 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/14 16:22:09 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/04/06 19:18:58 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	reins_print_keycodes(t_reins *reins)
 {
-	char				buf[MAX_KEY_SIZE];
+	static char				buf[MAX_KEY_SIZE];
 
 	reins_enable(reins);
 	while (1)

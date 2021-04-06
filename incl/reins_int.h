@@ -18,21 +18,7 @@
 # include <vector.h>
 # include <bstree.h>
 # include <stdbool.h>
-
-/*
-**	--------------------READ_STATE--------------------
-*/
-
-/*
-**	returned by t_keyf functions to signal the state of the reader
-*/
-enum	e_readstate
-{
-	RD_ERROR,
-	RD_EOF,
-	RD_SEND,
-	RD_IDLE
-};
+# include <reins.h>
 
 /*
 **	----------------TERMINAL_COMMANDS-----------------
@@ -62,19 +48,10 @@ enum	e_readstate
 
 # define MAX_KEY_SIZE		6
 
-# define KEY_CNTRL_U		"\x15"
-# define KEY_CNTRL_D		"\x4"
-# define KEY_NEWLINE		"\xA"
-# define KEY_CNTRL_L		"\xC"
-# define KEY_ESC			"\x1B"
-# define KEY_CNTRL_U		"\x15"
-# define KEY_UP				"\x41"
-# define KEY_DOWN			"\x42"
-# define KEY_RIGHT			"\x43"
-# define KEY_LEFT			"\x44"
-# define KEY_END			"\x46"
-# define KEY_HOME			"\x48"
-# define KEY_DEL			"\x7F"
+# define MOD_CTRL			(1 << 0)
+# define MOD_SHIFT			(1 << 1)
+# define MOD_ALT			(1 << 2)
+# define MOD_META			(1 << 3)
 
 /*
 **	---------------------STRUCTS----------------------
@@ -116,17 +93,16 @@ typedef struct s_reins
 **	--------------------GET_INPUT---------------------
 */
 
+
 typedef struct s_hook
 {
-	void	(*function)(void *tmp);
-	void	*param;
+	t_hookf		function;
+	void		*param;
 }				t_hook;
 
 /*
 **	--------------KEY_FUNCTION_PROTOTYPE--------------
 */
-
-typedef int	(*t_keyf)(t_input *input, char *buf, t_hook *hook);
 
 typedef struct s_key
 {

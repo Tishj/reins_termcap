@@ -14,20 +14,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	reins_hook(t_reins *reins, char *raw_key, void (*f)(), void *param)
+void	reins_hook_run(t_hook *hook)
+{
+	if (hook->function)
+		hook->function(hook->param);
+}
+
+int	reins_hook(t_reins *reins, char *raw_key, t_hookf func, void *param)
 {
 	t_key	*key;
 	char	keycode[MAX_KEY_SIZE];
-	t_node	**node;
 
 	if (!reins || !create_keycode(raw_key, keycode))
 		return (0);
 //	print_keycode_formatted(keycode, 6);
-	node = bstree_find(&reins->keys, keycode, util_strnlen(keycode, 6), NULL);
-	if (!*node)
+	key = bstree_find(&reins->keys, keycode, util_strnlen(keycode, 6));
+	if (!key)
 		return (0);
-	key = (*node)->val;
-	key->hook.function = f;
+	key->hook.function = func;
 	key->hook.param = param;
 	return (1);
 }

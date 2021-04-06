@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:25:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/23 00:42:43 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:54:52 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 t_key	*get_action(t_reins *reins, char *buf, size_t *i)
 {
-	t_node	**node;
+	t_key	*key;
 
-	node = bstree_find(&reins->keys, buf, MAX_KEY_SIZE - *i, NULL);
-	if (!*node)
-		return (NULL);
-	return ((*node)->val);
+	key = bstree_find(&reins->keys, buf, MAX_KEY_SIZE - *i);
+	return (key);
 }
 
 int	perform_action(t_reins *reins, t_input *input, char *buf)
