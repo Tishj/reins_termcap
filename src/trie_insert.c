@@ -6,11 +6,12 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/18 17:23:40 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/05/18 18:13:58 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/05/18 20:38:15 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
+#include <stdlib.h>
 
 void	*trie_insert(t_trie **root, char *key, void *val)
 {
@@ -30,6 +31,8 @@ void	*trie_insert(t_trie **root, char *key, void *val)
 	}
 	if (iter && !key[i])
 	{
+		if (iter->end)
+			free(iter->val);
 		iter->val = val;
 		iter->end = true;
 		return (iter);
