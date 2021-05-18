@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/03/15 16:45:00 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/05/18 17:08:05 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,10 @@ else ifeq ($(DEBUG),2)
 endif
 
 HEADER	=	./incl/reins.h \
-			./lib/vector/incl/vector.h
+			./lib/vector/incl/vector.h \
+			./lib/bstree/incl/bstree.h
 
-LIBRARY	=	./lib/vector/libvector.a
+LIBRARY	=	./lib/vector/libvector.a ./lib/bstree/libbst.a
 
 TAIL	=	$(foreach lib,$(LIBRARY),-L $(dir $(lib)) $(patsubst lib%.a,-l%,$(notdir $(lib))))
 
@@ -56,17 +57,25 @@ SRC 	=	reins_init.c \
 			util/termcmd.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \
+			util/error.c \
 			create_keycode.c \
 			perform_action.c \
-			find_key.c \
 			new_key.c \
-			get_key.c \
 			reins_hook.c \
 			reins_key.c \
 			reins_enable.c \
-			reins_disable.c
-
-
+			reins_disable.c \
+			input/reins_input_add.c \
+			input/reins_input_del.c \
+			input/reins_input_clear.c \
+			input/reins_cursor_move.c \
+			input/reins_input_empty.c \
+			input/reins_input_size.c \
+			reins_print_keycodes.c \
+			visual_add.c \
+			visual_del.c \
+			action/key_end.c \
+			action/key_home.c
 
 OBJ 	:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -84,6 +93,9 @@ $(NAME) : $(OBJ) $(LIBRARY)
 ./lib/vector/libvector.a:
 	@$(MAKE) -sC $(dir $@) DEBUG=$(DEBUG)
 
+./lib/bstree/libbst.a:
+	@$(MAKE) -sC $(dir $@) DEBUG=$(DEBUG)
+
 all : $(NAME) 
 
 test: all
@@ -92,11 +104,13 @@ test: all
 clean:
 	@echo "Cleaning reins.."
 	@$(MAKE) -sC ./lib/vector/ clean
+	@$(MAKE) -sC ./lib/bstree/ clean
 	@rm -f $(OBJ)
 
 fclean: clean
 	@echo "Full cleaning reins.."
 	@$(MAKE) -sC ./lib/vector/ fclean
+	@$(MAKE) -sC ./lib/bstree/ fclean
 	@rm -f $(NAME) test
 
 re: fclean all

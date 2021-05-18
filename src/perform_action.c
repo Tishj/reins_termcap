@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:25:07 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 13:23:43 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/24 09:54:52 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 t_key	*get_action(t_reins *reins, char *buf, size_t *i)
 {
-	ssize_t	index;
+	t_key	*key;
 
-	index = find_key(reins, buf + *i, 6 - *i);
-	if (index == -1)
-		return (NULL);
-	return (get_key(reins, buf + *i, 6 - *i));
+	key = bstree_find(&reins->keys, buf, MAX_KEY_SIZE - *i);
+	return (key);
 }
 
-int	perform_action(t_reins *reins, t_vec *input, char *buf)
+int	perform_action(t_reins *reins, t_input *input, char *buf)
 {
 	size_t					i;
 	int						state;
@@ -30,12 +28,12 @@ int	perform_action(t_reins *reins, t_vec *input, char *buf)
 
 	state = RD_IDLE;
 	i = 0;
-	while (i < 6 && buf[i])
+	while (i < MAX_KEY_SIZE && buf[i])
 	{
 		key = get_action(reins, buf, &i);
 		if (key && key->function)
 		{
-			state = key->function(reins, input, buf + i, &key->hook);
+			state = key->function(input, buf + i, &key->hook);
 			if (state != RD_IDLE)
 				break ;
 			i += key->size;

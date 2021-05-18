@@ -16,22 +16,9 @@
 # include <termios.h>
 # include <stddef.h>
 # include <vector.h>
+# include <bstree.h>
 # include <stdbool.h>
-
-/*
-**	--------------------READ_STATE--------------------
-*/
-
-/*
-**	returned by t_keyf functions to signal the state of the reader
-*/
-enum	e_readstate
-{
-	RD_ERROR,
-	RD_EOF,
-	RD_SEND,
-	RD_IDLE
-};
+# include <reins.h>
 
 /*
 **	----------------TERMINAL_COMMANDS-----------------
@@ -59,18 +46,12 @@ enum	e_readstate
 **	----------------SPECIAL_CHARACTERS----------------
 */
 
-# define KEY_CNTRL_D		"\x4"
-# define KEY_NEWLINE		"\xA"
-# define KEY_CNTRL_L		"\xC"
-# define KEY_ESC			"\x1B"
-# define KEY_CNTRL_U		"\x15"
-# define KEY_UP				"\x41"
-# define KEY_DOWN			"\x42"
-# define KEY_RIGHT			"\x43"
-# define KEY_LEFT			"\x44"
-# define KEY_END			"\x46"
-# define KEY_HOME			"\x48"
-# define KEY_DEL			"\x7F"
+# define MAX_KEY_SIZE		6
+
+# define MOD_CTRL			(1 << 0)
+# define MOD_SHIFT			(1 << 1)
+# define MOD_ALT			(1 << 2)
+# define MOD_META			(1 << 3)
 
 /*
 **	---------------------STRUCTS----------------------
@@ -82,7 +63,8 @@ typedef struct s_vec2ll
 	long long	row;	
 }				t_vec2ll;
 
-typedef struct s_reins
+//input object
+typedef struct s_input
 {
 	t_vec2ll		term_cursor;
 	size_t			max_col;
@@ -94,29 +76,33 @@ typedef struct s_reins
 	t_vec2ll		shell_cursor;
 	size_t			input_rows;
 
+	t_vec			line;
+}				t_input;
+
+typedef struct s_reins
+{
 	char			table[2048];
 	struct termios	termios;
 	struct termios	standard;
 	bool			enabled;
 
-	t_vec			keys;
+	t_bstree		keys;
 }					t_reins;
 
 /*
 **	--------------------GET_INPUT---------------------
 */
 
+
 typedef struct s_hook
 {
-	void	(*function)(void *tmp);
-	void	*param;
+	t_hookf		function;
+	void		*param;
 }				t_hook;
 
 /*
 **	--------------KEY_FUNCTION_PROTOTYPE--------------
 */
-
-typedef int	(*t_keyf)(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
 
 typedef struct s_key
 {
@@ -135,7 +121,7 @@ int			reins_key(t_reins *reins, char *raw_key, t_keyf func);
 /*
 **	----------------------HOOKS-----------------------
 */
-int			perform_action(t_reins *reins, t_vec *input, char *buf);
+int			perform_action(t_reins *reins, t_input *input, char *buf);
 
 t_key		*new_key(char keycode[6], t_keyf f);
 ssize_t		find_key(t_reins *reins, char *keycode, size_t size);
@@ -144,30 +130,36 @@ t_key		*get_key(t_reins *reins, char *keycode, size_t size);
 /*
 **	--------------DEFAULT_KEY_BEHAVIOUR---------------
 */
-int			key_eof(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_newline(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_regular(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_up(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_down(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_right(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_left(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
-int			key_del(t_reins *reins, t_vec *input, char *buf, t_hook *hook);
+int			key_eof(t_input *input, char *buf, t_hook *hook);
+int			key_newline(t_input *input, char *buf, t_hook *hook);
+int			key_regular(t_input *input, char *buf, t_hook *hook);
+int			key_up(t_input *input, char *buf, t_hook *hook);
+int			key_down(t_input *input, char *buf, t_hook *hook);
+int			key_right(t_input *input, char *buf, t_hook *hook);
+int			key_left(t_input *input, char *buf, t_hook *hook);
+int			key_del(t_input *input, char *buf, t_hook *hook);
+int			key_home(t_input *input, char *buf, t_hook *hook);
+int			key_end(t_input *input, char *buf, t_hook *hook);
 
 /*
 **	------------TERMINAL_RELATED_FUNCTIONS------------
 */
 
 void		termcmd(char *command, int p1, int p2, int lines_affected);
-void		update_cursor(t_reins *reins, int col_adjust, int row_adjust);
-void		refresh_cursor(t_reins *nav);
+void		update_cursor(t_input *reins, int col_adjust, int row_adjust);
+void		refresh_cursor(t_input *input);
+void		visual_add(t_input *input, char *buffer, size_t size);
+void		visual_del(t_input *input, size_t size);
 
 /*
 **	-----------------------UTIL-----------------------
 */
 
+int			error(char *msg, int error_value);
+
 int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reins *reins);
-int			init_cursor(t_reins *reins);
+int			init_cursor(t_input *input);
 void		print_keycode_formatted(char *keycode, size_t n);
 
 int			util_atoi(char *str);

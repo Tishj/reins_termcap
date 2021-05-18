@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vector_int.h                                       :+:    :+:            */
+/*   error.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/06 19:32:37 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 20:33:23 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/12 15:12:41 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/13 20:38:54 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_INT_H
-# define VECTOR_INT_H
+#include <reins_int.h>
+#include <stdio.h>
 
-# include "vector.h"
-
-int					vec_realloc(t_vec *vector, size_t n);
-void				*util_memcpy(void *dst, void *src, size_t n);
-void				util_memmove(void *dst, void *src, size_t n);
-
-#endif
+int	error(char *msg, int error_value)
+{
+	printf("%s\n", msg);
+	return (error_value);
+}

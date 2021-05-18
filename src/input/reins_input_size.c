@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_key.c                                          :+:    :+:            */
+/*   reins_input_size.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/07 21:21:11 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 12:02:10 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/18 15:19:05 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/18 15:19:28 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 
-t_key	*get_key(t_reins *reins, char *keycode, size_t size)
+size_t	reins_input_size(t_input *input)
 {
-	ssize_t	index;
-
-	index = find_key(reins, keycode, size);
-	if (index == -1)
-		return (NULL);
-	return (vec_getref(&reins->keys, (size_t)index));
+	return (input->line.size);
 }

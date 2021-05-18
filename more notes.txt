@@ -1,0 +1,56 @@
+expected:
+index 302
+
+actual:
+index 449
+
+
+147 off
+
+
+376
+
+302
+
+len = 41
+
+
+max_col:	155
+prompt_size:	8
+
+
+index:		376
+len:		188
+
+
+1:
+wrap_around starting at 188, for a length of (max_col - prompt_size)
+
+2:
+wrap_around starting at 
+
+
+(2 * 155) = 310 - 8 = 302
+
+114
+
+155 - 41
+
+
+index: 147
+amount: 147
+
+len: 188
+	(1 * max->col = 155) - 8 = 148 + 188 = 336 - 147 = 
+
+
+index = ((row + 1) * input->max_col) - input->prompt_size + offset - len
+
+	(2 * max->col = 310) - 8 = 302 + 188 = 390 - 41 = 349
+	(2 * max->col = 310) - 8 = 302 + 41 = 343 - 41 = 302
+
+nopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+188 naar 335
+
+147

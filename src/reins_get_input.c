@@ -15,32 +15,33 @@
 #include <stdio.h>
 #include <termcap.h>
 #include <reins_int.h>
+#include <reins.h>
 
 int	reins_get_input(t_reins *reins, char **line)
 {
-	t_vec				input;
-	char				buf[6];
+	t_input				input;
+	char				buf[MAX_KEY_SIZE];
 	int					state;
 
-	if (!init_cursor(reins))
+	if (!reins_enable(reins) || !init_cursor(&input))
 		return (-1);
-	vec_new(&input, sizeof(char));
+	vec_new(&input.line, sizeof(char));
 	while (1)
 	{
-		util_bzero(buf, 6);
-		read(STDIN_FILENO, buf, 6);
+		util_bzero(buf, MAX_KEY_SIZE);
+		read(STDIN_FILENO, buf, MAX_KEY_SIZE);
 		state = perform_action(reins, &input, buf);
+		refresh_cursor(&input);
 		if (state != RD_IDLE)
 			break ;
-		refresh_cursor(reins);
 	}
 	if (state == RD_ERROR)
 		return (- !!dprintf(2, "error state!\n"));
-	if (!vec_add(&input, ""))
+	if (!vec_add(&input.line, "", 1))
 		return (- !!dprintf(2, "failed to null-terminate!\n"));
-	*line = util_strdup(input.store);
+	*line = util_strdup(input.line.store);
 	if (!*line)
 		return (- !!dprintf(2, "strdup failed!\n"));
-	vec_destroy(&input, NULL);
+	vec_destroy(&input.line, NULL);
 	return ((state != RD_EOF));
 }

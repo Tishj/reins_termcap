@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vector_int.h                                       :+:    :+:            */
+/*   key_end.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/06 19:32:37 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 20:33:23 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/13 13:18:17 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/13 13:23:06 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_INT_H
-# define VECTOR_INT_H
+#include <reins_int.h>
+#include <reins.h>
 
-# include "vector.h"
-
-int					vec_realloc(t_vec *vector, size_t n);
-void				*util_memcpy(void *dst, void *src, size_t n);
-void				util_memmove(void *dst, void *src, size_t n);
-
-#endif
+int	key_end(t_input *input, char *buf, t_hook *hook)
+{
+	(void)hook;
+	(void)buf;
+	reins_cursor_move(input, input->max_col, input->input_rows, true);
+	return (RD_IDLE);
+}

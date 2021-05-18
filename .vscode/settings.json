@@ -1,6 +1,9 @@
 {
 	"files.associations": {
 		"reins_int.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"reins.h": "c",
+		"functional": "c",
+		"stddef.h": "c"
 	}
 }

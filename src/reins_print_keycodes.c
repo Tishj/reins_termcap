@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   key_up.c                                           :+:    :+:            */
+/*   reins_print_keycodes.c                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/11 22:12:23 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/13 15:34:46 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/04/06 19:18:58 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
+#include <reins.h>
+#include <fcntl.h>
 #include <unistd.h>
-#include <stdio.h>
 
-int	key_up(t_input *input, char *buf, t_hook *hook)
+int	reins_print_keycodes(t_reins *reins)
 {
-	if (hook && hook->function)
-		hook->function(hook->param);
-	(void)input;
-	(void)buf;
+	static char				buf[MAX_KEY_SIZE];
+
+	reins_enable(reins);
+	while (1)
+	{
+		util_bzero(buf, MAX_KEY_SIZE);
+		read(STDIN_FILENO, buf, MAX_KEY_SIZE);
+		print_keycode_formatted(buf, MAX_KEY_SIZE);
+	}
 	return (RD_IDLE);
 }

@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   find_key.c                                         :+:    :+:            */
+/*   reins_input_empty.c                                :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/07 21:22:14 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 14:33:04 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/18 15:17:28 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/18 15:18:03 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 
-ssize_t	find_key(t_reins *reins, char *keycode, size_t size)
+bool	reins_input_empty(t_input *input)
 {
-	size_t	i;
-	t_key	*tmp;
-
-	i = 0;
-	while (i < reins->keys.size)
-	{
-		tmp = vec_getref(&reins->keys, i);
-		if (!util_strncmp(tmp->buf, keycode, size))
-			return (i);
-		i++;
-	}
-	return (-1);
+	return (!input->line.size);
 }

@@ -6,22 +6,31 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:44:53 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/10 14:33:11 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/13 20:35:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 #include <unistd.h>
 
-int	key_right(t_reins *reins, t_vec *input, char *buf, t_hook *hook)
+static size_t	index_of_cursor(t_input *input)
+{
+	size_t	index;
+
+	index = (input->shell_cursor.row * input->max_col)
+		- (!!input->shell_cursor.row * input->prompt_size)
+		+ input->shell_cursor.col;
+	return (index);
+}
+
+int	key_right(t_input *input, char *buf, t_hook *hook)
 {
 	if (hook && hook->function)
 		hook->function(hook->param);
 	(void)buf;
-	if ((reins->shell_cursor.row * reins->max_col)
-		+ reins->shell_cursor.col >= input->size)
+	if (index_of_cursor(input) >= input->line.size)
 		return (RD_IDLE);
-	update_cursor(reins, 1, 0);
-	termcmd(MOVE_COLROW, reins->term_cursor.col, reins->term_cursor.row, 1);
+	update_cursor(input, 1, 0);
+	termcmd(MOVE_COLROW, input->term_cursor.col, input->term_cursor.row, 1);
 	return (RD_IDLE);
 }
