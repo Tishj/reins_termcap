@@ -46,8 +46,6 @@
 **	----------------SPECIAL_CHARACTERS----------------
 */
 
-# define MAX_KEY_SIZE		6
-
 # define MOD_CTRL			(1 << 0)
 # define MOD_SHIFT			(1 << 1)
 # define MOD_ALT			(1 << 2)
@@ -56,6 +54,15 @@
 /*
 **	---------------------STRUCTS----------------------
 */
+
+typedef struct s_trie t_trie;
+
+struct s_trie
+{
+	t_trie	*children[256];
+	bool	end;
+	void	*val;
+};
 
 typedef struct s_vec2ll
 {
@@ -86,8 +93,19 @@ typedef struct s_reins
 	struct termios	standard;
 	bool			enabled;
 
-	t_bstree		keys;
+	t_trie			*keys;
 }					t_reins;
+
+
+/*
+**	--------------------PREFIX TREE---------------------
+*/
+
+t_trie	*trie_new(void);
+void	*trie_insert(t_trie **root, char *key, void *val);
+void	*trie_find(t_trie *root, char *c, int *ret);
+void	*trie_find_str(t_trie *root, char *keycode);
+void	trie_destroy(t_trie *trie);
 
 /*
 **	--------------------GET_INPUT---------------------
@@ -106,7 +124,7 @@ typedef struct s_hook
 
 typedef struct s_key
 {
-	char	buf[6];
+	char	*keycode;
 	size_t	size;
 	t_keyf	function;
 	t_hook	hook;
@@ -121,9 +139,9 @@ int			reins_key(t_reins *reins, char *raw_key, t_keyf func);
 /*
 **	----------------------HOOKS-----------------------
 */
-int			perform_action(t_reins *reins, t_input *input, char *buf);
+int			perform_action(t_reins *reins, t_input *input);
 
-t_key		*new_key(char keycode[6], t_keyf f);
+t_key		*new_key(char *keycode, t_keyf f);
 ssize_t		find_key(t_reins *reins, char *keycode, size_t size);
 t_key		*get_key(t_reins *reins, char *keycode, size_t size);
 
@@ -157,7 +175,6 @@ void		visual_del(t_input *input, size_t size);
 
 int			error(char *msg, int error_value);
 
-int			create_keycode(char *raw, char keycode[6]);
 int			init_keys(t_reins *reins);
 int			init_cursor(t_input *input);
 void		print_keycode_formatted(char *keycode, size_t n);
@@ -166,6 +183,7 @@ int			util_atoi(char *str);
 size_t		util_strlen(char *str);
 void		util_bzero(void *dest, size_t n);
 void		util_memcpy(void *dest, void *src, size_t n);
+void		util_memset(void *dest, unsigned char value, size_t n);
 int			util_memcmp(void *dest, void *src, size_t n);
 int			util_strncmp(char *str1, char *str2, size_t n);
 char		*util_strdup(char *str);

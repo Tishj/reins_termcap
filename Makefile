@@ -6,7 +6,7 @@
 #    By: tishj <tishj@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/03 12:48:38 by tishj         #+#    #+#                  #
-#    Updated: 2021/05/18 17:08:05 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/05/18 18:41:24 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,12 @@ SRC 	=	reins_init.c \
 			util/util_bzero.c \
 			util/util_strdup.c \
 			util/util_memcpy.c \
+			trie_new.c \
+			trie_find.c \
+			trie_find_str.c \
+			trie_insert.c \
+			trie_destroy.c \
+			util/util_memset.c \
 			util/util_memcmp.c \
 			util/util_strncmp.c \
 			util/util_strnlen.c \
@@ -58,7 +64,6 @@ SRC 	=	reins_init.c \
 			util/update_cursor.c \
 			util/refresh_cursor.c \
 			util/error.c \
-			create_keycode.c \
 			perform_action.c \
 			new_key.c \
 			reins_hook.c \

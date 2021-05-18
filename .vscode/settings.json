@@ -4,6 +4,7 @@
 		"unistd.h": "c",
 		"reins.h": "c",
 		"functional": "c",
-		"stddef.h": "c"
+		"stddef.h": "c",
+		"stdlib.h": "c"
 	}
 }

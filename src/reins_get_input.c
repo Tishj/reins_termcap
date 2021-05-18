@@ -20,7 +20,6 @@
 int	reins_get_input(t_reins *reins, char **line)
 {
 	t_input				input;
-	char				buf[MAX_KEY_SIZE];
 	int					state;
 
 	if (!reins_enable(reins) || !init_cursor(&input))
@@ -28,9 +27,7 @@ int	reins_get_input(t_reins *reins, char **line)
 	vec_new(&input.line, sizeof(char));
 	while (1)
 	{
-		util_bzero(buf, MAX_KEY_SIZE);
-		read(STDIN_FILENO, buf, MAX_KEY_SIZE);
-		state = perform_action(reins, &input, buf);
+		state = perform_action(reins, &input);
 		refresh_cursor(&input);
 		if (state != RD_IDLE)
 			break ;

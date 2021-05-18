@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/09 11:38:54 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/23 00:05:03 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/05/18 17:58:16 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ int	init_keys(t_reins *reins)
 
 	functions = functions_singleton();
 	keycodes = keycodes_singleton();
-	if (!bstree_init(&reins->keys, sizeof(char), util_memcmp, free))
-		return (0);
 	i = 0;
 	while (functions[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 19:32:06 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/12 13:53:39 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/05/18 17:50:07 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <reins.h>
 
+//this is the only fucking key that uses buf
 int	key_regular(t_input *input, char *buf, t_hook *hook)
 {
 	if (hook && hook->function)

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   create_keycode.c                                   :+:    :+:            */
+/*   trie_new.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tishj <tishj@student.codam.nl>               +#+                     */
+/*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/09 13:10:28 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/14 16:21:07 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/05/18 17:19:57 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/05/18 20:07:53 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
+#include <stdlib.h>
 
-int	create_keycode(char *raw, char keycode[MAX_KEY_SIZE])
+t_trie	*trie_new(void)
 {
-	if (!raw)
-		return (0);
-	util_bzero(keycode, MAX_KEY_SIZE);
-	util_strncpy(keycode, raw, MAX_KEY_SIZE);
-	return (1);
+	t_trie	*new;
+
+	new = malloc(sizeof(t_trie));
+	if (!new)
+		return (NULL);
+	util_memset(new->children, 0, 255 * sizeof(t_trie*));
+	new->end = false;
+	new->val = NULL;
+	return (new);
 }

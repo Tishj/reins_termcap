@@ -6,7 +6,7 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 21:13:58 by tishj         #+#    #+#                 */
-/*   Updated: 2021/05/18 16:55:01 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/05/18 17:37:30 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int	main(void)
 	while (ret)
 	{
 		write(1, PROMPT, sizeof(PROMPT));
-//		ret = reins_get_input(reins, &line);
-		ret = reins_print_keycodes(reins);
+		ret = reins_get_input(reins, &line);
+//		ret = reins_print_keycodes(reins);
 		reins_disable(reins);
 		printf("\nLINE: |%s|\n", line);
 		free(line);

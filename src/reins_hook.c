@@ -20,15 +20,14 @@ void	reins_hook_run(t_hook *hook)
 		hook->function(hook->param);
 }
 
-int	reins_hook(t_reins *reins, char *raw_key, t_hookf func, void *param)
+int	reins_hook(t_reins *reins, char *keycode, t_hookf func, void *param)
 {
 	t_key	*key;
-	char	keycode[MAX_KEY_SIZE];
 
-	if (!reins || !create_keycode(raw_key, keycode))
+	if (!reins)
 		return (0);
 //	print_keycode_formatted(keycode, 6);
-	key = bstree_find(&reins->keys, keycode, util_strnlen(keycode, 6));
+	key = trie_find_str(reins->keys, keycode);
 	if (!key)
 		return (0);
 	key->hook.function = func;

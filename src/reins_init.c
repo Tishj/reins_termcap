@@ -56,6 +56,7 @@ t_reins	*reins_init(void)
 	t_reins	*reins;
 
 	reins = malloc(sizeof(t_reins));
+	reins->keys = NULL;
 	if (!reins)
 		return (NULL);
 	reins->enabled = false;

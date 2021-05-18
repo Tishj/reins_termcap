@@ -63,8 +63,8 @@ int			reins_get_input(t_reins *reins, char **line);
 void		reins_destroy(t_reins *reins);
 int			reins_enable(t_reins *reins);
 int			reins_disable(t_reins *reins);
-int			reins_key(t_reins *reins, char *raw_key, t_keyf func);
-int			reins_hook(t_reins *reins, char *raw_key, t_hookf func, void *param);
+int			reins_key(t_reins *reins, char *keycode, t_keyf func);
+int			reins_hook(t_reins *reins, char *keycode, t_hookf func, void *param);
 int			reins_print_keycodes(t_reins *reins);
 
 int			reins_cursor_move(t_input *input, size_t x, size_t y, bool cap);

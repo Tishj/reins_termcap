@@ -17,6 +17,6 @@
 void	reins_destroy(t_reins *reins)
 {
 	reins_disable(reins);
-	bstree_clear(&reins->keys);
+	trie_destroy(reins->keys);
 	free(reins);
 }

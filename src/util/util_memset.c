@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reins_key.c                                       :+:    :+:            */
+/*   util_memset.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/08 23:41:18 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/09 14:19:54 by tishj         ########   odam.nl         */
+/*   Created: 2021/03/05 18:15:01 by tishj         #+#    #+#                 */
+/*   Updated: 2021/05/18 17:21:39 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <reins_int.h>
-#include <stdlib.h>
+#include <stddef.h>
 
-/*
-**	Add or replace a function to handle a certain keycode
-*/
-int	reins_key(t_reins *reins, char *keycode, t_keyf func)
+void	util_memset(void *dest, unsigned char value, size_t n)
 {
-	t_key	*key;
+	size_t	i;
 
-	if (!reins)
-		return (0);
-	key = new_key(keycode, func);
-	if (!key || !trie_insert(&reins->keys, keycode, key))
+	i = 0;
+	while (i < n)
 	{
-		free(key);
-		return (0);
+		((unsigned char *)dest)[i] = value;
+		i++;
 	}
-	return (1);
 }

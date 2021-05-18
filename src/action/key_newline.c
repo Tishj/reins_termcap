@@ -6,13 +6,14 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 20:38:29 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/13 13:36:53 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/05/18 20:14:39 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
 #include <unistd.h>
 #include <reins.h>
+#include <stdio.h>
 
 int	key_newline(t_input *input, char *buf, t_hook *hook)
 {

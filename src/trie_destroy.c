@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reins_print_keycodes.c                             :+:    :+:            */
+/*   trie_destroy.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/13 15:34:46 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/05/18 18:45:46 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/05/18 17:59:10 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/05/18 18:14:07 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
-#include <reins.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include <stdlib.h>
 
-int	reins_print_keycodes(t_reins *reins)
+void	trie_destroy(t_trie *trie)
 {
-	static char				buf[1000 + 1];
-	int		ret;
+	size_t	i;
 
-	reins_enable(reins);
-	while (1)
+	i = 0;
+	while (i < 256)
 	{
-		ret = read(STDIN_FILENO, buf, 1000);
-		print_keycode_formatted(buf, ret);
-		util_bzero(buf, ret);
+		if (trie->children[i])
+			trie_destroy(trie->children[i]);
+		i++;
 	}
-	return (RD_IDLE);
+	free(trie);
 }

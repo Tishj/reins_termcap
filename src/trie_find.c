@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   reins_print_keycodes.c                             :+:    :+:            */
+/*   trie_find.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/13 15:34:46 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/05/18 18:45:46 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/05/18 17:28:00 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/05/18 18:12:55 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <reins_int.h>
-#include <reins.h>
-#include <fcntl.h>
 #include <unistd.h>
 
-int	reins_print_keycodes(t_reins *reins)
+void	*trie_find(t_trie *root, char *c, int *ret)
 {
-	static char				buf[1000 + 1];
-	int		ret;
-
-	reins_enable(reins);
-	while (1)
+	while (root && !root->end)
 	{
-		ret = read(STDIN_FILENO, buf, 1000);
-		print_keycode_formatted(buf, ret);
-		util_bzero(buf, ret);
+		*ret = read(STDIN_FILENO, c, 1);
+		if (!*ret)
+			break ;
+		root = root->children[(int)*c];
 	}
-	return (RD_IDLE);
+	if (root)
+		return (root->val);
+	return (NULL);
 }
