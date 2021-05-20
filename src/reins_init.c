@@ -51,20 +51,23 @@ static int	init_termios(t_reins *reins)
 	return (1);
 }
 
+/*
+**	Returns a heap allocated and initialized reins object, or NULL on failure.
+*/
 t_reins	*reins_init(void)
 {
 	t_reins	*reins;
 
 	reins = malloc(sizeof(t_reins));
-	reins->keys = NULL;
 	if (!reins)
 		return (NULL);
+	reins->keys = NULL;
 	reins->enabled = false;
 	if (!init_table(reins)
 		|| !init_termios(reins)
 		|| !init_keys(reins))
 	{
-		free(reins);
+		reins_destroy(reins);
 		return (NULL);
 	}
 	return (reins);

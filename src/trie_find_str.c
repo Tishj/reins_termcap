@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/18 18:08:14 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/05/18 18:13:14 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/05/20 18:14:45 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 void	*trie_find_str(t_trie *root, char *keycode)
 {
 	size_t	i;
+	unsigned char *key;
 
 	i = 0;
-	while (root && keycode[i])
+	key = (unsigned char*)keycode;
+	while (root && key[i])
 	{
-		if (!root->children[(int)keycode[i]])
+		if (!root->children[(int)key[i]])
 			break ;
-		root = root->children[(int)keycode[i]];
+		root = root->children[(int)key[i]];
 		i++;
 	}
-	if (root && root->end && !keycode[i])
+	if (root && root->end && !key[i])
 		return (root->val);
 	return (NULL);
 }

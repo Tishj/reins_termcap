@@ -16,13 +16,13 @@
 /*
 **	Add or replace a function to handle a certain keycode
 */
-int	reins_key(t_reins *reins, char *keycode, t_keyf func)
+int	reins_key(t_reins *reins, char *keycode, t_keyf function)
 {
 	t_key	*key;
 
 	if (!reins)
 		return (0);
-	key = new_key(keycode, func);
+	key = new_key(keycode, function);
 	if (!key || !trie_insert(&reins->keys, keycode, key))
 	{
 		free(key);

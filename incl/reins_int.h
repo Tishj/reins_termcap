@@ -57,9 +57,11 @@
 
 typedef struct s_trie t_trie;
 
+# define TRIE_CHILDREN_AMOUNT 128
+
 struct s_trie
 {
-	t_trie	*children[256];
+	t_trie	*children[TRIE_CHILDREN_AMOUNT];
 	bool	end;
 	void	*val;
 };
